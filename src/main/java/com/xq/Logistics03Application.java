@@ -1,4 +1,4 @@
-package com.xq.logistics03;
+package com.xq;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
