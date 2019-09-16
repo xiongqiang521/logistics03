@@ -1,4 +1,4 @@
-package com.xq.logistics03;
+package com.xq;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
