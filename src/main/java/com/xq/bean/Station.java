@@ -1,7 +1,11 @@
-package com.xq.bean;;
+package com.xq.bean;
+
+import java.io.Serializable;
+
+;
 
 
-public class Station {
+public class Station implements Serializable {
 
   private Integer id;
   private Integer station_num;

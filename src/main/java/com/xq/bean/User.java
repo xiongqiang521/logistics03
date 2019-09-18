@@ -1,7 +1,11 @@
-package com.xq.bean;;
+package com.xq.bean;
+
+import java.io.Serializable;
+
+;
 
 
-public class User {
+public class User implements Serializable {
 
   private Integer id;
   private Integer user_id;

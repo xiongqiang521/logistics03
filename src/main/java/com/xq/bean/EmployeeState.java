@@ -1,7 +1,11 @@
-package com.xq.bean;;
+package com.xq.bean;
+
+import java.io.Serializable;
+
+;
 
 
-public class EmployeeState {
+public class EmployeeState implements Serializable {
 
   private Integer id;
   private String type;

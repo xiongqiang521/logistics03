@@ -1,7 +1,11 @@
-package com.xq.bean;;
+package com.xq.bean;
+
+import java.io.Serializable;
+
+;
 
 
-public class Area {
+public class Area implements Serializable {
 
   private Integer area_no;
   private String city_code;
