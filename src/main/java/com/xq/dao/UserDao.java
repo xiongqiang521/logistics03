@@ -1,5 +1,6 @@
 package com.xq.dao;
 
+
 import com.xq.bean.Users;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
