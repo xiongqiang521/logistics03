@@ -1,7 +1,8 @@
-package com.xq.bean;;
+package com.xq.bean;
 
+import java.io.Serializable;
 
-public class TransferDetail {
+public class TransferDetail implements Serializable {
 
   private Integer id;
   private Integer transfer_id;

@@ -15,6 +15,7 @@ import java.io.InputStream;
  * 2019/9/16 9:19
  */
 public class ImgBase64 {
+    private ImgBase64(){}
 
     /**
      * 将图片转换为BASE64格式，BASE64格式为字符串

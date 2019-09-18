@@ -1,7 +1,8 @@
-package com.xq.bean;;
+package com.xq.bean;
 
+import java.io.Serializable;
 
-public class Order {
+public class Order implements Serializable {
 
   private String id;
   private Integer order_id;

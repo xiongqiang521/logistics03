@@ -1,7 +1,8 @@
-package com.xq.bean;;
+package com.xq.bean;
 
+import java.io.Serializable;
 
-public class Car {
+public class Car implements Serializable {
 
   private Integer id;
   private String car_num;

@@ -1,12 +1,10 @@
-package com.xq.bean;
+package com.xq.bean;;
 
 
-import java.sql.Date;
-
-public class Users {
+public class User {
 
   private Integer id;
-  private String user_id;
+  private Integer user_id;
   private String name;
   private String password;
   private String create_time;
@@ -15,7 +13,7 @@ public class Users {
 
   @Override
   public String toString() {
-    return "Users{" +
+    return "User{" +
             "id=" + id +
             ", user_id=" + user_id +
             ", name='" + name + '\'' +
@@ -34,13 +32,15 @@ public class Users {
     this.id = id;
   }
 
-  public String getUser_id() {
+
+  public Integer getUser_id() {
     return user_id;
   }
 
-  public void setUser_id(String user_id) {
+  public void setUser_id(Integer user_id) {
     this.user_id = user_id;
   }
+
 
   public String getName() {
     return name;
@@ -50,6 +50,7 @@ public class Users {
     this.name = name;
   }
 
+
   public String getPassword() {
     return password;
   }
@@ -57,6 +58,7 @@ public class Users {
   public void setPassword(String password) {
     this.password = password;
   }
+
 
   public String getCreate_time() {
     return create_time;
@@ -66,6 +68,7 @@ public class Users {
     this.create_time = create_time;
   }
 
+
   public String getState() {
     return state;
   }
@@ -74,6 +77,7 @@ public class Users {
     this.state = state;
   }
 
+
   public String getTelephone() {
     return telephone;
   }
@@ -81,4 +85,5 @@ public class Users {
   public void setTelephone(String telephone) {
     this.telephone = telephone;
   }
+
 }
