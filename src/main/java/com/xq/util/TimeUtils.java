@@ -27,12 +27,7 @@ public class TimeUtils {
         return dateTime;
     }
 
-    public static Long getDateTime() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String format = dateFormat.format(timeNum);
-        long l = Long.parseLong(format);
-        return l;
-    }
+
 
 
 

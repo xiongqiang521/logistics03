@@ -1,20 +1,14 @@
 package com.xq.web.controller;
 
-import com.alibaba.fastjson.JSONObject;
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import com.xq.bean.User;
+import com.xq.bean.Users;
 import com.xq.service.UserService;
 import com.xq.util.TimeUtils;
 import com.xq.util.UUIDUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
-import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -145,17 +139,11 @@ public class UserController {
     //管理员注册
     @RequestMapping("/UserRegister")
     @ResponseBody
-    public User UserRegist(User user) throws ParseException {
-        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd hh:ss:mm");
-        String format = simpleDateFormat.format(new java.util.Date());
-        long l = Long.parseLong(format);
-        user.setUser_id(UUIDUtils.getUUID()+UUIDUtils.getUUID());
-//        user.setCreate_time(new Date(year, month, date, hrs, min, sec));
-        user.setState("admin");
-        System.out.println(111);
-        System.out.println("user---------");
-        System.out.println(user);
-        service.UserRegist(user);
-        return user;
+    public Users UserRegist(Users users) throws ParseException {
+        users.setUser_id(UUIDUtils.getUUID()+UUIDUtils.getUUID());
+        users.setCreate_time(TimeUtils.getDateTimeToString());
+        System.out.println(users);
+        service.UserRegist(users);
+        return users;
     }
 }

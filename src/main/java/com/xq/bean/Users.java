@@ -3,19 +3,19 @@ package com.xq.bean;
 
 import java.sql.Date;
 
-public class User {
+public class Users {
 
   private Integer id;
   private String user_id;
   private String name;
   private String password;
-  private Date create_time;
+  private String create_time;
   private String state;
   private String telephone;
 
   @Override
   public String toString() {
-    return "User{" +
+    return "Users{" +
             "id=" + id +
             ", user_id=" + user_id +
             ", name='" + name + '\'' +
@@ -58,11 +58,11 @@ public class User {
     this.password = password;
   }
 
-  public Date getCreate_time() {
+  public String getCreate_time() {
     return create_time;
   }
 
-  public void setCreate_time(Date create_time) {
+  public void setCreate_time(String create_time) {
     this.create_time = create_time;
   }
 
