@@ -12,6 +12,7 @@ import java.util.Date;
  */
 
 public class TimeUtils {
+    private TimeUtils(){}
 
     public static long timeNum = new Date().getTime();
 

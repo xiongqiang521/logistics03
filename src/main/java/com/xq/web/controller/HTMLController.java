@@ -1,7 +1,9 @@
 package com.xq.web.controller;
 
+import com.xq.bean.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -21,5 +23,14 @@ public class HTMLController {
         return request.getServletPath().substring(1).replace(".html", "");
         */
         return null;
+    }
+
+
+    @RequestMapping("add")
+    @ResponseBody
+    public User  add(User user){
+        System.out.println(1111);
+        System.out.println(user);
+        return user;
     }
 }

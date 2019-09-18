@@ -120,8 +120,20 @@
 
           //监听提交
           form.on('submit(add)', function(data){
-            console.log(data);
+            console.log(data.field);
             //发异步，把数据提交给php
+            var maintenancePlace = JSON.stringify(data.field);
+            $.ajax({
+                url : 'add',
+                type : 'post',
+                dataType : 'json',
+                contentType :"application/json",
+                data : maintenancePlace,
+                success : function (data1) {
+                      alert(11111111)
+                }
+            });
+
             layer.alert("增加成功", {icon: 6},function () {
                 // 获得frame索引
                 var index = parent.layer.getFrameIndex(window.name);
