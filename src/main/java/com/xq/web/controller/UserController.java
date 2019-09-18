@@ -7,10 +7,12 @@ import com.xq.util.UUIDUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -145,5 +147,17 @@ public class UserController {
         System.out.println(users);
         service.UserRegist(users);
         return users;
+    }
+
+    //查询所有管理人员
+    @RequestMapping("/getAll")
+    public ModelAndView getAll(ModelAndView mv){
+        List<Users> users = service.getAll();
+        for (Users user : users) {
+            System.out.println(user);
+        }
+        mv.addObject("users",users);
+        return null;
+
     }
 }

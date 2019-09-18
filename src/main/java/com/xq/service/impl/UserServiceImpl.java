@@ -6,13 +6,21 @@ import com.xq.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
+    @Resource
     private UserDao dao;
     @Override
     public void UserRegist(Users users) {
         dao.UserRegist(users);
+    }
+
+    @Override
+    public List<Users> getAll() {
+        return dao.getAll();
     }
 }
