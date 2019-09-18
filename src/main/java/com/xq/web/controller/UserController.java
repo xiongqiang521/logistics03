@@ -140,7 +140,7 @@ public class UserController {
     @RequestMapping("/UserRegister")
     @ResponseBody
     public Users UserRegist(Users users) throws ParseException {
-        users.setUser_id(UUIDUtils.getUUID()+UUIDUtils.getUUID());
+        users.setUser_id(UUIDUtils.getUUID());
         users.setCreate_time(TimeUtils.getDateTimeToString());
         System.out.println(users);
         service.UserRegist(users);
