@@ -2,9 +2,6 @@ package com.xq.bean;
 
 import java.io.Serializable;
 
-;
-
-
 public class Area implements Serializable {
 
   private Integer area_no;

@@ -2,9 +2,6 @@ package com.xq.bean;
 
 import java.io.Serializable;
 
-;
-
-
 public class Employee implements Serializable {
 
   private Integer id;

@@ -2,9 +2,6 @@ package com.xq.bean;
 
 import java.io.Serializable;
 
-;
-
-
 public class Province implements Serializable {
 
   private Integer prov_no;

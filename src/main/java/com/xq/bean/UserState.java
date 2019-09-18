@@ -2,9 +2,6 @@ package com.xq.bean;
 
 import java.io.Serializable;
 
-;
-
-
 public class UserState implements Serializable {
 
   private Integer id;
@@ -12,7 +9,7 @@ public class UserState implements Serializable {
 
   @Override
   public String toString() {
-    return "UserState{" +
+      return "UserState{" +
             "id=" + id +
             ", state='" + state + '\'' +
             '}';
