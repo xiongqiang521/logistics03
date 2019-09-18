@@ -27,6 +27,15 @@ public class TimeUtils {
         return dateTime;
     }
 
+    public static Long getDateTime() {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String format = dateFormat.format(timeNum);
+        long l = Long.parseLong(format);
+        return l;
+    }
+
+
+
     /**
      * 返回当前时间，格式为HH:mm:ss
      * @return
