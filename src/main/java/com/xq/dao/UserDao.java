@@ -18,4 +18,8 @@ public interface UserDao {
    //查询所有管理人员
     @Select("select * from users")
    List<Users> getAll();
+
+    //验证登录
+    @Select("SELECT * FROM users WHERE NAME=#{NAME}")
+    Users login(String name);
 }

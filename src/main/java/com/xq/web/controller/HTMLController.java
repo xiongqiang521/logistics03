@@ -15,11 +15,11 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class HTMLController {
     @RequestMapping("*.html")
-    public String welcome(HttpServletRequest request) {
+        public String welcome(HttpServletRequest request) {
         /*
         备用，返回null测试没问题，不明白为什么，如果返回null找不到页面404，使用下面的替代null
-        return request.getServletPath().substring(1).replace(".html", "");
+        return request.getServletPath().(1substring).replace(".html", "");
         */
-        return null;
+            return null;
     }
 }

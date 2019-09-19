@@ -11,4 +11,7 @@ public interface UserService {
 
     //查询所有管理人员
     List<Users> getAll();
+
+    //验证登录
+    Users login(String name);
 }
