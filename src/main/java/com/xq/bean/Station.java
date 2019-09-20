@@ -1,17 +1,17 @@
-package com.xq.bean;
+package com.xq.bean;;
 
 
 public class Station {
 
   private Integer id;
-  private Integer stationNum;
+  private Integer station_num;
   private String name;
   private String address;
-  private Integer employeeId;
+  private Integer employee_id;
   private String telephone;
-  private Double maxWeight;
+  private Double max_weight;
   private Integer transfer;
-  private Integer transferId;
+  private Integer transfer_id;
 
 
   public Integer getId() {
@@ -23,12 +23,12 @@ public class Station {
   }
 
 
-  public Integer getStationNum() {
-    return stationNum;
+  public Integer getStation_num() {
+    return station_num;
   }
 
-  public void setStationNum(Integer stationNum) {
-    this.stationNum = stationNum;
+  public void setStation_num(Integer station_num) {
+    this.station_num = station_num;
   }
 
 
@@ -50,12 +50,12 @@ public class Station {
   }
 
 
-  public Integer getEmployeeId() {
-    return employeeId;
+  public Integer getEmployee_id() {
+    return employee_id;
   }
 
-  public void setEmployeeId(Integer employeeId) {
-    this.employeeId = employeeId;
+  public void setEmployee_id(Integer employee_id) {
+    this.employee_id = employee_id;
   }
 
 
@@ -68,12 +68,12 @@ public class Station {
   }
 
 
-  public Double getMaxWeight() {
-    return maxWeight;
+  public Double getMax_weight() {
+    return max_weight;
   }
 
-  public void setMaxWeight(Double maxWeight) {
-    this.maxWeight = maxWeight;
+  public void setMax_weight(Double max_weight) {
+    this.max_weight = max_weight;
   }
 
 
@@ -86,12 +86,12 @@ public class Station {
   }
 
 
-  public Integer getTransferId() {
-    return transferId;
+  public Integer getTransfer_id() {
+    return transfer_id;
   }
 
-  public void setTransferId(Integer transferId) {
-    this.transferId = transferId;
+  public void setTransfer_id(Integer transfer_id) {
+    this.transfer_id = transfer_id;
   }
 
 }

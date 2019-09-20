@@ -1,13 +1,13 @@
-package com.xq.bean;
+package com.xq.bean;;
 
 
 public class OrderTransferInfo {
 
   private Integer id;
-  private Integer orderId;
+  private Integer order_id;
   private String mode;
-  private Integer stationId;
-  private Integer employeeId;
+  private Integer station_id;
+  private Integer employee_id;
   private String time;
 
 
@@ -20,13 +20,14 @@ public class OrderTransferInfo {
   }
 
 
-  public Integer getOrderId() {
-    return orderId;
+  public Integer getOrder_id() {
+    return order_id;
   }
 
-  public void setOrderId(Integer orderId) {
-    this.orderId = orderId;
+  public void setOrder_id(Integer order_id) {
+    this.order_id = order_id;
   }
+
 
   public String getMode() {
     return mode;
@@ -36,21 +37,22 @@ public class OrderTransferInfo {
     this.mode = mode;
   }
 
-  public Integer getStationId() {
-    return stationId;
+
+  public Integer getStation_id() {
+    return station_id;
   }
 
-  public void setStationId(Integer stationId) {
-    this.stationId = stationId;
+  public void setStation_id(Integer station_id) {
+    this.station_id = station_id;
   }
 
 
-  public Integer getEmployeeId() {
-    return employeeId;
+  public Integer getEmployee_id() {
+    return employee_id;
   }
 
-  public void setEmployeeId(Integer employeeId) {
-    this.employeeId = employeeId;
+  public void setEmployee_id(Integer employee_id) {
+    this.employee_id = employee_id;
   }
 
 

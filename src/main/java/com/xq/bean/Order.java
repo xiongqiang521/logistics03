@@ -1,20 +1,20 @@
-package com.xq.bean;
+package com.xq.bean;;
 
 
 public class Order {
 
   private String id;
-  private Integer orderId;
-  private String sendTime;
-  private Integer sendUserId;
-  private String sendAddress;
-  private String receiveTime;
-  private Integer receiveUserId;
-  private String receiveAddress;
-  private double weight;
+  private Integer order_id;
+  private String send_time;
+  private Integer send_user_id;
+  private String send_address;
+  private String receive_time;
+  private Integer receive_user_id;
+  private String receive_address;
+  private Double weight;
   private String money;
-  private Integer orderStateId;
-  private Integer orderInfoId;
+  private Integer order_state_id;
+  private Integer order_info_id;
 
 
   public String getId() {
@@ -26,74 +26,74 @@ public class Order {
   }
 
 
-  public Integer getOrderId() {
-    return orderId;
+  public Integer getOrder_id() {
+    return order_id;
   }
 
-  public void setOrderId(Integer orderId) {
-    this.orderId = orderId;
-  }
-
-
-  public String getSendTime() {
-    return sendTime;
-  }
-
-  public void setSendTime(String sendTime) {
-    this.sendTime = sendTime;
+  public void setOrder_id(Integer order_id) {
+    this.order_id = order_id;
   }
 
 
-  public Integer getSendUserId() {
-    return sendUserId;
+  public String getSend_time() {
+    return send_time;
   }
 
-  public void setSendUserId(Integer sendUserId) {
-    this.sendUserId = sendUserId;
-  }
-
-
-  public String getSendAddress() {
-    return sendAddress;
-  }
-
-  public void setSendAddress(String sendAddress) {
-    this.sendAddress = sendAddress;
+  public void setSend_time(String send_time) {
+    this.send_time = send_time;
   }
 
 
-  public String getReceiveTime() {
-    return receiveTime;
+  public Integer getSend_user_id() {
+    return send_user_id;
   }
 
-  public void setReceiveTime(String receiveTime) {
-    this.receiveTime = receiveTime;
-  }
-
-
-  public Integer getReceiveUserId() {
-    return receiveUserId;
-  }
-
-  public void setReceiveUserId(Integer receiveUserId) {
-    this.receiveUserId = receiveUserId;
+  public void setSend_user_id(Integer send_user_id) {
+    this.send_user_id = send_user_id;
   }
 
 
-  public String getReceiveAddress() {
-    return receiveAddress;
+  public String getSend_address() {
+    return send_address;
   }
 
-  public void setReceiveAddress(String receiveAddress) {
-    this.receiveAddress = receiveAddress;
+  public void setSend_address(String send_address) {
+    this.send_address = send_address;
   }
 
 
-  public double getWeight() {
+  public String getReceive_time() {
+    return receive_time;
+  }
+
+  public void setReceive_time(String receive_time) {
+    this.receive_time = receive_time;
+  }
+
+
+  public Integer getReceive_user_id() {
+    return receive_user_id;
+  }
+
+  public void setReceive_user_id(Integer receive_user_id) {
+    this.receive_user_id = receive_user_id;
+  }
+
+
+  public String getReceive_address() {
+    return receive_address;
+  }
+
+  public void setReceive_address(String receive_address) {
+    this.receive_address = receive_address;
+  }
+
+
+  public Double getWeight() {
     return weight;
   }
 
-  public void setWeight(double weight) {
+  public void setWeight(Double weight) {
     this.weight = weight;
   }
 
@@ -107,21 +107,21 @@ public class Order {
   }
 
 
-  public Integer getOrderStateId() {
-    return orderStateId;
+  public Integer getOrder_state_id() {
+    return order_state_id;
   }
 
-  public void setOrderStateId(Integer orderStateId) {
-    this.orderStateId = orderStateId;
+  public void setOrder_state_id(Integer order_state_id) {
+    this.order_state_id = order_state_id;
   }
 
 
-  public Integer getOrderInfoId() {
-    return orderInfoId;
+  public Integer getOrder_info_id() {
+    return order_info_id;
   }
 
-  public void setOrderInfoId(Integer orderInfoId) {
-    this.orderInfoId = orderInfoId;
+  public void setOrder_info_id(Integer order_info_id) {
+    this.order_info_id = order_info_id;
   }
 
 }
