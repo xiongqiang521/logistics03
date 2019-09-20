@@ -1,7 +1,8 @@
 package com.xq.shiro;
 
+import com.xq.bean.Employee;
 import com.xq.bean.Users;
-import com.xq.service.UserService;
+import com.xq.service.EmployeeService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -11,13 +12,15 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 /**
  * 自定义Realm
  */
 public class UserRealm extends AuthorizingRealm {
 
     @Autowired
-    private UserService service;
+    private EmployeeService service;
 
     /**
      * 执行授权逻辑
@@ -31,10 +34,10 @@ public class UserRealm extends AuthorizingRealm {
         //给资源进行授权
         SimpleAuthorizationInfo info=new SimpleAuthorizationInfo();
         Subject subject = SecurityUtils.getSubject();
-        Users users = (Users) subject.getPrincipal();
-        Users user = service.login(users.getName());
-        System.out.println("----------"+user.getState());
-        info.addStringPermission(user.getState());
+        Employee users = (Employee) subject.getPrincipal();
+
+
+        info.addStringPermission("");
         return info;
     }
 
@@ -50,14 +53,14 @@ public class UserRealm extends AuthorizingRealm {
         System.out.println("执行认证逻辑");
 
         UsernamePasswordToken t = (UsernamePasswordToken) token;
-        Users users = service.login(t.getUsername());
+        Employee users = service.login(t.getUsername());
         System.out.println("name----------" + users);
         if(users==null){
             //判断用户名是否存在  否则底层会抛出UnKnowAccountException
             return null;
         }
         //判断密码是否正确
-        return new SimpleAuthenticationInfo(users,users.getPassword(),"");
+        return new SimpleAuthenticationInfo(users,"","");
 
     }
     }
