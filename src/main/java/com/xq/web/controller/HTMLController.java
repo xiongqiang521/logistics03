@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 public class HTMLController {
-    @RequestMapping("*.html")
-    public String welcome(HttpServletRequest request) {
+    @RequestMapping({"*.html","*/*.html","*/*/*.html"})
+    public String welcome() {
         /*
         备用，返回null测试没问题，不明白为什么，如果返回null找不到页面404，使用下面的替代null
         return request.getServletPath().substring(1).replace(".html", "");

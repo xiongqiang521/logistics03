@@ -4,30 +4,16 @@ import java.io.Serializable;
 
 public class Station implements Serializable {
 
-  private Integer id;             //主键(仅编号用)
-  private Integer station_num;    //站点编号
-  private String name;            //站点名称
-  private String address;         //站点地址
-  private Integer employee_id;    //站点负责人(属于员工)id
-  private String telephone;       //电话
-  private Integer transfer_id;    //对应的站点,此项只有网点有该字段
-  private Double max_weight;      //站点最大库存量
-  private String transfer;        //是否为中转站点   1为中转站点 0为网点
+  private Integer id;
+  private Integer station_num;
+  private String name;
+  private String address;
+  private Integer employee_id;
+  private String telephone;
+  private Double max_weight;
+  private Integer transfer;
+  private Integer transfer_id;
 
-  @Override
-  public String toString() {
-    return "Station{" +
-            "id=" + id +
-            ", station_num=" + station_num +
-            ", name='" + name + '\'' +
-            ", address='" + address + '\'' +
-            ", employee_id=" + employee_id +
-            ", telephone='" + telephone + '\'' +
-            ", transfer_id=" + transfer_id +
-            ", max_weight=" + max_weight +
-            ", transfer='" + transfer + '\'' +
-            '}';
-  }
 
   public Integer getId() {
     return id;
@@ -83,15 +69,6 @@ public class Station implements Serializable {
   }
 
 
-  public Integer getTransfer_id() {
-    return transfer_id;
-  }
-
-  public void setTransfer_id(Integer transfer_id) {
-    this.transfer_id = transfer_id;
-  }
-
-
   public Double getMax_weight() {
     return max_weight;
   }
@@ -100,11 +77,22 @@ public class Station implements Serializable {
     this.max_weight = max_weight;
   }
 
-  public String getTransfer() {
+
+  public Integer getTransfer() {
     return transfer;
   }
 
-  public void setTransfer(String transfer) {
+  public void setTransfer(Integer transfer) {
     this.transfer = transfer;
   }
+
+
+  public Integer getTransfer_id() {
+    return transfer_id;
+  }
+
+  public void setTransfer_id(Integer transfer_id) {
+    this.transfer_id = transfer_id;
+  }
+
 }

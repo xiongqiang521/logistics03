@@ -12,6 +12,7 @@ import java.util.Date;
  */
 
 public class TimeUtils {
+    private TimeUtils(){}
 
     public static long timeNum = new Date().getTime();
 
@@ -26,6 +27,10 @@ public class TimeUtils {
         String dateTime = dateFormat.format(timeNum);
         return dateTime;
     }
+
+
+
+
 
     /**
      * 返回当前时间，格式为HH:mm:ss

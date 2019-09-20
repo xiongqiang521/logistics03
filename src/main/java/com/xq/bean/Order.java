@@ -1,8 +1,7 @@
-package com.xq.bean;
+package com.xq.bean;;
 
-import java.io.Serializable;
 
-public class Order implements Serializable {
+public class Order {
 
   private String id;
   private Integer order_id;
@@ -15,23 +14,8 @@ public class Order implements Serializable {
   private Double weight;
   private String money;
   private Integer order_state_id;
+  private Integer order_info_id;
 
-  @Override
-  public String toString() {
-    return "Order{" +
-            "id='" + id + '\'' +
-            ", order_id=" + order_id +
-            ", send_time='" + send_time + '\'' +
-            ", send_user_id=" + send_user_id +
-            ", send_address='" + send_address + '\'' +
-            ", receive_time='" + receive_time + '\'' +
-            ", receive_user_id=" + receive_user_id +
-            ", receive_address='" + receive_address + '\'' +
-            ", weight=" + weight +
-            ", money='" + money + '\'' +
-            ", order_state_id=" + order_state_id +
-            '}';
-  }
 
   public String getId() {
     return id;
@@ -129,6 +113,15 @@ public class Order implements Serializable {
 
   public void setOrder_state_id(Integer order_state_id) {
     this.order_state_id = order_state_id;
+  }
+
+
+  public Integer getOrder_info_id() {
+    return order_info_id;
+  }
+
+  public void setOrder_info_id(Integer order_info_id) {
+    this.order_info_id = order_info_id;
   }
 
 }
