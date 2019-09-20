@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:shiro="http://www.w3.org/1999/xhtml">
 <head>
 	<meta charset="UTF-8">
 	<title>后台系统管理</title>
@@ -52,6 +52,7 @@
     <!-- 左侧菜单开始 -->
     <div class="left-nav">
       <div id="side-nav">
+
         <ul id="nav">
             <li>
                 <a href="javascript:;">
@@ -106,7 +107,11 @@
                         </ul>
                     </li>
                 </ul>
+
+
+
             </li>
+
             <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe723;</i>
@@ -121,13 +126,17 @@
                         </a>
                     </li >
                 </ul>
+
             </li>
+
             <li>
+                <div shiro:hasPermission="jinli">
                 <a href="javascript:;">
                     <i class="iconfont">&#xe726;</i>
                     <cite>管理员管理</cite>
                     <i class="iconfont nav_right">&#xe697;</i>
                 </a>
+                </div>
                 <ul class="sub-menu">
                     <li>
                         <a _href="admin-list.html">
@@ -154,7 +163,9 @@
                         </a>
                     </li >
                 </ul>
+
             </li>
+
             <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe6ce;</i>

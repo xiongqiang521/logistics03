@@ -12,14 +12,31 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class UserController {
+
+    @RequestMapping("/hello")
+    public ModelAndView index(ModelAndView mv){
+        System.out.println("员工");
+        mv.setViewName("redirect:/index.html");
+        return mv;
+    }
+
+
     @Resource
     private UserService service;
+
+    //查询所有管理人员
+    @RequestMapping("/admin-list.html")
+    public ModelAndView getAll(ModelAndView mv){
+        List<Users> users = service.getAll();
+        //将获取到的管理员信息添加域中
+        mv.addObject("users",users);
+        mv.setViewName("admin-list");
+        return mv;
+    }
 
     //管理员注册
     @RequestMapping("/UserRegister")
@@ -34,14 +51,46 @@ public class UserController {
 
     //查询所有管理人员
     @RequestMapping("/getAll")
-    public ModelAndView getAll(ModelAndView mv){
+    public ModelAndView getAll(ModelAndView mv) {
         List<Users> users = service.getAll();
         for (Users user : users) {
             System.out.println(user);
         }
-        mv.addObject("users",users);
+        mv.addObject("users", users);
         return null;
-
     }
 
+    @RequestMapping("/unAuth")
+    public String unAuth(){
+        return "unAuth";
+    }
+
+    /**
+     *    使用shiro 验证登录
+     * @param name
+     * @param password
+     * @param mv
+     * @return
+     */
+    @RequestMapping("/login")
+    public ModelAndView login(String name,String password, ModelAndView mv){
+      //使用shiro编写认证操作
+        //1.获取Subject
+        Subject subject = SecurityUtils.getSubject();
+        //封装用户信息
+        UsernamePasswordToken token=new UsernamePasswordToken(name,password);
+        System.out.println("user-----------"+name+password);
+        try {
+            subject.login(token);
+            mv.setViewName("redirect:/index.html");
+            System.out.println(222);
+            return mv;
+        } catch (Exception e) {
+            //登录失败：用户名不存在或密码错误
+            mv.setViewName("login.html");
+            mv.addObject("msg","用户名或密码错误");
+            System.out.println(111);
+            return mv;
+        }
+    }
 }
