@@ -1,37 +1,21 @@
 package com.xq.bean;
 
-import java.io.Serializable;
 
-public class Order implements Serializable {
+public class Order {
 
   private String id;
-  private Integer order_id;
-  private String send_time;
-  private Integer send_user_id;
-  private String send_address;
-  private String receive_time;
-  private Integer receive_user_id;
-  private String receive_address;
-  private Double weight;
+  private Integer orderId;
+  private String sendTime;
+  private Integer sendUserId;
+  private String sendAddress;
+  private String receiveTime;
+  private Integer receiveUserId;
+  private String receiveAddress;
+  private double weight;
   private String money;
-  private Integer order_state_id;
+  private Integer orderStateId;
+  private Integer orderInfoId;
 
-  @Override
-  public String toString() {
-    return "Order{" +
-            "id='" + id + '\'' +
-            ", order_id=" + order_id +
-            ", send_time='" + send_time + '\'' +
-            ", send_user_id=" + send_user_id +
-            ", send_address='" + send_address + '\'' +
-            ", receive_time='" + receive_time + '\'' +
-            ", receive_user_id=" + receive_user_id +
-            ", receive_address='" + receive_address + '\'' +
-            ", weight=" + weight +
-            ", money='" + money + '\'' +
-            ", order_state_id=" + order_state_id +
-            '}';
-  }
 
   public String getId() {
     return id;
@@ -42,74 +26,74 @@ public class Order implements Serializable {
   }
 
 
-  public Integer getOrder_id() {
-    return order_id;
+  public Integer getOrderId() {
+    return orderId;
   }
 
-  public void setOrder_id(Integer order_id) {
-    this.order_id = order_id;
-  }
-
-
-  public String getSend_time() {
-    return send_time;
-  }
-
-  public void setSend_time(String send_time) {
-    this.send_time = send_time;
+  public void setOrderId(Integer orderId) {
+    this.orderId = orderId;
   }
 
 
-  public Integer getSend_user_id() {
-    return send_user_id;
+  public String getSendTime() {
+    return sendTime;
   }
 
-  public void setSend_user_id(Integer send_user_id) {
-    this.send_user_id = send_user_id;
-  }
-
-
-  public String getSend_address() {
-    return send_address;
-  }
-
-  public void setSend_address(String send_address) {
-    this.send_address = send_address;
+  public void setSendTime(String sendTime) {
+    this.sendTime = sendTime;
   }
 
 
-  public String getReceive_time() {
-    return receive_time;
+  public Integer getSendUserId() {
+    return sendUserId;
   }
 
-  public void setReceive_time(String receive_time) {
-    this.receive_time = receive_time;
-  }
-
-
-  public Integer getReceive_user_id() {
-    return receive_user_id;
-  }
-
-  public void setReceive_user_id(Integer receive_user_id) {
-    this.receive_user_id = receive_user_id;
+  public void setSendUserId(Integer sendUserId) {
+    this.sendUserId = sendUserId;
   }
 
 
-  public String getReceive_address() {
-    return receive_address;
+  public String getSendAddress() {
+    return sendAddress;
   }
 
-  public void setReceive_address(String receive_address) {
-    this.receive_address = receive_address;
+  public void setSendAddress(String sendAddress) {
+    this.sendAddress = sendAddress;
   }
 
 
-  public Double getWeight() {
+  public String getReceiveTime() {
+    return receiveTime;
+  }
+
+  public void setReceiveTime(String receiveTime) {
+    this.receiveTime = receiveTime;
+  }
+
+
+  public Integer getReceiveUserId() {
+    return receiveUserId;
+  }
+
+  public void setReceiveUserId(Integer receiveUserId) {
+    this.receiveUserId = receiveUserId;
+  }
+
+
+  public String getReceiveAddress() {
+    return receiveAddress;
+  }
+
+  public void setReceiveAddress(String receiveAddress) {
+    this.receiveAddress = receiveAddress;
+  }
+
+
+  public double getWeight() {
     return weight;
   }
 
-  public void setWeight(Double weight) {
+  public void setWeight(double weight) {
     this.weight = weight;
   }
 
@@ -123,12 +107,21 @@ public class Order implements Serializable {
   }
 
 
-  public Integer getOrder_state_id() {
-    return order_state_id;
+  public Integer getOrderStateId() {
+    return orderStateId;
   }
 
-  public void setOrder_state_id(Integer order_state_id) {
-    this.order_state_id = order_state_id;
+  public void setOrderStateId(Integer orderStateId) {
+    this.orderStateId = orderStateId;
+  }
+
+
+  public Integer getOrderInfoId() {
+    return orderInfoId;
+  }
+
+  public void setOrderInfoId(Integer orderInfoId) {
+    this.orderInfoId = orderInfoId;
   }
 
 }

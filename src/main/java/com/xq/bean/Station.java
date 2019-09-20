@@ -1,31 +1,18 @@
 package com.xq.bean;
 
-import java.io.Serializable;
 
-public class Station implements Serializable {
+public class Station {
 
   private Integer id;
-  private Integer station_num;
+  private Integer stationNum;
   private String name;
   private String address;
-  private Integer employee_id;
+  private Integer employeeId;
   private String telephone;
-  private Integer transfer_id;
-  private Double max_weight;
+  private Double maxWeight;
+  private Integer transfer;
+  private Integer transferId;
 
-  @Override
-  public String toString() {
-    return "Station{" +
-            "id=" + id +
-            ", station_num=" + station_num +
-            ", name='" + name + '\'' +
-            ", address='" + address + '\'' +
-            ", employee_id=" + employee_id +
-            ", telephone='" + telephone + '\'' +
-            ", transfer_id=" + transfer_id +
-            ", max_weight=" + max_weight +
-            '}';
-  }
 
   public Integer getId() {
     return id;
@@ -36,12 +23,12 @@ public class Station implements Serializable {
   }
 
 
-  public Integer getStation_num() {
-    return station_num;
+  public Integer getStationNum() {
+    return stationNum;
   }
 
-  public void setStation_num(Integer station_num) {
-    this.station_num = station_num;
+  public void setStationNum(Integer stationNum) {
+    this.stationNum = stationNum;
   }
 
 
@@ -63,12 +50,12 @@ public class Station implements Serializable {
   }
 
 
-  public Integer getEmployee_id() {
-    return employee_id;
+  public Integer getEmployeeId() {
+    return employeeId;
   }
 
-  public void setEmployee_id(Integer employee_id) {
-    this.employee_id = employee_id;
+  public void setEmployeeId(Integer employeeId) {
+    this.employeeId = employeeId;
   }
 
 
@@ -81,21 +68,30 @@ public class Station implements Serializable {
   }
 
 
-  public Integer getTransfer_id() {
-    return transfer_id;
+  public Double getMaxWeight() {
+    return maxWeight;
   }
 
-  public void setTransfer_id(Integer transfer_id) {
-    this.transfer_id = transfer_id;
+  public void setMaxWeight(Double maxWeight) {
+    this.maxWeight = maxWeight;
   }
 
 
-  public Double getMax_weight() {
-    return max_weight;
+  public Integer getTransfer() {
+    return transfer;
   }
 
-  public void setMax_weight(Double max_weight) {
-    this.max_weight = max_weight;
+  public void setTransfer(Integer transfer) {
+    this.transfer = transfer;
+  }
+
+
+  public Integer getTransferId() {
+    return transferId;
+  }
+
+  public void setTransferId(Integer transferId) {
+    this.transferId = transferId;
   }
 
 }

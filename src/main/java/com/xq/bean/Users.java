@@ -3,7 +3,7 @@ package com.xq.bean;
 
 public class Users {
 
-  private long id;
+  private Integer id;
   private String user_id;
   private String name;
   private String password;
@@ -24,11 +24,11 @@ public class Users {
             '}';
   }
 
-  public long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
