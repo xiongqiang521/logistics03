@@ -39,7 +39,7 @@ public class ShiroConfig {
         //授权过滤器
         filterMap.put("/*", "perms[jinli]");
         filterMap.put("/user/*", "perms[y:g]");
-        //通配拦截
+        // 通配拦截
         filterMap.put("/*", "authc");
         System.out.println(1111);
         //登录成功要跳转的连接
@@ -48,7 +48,7 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setLoginUrl("/login.html");
         //设置未授权提示页面
         shiroFilterFactoryBean.setUnauthorizedUrl("/unAuth");
-        shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
+        // shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
         return shiroFilterFactoryBean;
     }
 
