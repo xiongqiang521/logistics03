@@ -4,6 +4,9 @@ import com.xq.bean.Users;
 import com.xq.service.UserService;
 import com.xq.util.TimeUtils;
 import com.xq.util.UUIDUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -47,17 +50,6 @@ public class UserController {
         System.out.println(users);
         service.UserRegist(users);
         return users;
-    }
-
-    //查询所有管理人员
-    @RequestMapping("/getAll")
-    public ModelAndView getAll(ModelAndView mv) {
-        List<Users> users = service.getAll();
-        for (Users user : users) {
-            System.out.println(user);
-        }
-        mv.addObject("users", users);
-        return null;
     }
 
     @RequestMapping("/unAuth")
