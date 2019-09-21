@@ -71,7 +71,7 @@
       <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
         <button class="layui-btn" onclick="x_admin_show('出入库','./transitinfo.html')"><i class="layui-icon"></i>出入库</button>
-        <span class="x-right" style="line-height:40px">共有数据：88 条</span>
+        <span class="x-right" style="line-height:40px">共有数据：{{pageBean.totalCount}} 条</span>
       </xblock>
       <table class="layui-table">
         <thead>
@@ -199,7 +199,7 @@
         },
         /*加载页面时自动调用findAll方法*/
         mounted:function(){
-          this.findAll();
+          this.findAll(), this.findAllByPage()
         },
         methods: {
           /*显示中转信息列表*/
@@ -212,8 +212,20 @@
             }).catch(function (err) {
               console.log(err);
             });
+          },
+          /*分页显示中转信息列表*/
+          findAllByPage: function () {
+            var _this = this;
+            axios.get("/findByPage").then(function (response) {
+
+
+              console.log(response.data);
+              _this.pageBean = response.data;
+            }).catch(function (err) {
+              console.log(err);
+            });
           }
-        },
+        }
 
       });
 

@@ -2,10 +2,13 @@ package com.xq.transfer.web.controller;
 
 import com.xq.bean.TransferInfo;
 import com.xq.transfer.service.TransferService;
+import com.xq.util.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -26,4 +29,9 @@ public class TransferController {
         return list;
     }
 
+    @RequestMapping("findByPage")
+    public PageBean getPage(@RequestParam(defaultValue="1") int currentPage,@RequestParam(defaultValue="10")  int pageSize, HttpServletRequest request){
+        PageBean pageBean= transferService.findByPage(currentPage,pageSize) ;
+        return pageBean;
+}
 }
