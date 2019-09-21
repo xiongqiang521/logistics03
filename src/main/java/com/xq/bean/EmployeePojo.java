@@ -13,6 +13,7 @@ public class EmployeePojo implements Serializable {
     private String telephone;
     private Integer state;
     private Integer station_num;
+    private String type;
 
     @Override
     public String toString() {
@@ -25,7 +26,16 @@ public class EmployeePojo implements Serializable {
                 ", telephone='" + telephone + '\'' +
                 ", state=" + state +
                 ", station_num=" + station_num +
+                ", type='" + type + '\'' +
                 '}';
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public Integer getId() {

@@ -28,7 +28,7 @@ public class ShiroConfig {
          *          anon: 无需认证（登录）可以访问
          *          perms：该资源必须得到资源权限才可以访问
          *          authc: 必须认证才可以访问
-         *          user: 如果使用rememberMe的功能可以直接访问
+         *          manager: 如果使用rememberMe的功能可以直接访问
          *          role: 该资源必须得到角色权限才可以访问
          */
 
@@ -37,8 +37,9 @@ public class ShiroConfig {
         filterMap.put("/login.html", "anon");
         filterMap.put("/login", "anon");
         //授权过滤器
-        filterMap.put("/*", "perms[jinli]");
-        filterMap.put("/user/*", "perms[y:g]");
+        filterMap.put("/*", "perms[admin]");
+        filterMap.put("/manager/*", "perms[manager]");
+        filterMap.put("/orders/*", "perms[orders]");
         // 通配拦截
         filterMap.put("/*", "authc");
         System.out.println(1111);
@@ -48,7 +49,7 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setLoginUrl("/login.html");
         //设置未授权提示页面
         shiroFilterFactoryBean.setUnauthorizedUrl("/unAuth");
-//         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
+         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
         return shiroFilterFactoryBean;
     }
 

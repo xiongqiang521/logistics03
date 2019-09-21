@@ -1,7 +1,7 @@
 package com.xq.bean;
 
 import java.io.Serializable;
-import java.util.List;
+
 
 public class EmployeeState implements Serializable {
 
@@ -26,7 +26,6 @@ public class EmployeeState implements Serializable {
   public void setId(Integer id) {
     this.id = id;
   }
-
 
   public String getType() {
     return type;

@@ -37,7 +37,7 @@ public class UserRealm extends AuthorizingRealm {
         Employee users = (Employee) subject.getPrincipal();
 
 
-        info.addStringPermission("");
+        info.addStringPermission(users.getEmployeeState().getType());
         return info;
     }
 
@@ -53,14 +53,16 @@ public class UserRealm extends AuthorizingRealm {
         System.out.println("执行认证逻辑");
 
         UsernamePasswordToken t = (UsernamePasswordToken) token;
-        Employee users = service.login(t.getUsername());
+        String username = t.getUsername();
+        Integer integer = Integer.valueOf(username);
+        Employee users = service.login(integer);
         System.out.println("name----------" + users);
         if(users==null){
             //判断用户名是否存在  否则底层会抛出UnKnowAccountException
             return null;
         }
         //判断密码是否正确
-        return new SimpleAuthenticationInfo(users,"","");
+        return new SimpleAuthenticationInfo(users,users.getPassword(),"");
 
     }
     }

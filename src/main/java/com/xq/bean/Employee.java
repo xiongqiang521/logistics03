@@ -29,15 +29,6 @@ public class Employee implements Serializable {
             '}';
   }
 
-
-  public EmployeeState getEmployeeState() {
-    return employeeState;
-  }
-
-  public void setEmployeeState(EmployeeState employeeState) {
-    this.employeeState = employeeState;
-  }
-
   public Integer getId() {
     return id;
   }
@@ -45,7 +36,6 @@ public class Employee implements Serializable {
   public void setId(Integer id) {
     this.id = id;
   }
-
 
   public Integer getEmployee_num() {
     return employee_num;
@@ -55,7 +45,6 @@ public class Employee implements Serializable {
     this.employee_num = employee_num;
   }
 
-
   public String getName() {
     return name;
   }
@@ -63,7 +52,6 @@ public class Employee implements Serializable {
   public void setName(String name) {
     this.name = name;
   }
-
 
   public String getPassword() {
     return password;
@@ -73,7 +61,6 @@ public class Employee implements Serializable {
     this.password = password;
   }
 
-
   public String getSex() {
     return sex;
   }
@@ -81,7 +68,6 @@ public class Employee implements Serializable {
   public void setSex(String sex) {
     this.sex = sex;
   }
-
 
   public String getTelephone() {
     return telephone;
@@ -91,7 +77,6 @@ public class Employee implements Serializable {
     this.telephone = telephone;
   }
 
-
   public Integer getState() {
     return state;
   }
@@ -100,4 +85,11 @@ public class Employee implements Serializable {
     this.state = state;
   }
 
+  public EmployeeState getEmployeeState() {
+    return employeeState;
+  }
+
+  public void setEmployeeState(EmployeeState employeeState) {
+    this.employeeState = employeeState;
+  }
 }

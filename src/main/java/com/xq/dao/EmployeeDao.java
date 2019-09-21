@@ -2,6 +2,8 @@ package com.xq.dao;
 
 
 import com.xq.bean.Employee;
+import com.xq.bean.EmployeeState;
+import com.xq.bean.Station;
 import com.xq.bean.Users;
 import org.apache.ibatis.annotations.*;
 
@@ -17,16 +19,21 @@ public interface EmployeeDao {
    //查询所有管理人员
    @Select("SELECT * from employee")
    @Results(id = "getAll",value = {
-           @Result(column = "state",property = "state"),
-           @Result(column = "state",property = "employeeState",one = @One(select ="com.xq.dao.EmployeeStateDao.getById" ))
+           @Result(column = "employee_num",property = "employee_num"),
+           @Result(column = "employee_num",property = "employeeState",one = @One(select ="com.xq.dao.EmployeeStateDao.getById" ))
    })
    List<Employee> getAll();
 
     //验证登录
-    @Select("SELECT * from employee where name=#{name}")
+    @Select("SELECT * from employee where employee_num=#{name}")
     @Results(id = "emMap",value = {
-            @Result(column = "state",property = "state"),
-            @Result(column = "state",property = "employeeState",one = @One(select ="com.xq.dao.EmployeeStateDao.getById" ))
+            @Result(column = "employee_num",property = "employee_num"),
+            @Result(column = "employee_num",property = "employeeState",one = @One(select ="com.xq.dao.EmployeeStateDao.getById" ))
     })
-    Employee login(String name);
+    Employee login(Integer name);
+
+
+
+
+
 }

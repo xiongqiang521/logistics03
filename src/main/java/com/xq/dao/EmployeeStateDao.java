@@ -14,4 +14,5 @@ public interface EmployeeStateDao {
     EmployeeState getById(Serializable id);
 
 
+
 }

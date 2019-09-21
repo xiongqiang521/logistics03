@@ -1,7 +1,9 @@
 package com.xq.service;
 
 import com.xq.bean.Employee;
+import com.xq.bean.EmployeeState;
 import com.xq.bean.Users;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -14,5 +16,8 @@ public interface EmployeeService {
     List<Employee> getAll();
 
     //验证登录
-    Employee login(String name);
+    Employee login(Integer name);
+
+
+
 }
