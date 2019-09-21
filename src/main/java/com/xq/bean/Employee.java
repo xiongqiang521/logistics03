@@ -1,6 +1,7 @@
 package com.xq.bean;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Employee implements Serializable {
 
@@ -12,6 +13,8 @@ public class Employee implements Serializable {
   private String telephone;
   private Integer state;
 
+  private EmployeeState employeeState;
+
   @Override
   public String toString() {
     return "Employee{" +
@@ -22,7 +25,17 @@ public class Employee implements Serializable {
             ", sex='" + sex + '\'' +
             ", telephone='" + telephone + '\'' +
             ", state=" + state +
+            ", employeeState=" + employeeState +
             '}';
+  }
+
+
+  public EmployeeState getEmployeeState() {
+    return employeeState;
+  }
+
+  public void setEmployeeState(EmployeeState employeeState) {
+    this.employeeState = employeeState;
   }
 
   public Integer getId() {

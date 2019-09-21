@@ -1,20 +1,21 @@
 package com.xq.web.controller;
 
-import com.xq.bean.Users;
-import com.xq.service.UserService;
-import com.xq.util.TimeUtils;
-import com.xq.util.UUIDUtils;
+import com.xq.bean.Employee;
+import com.xq.bean.EmployeePojo;
+import com.xq.bean.Station;
+import com.xq.service.EmployeeService;
+import com.xq.service.StationService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Controller
@@ -29,27 +30,37 @@ public class UserController {
 
 
     @Resource
-    private UserService service;
+    private EmployeeService employeeService;
+    @Resource
+    private StationService stationService;
+
+
 
     //查询所有管理人员
     @RequestMapping("/admin-list.html")
     public ModelAndView getAll(ModelAndView mv){
-        List<Users> users = service.getAll();
+        List<Employee> employee = employeeService.getAll();
+//        System.out.println("login---------"+employee);
         //将获取到的管理员信息添加域中
-        mv.addObject("users",users);
+        mv.addObject("employee",employee);
         mv.setViewName("admin-list");
         return mv;
+    }
+    @RequestMapping("/admin-add.html")
+    public Model getName(Model model){
+        List<Station> stations = stationService.getStationname();
+        model.addAttribute("stations",stations);
+        return model;
     }
 
     //管理员注册
     @RequestMapping("/UserRegister")
     @ResponseBody
-    public Users UserRegist(Users users) throws ParseException {
-        users.setUser_id(UUIDUtils.getUUID());
-        users.setCreate_time(TimeUtils.getDateTimeToString());
-        System.out.println(users);
-        service.UserRegist(users);
-        return users;
+    public EmployeePojo employeeRegist(EmployeePojo employee) throws ParseException {
+        System.out.println("employee--------"+employee);
+//     employeeService.EmployeeRegist(employee);
+
+        return employee;
     }
 
     @RequestMapping("/unAuth")

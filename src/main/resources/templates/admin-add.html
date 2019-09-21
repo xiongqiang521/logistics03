@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
   
   <head>
     <meta charset="UTF-8">
@@ -35,6 +35,19 @@
                   <span class="x-red">*</span>将会成为您唯一的登入名
               </div>
           </div>
+        <form class="layui-form" >
+          <div class="layui-form-item">
+              <label for="employee_num" class="layui-form-label">
+                  <span class="x-red">*</span>员工号
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="employee_num" name="employee_num" required="" lay-verify="required"
+                  autocomplete="off" class="layui-input">
+              </div>
+              <div class="layui-form-mid layui-word-aux">
+                  <span class="x-red">*</span>将会成为您唯一的登入名
+              </div>
+          </div>
           <div class="layui-form-item">
               <label for="phone" class="layui-form-label">
                   <span class="x-red">*</span>手机
@@ -59,14 +72,28 @@
                   <span class="x-red">*</span>
               </div>
           </div>-->
+           <div class="layui-form-item">
+                <label class="layui-form-label"><span class="x-red">*</span>性别</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="sex" value="男" lay-skin="primary" title="男" checked="">
+                    <input type="radio" name="sex" value="女" lay-skin="primary" title="女">
+                </div>
+            </div>
           <div class="layui-form-item">
               <label class="layui-form-label"><span class="x-red">*</span>角色</label>
               <div class="layui-input-block">
-                <input type="checkbox" name="state" value="店长" lay-skin="primary" title="超级管理员" checked="">
-                <input type="checkbox" name="state" value="经理" lay-skin="primary" title="编辑人员">
-                <input type="checkbox" name="state" value="员工" lay-skin="primary" title="宣传人员" checked="">
+                <input type="radio" name="state" value="1" lay-skin="primary" title="老板" checked="">
+                <input type="radio" name="state" value="2" lay-skin="primary" title="经理">
+                <input type="radio" name="state" value="3" lay-skin="primary" title="员工" checked="">
+              </div>
+              <div style="width: 200px; margin-left:110px;">
+                  <select name="station_num" >
+                          <option th:each="station : ${stations}" th:text="${station.name}" th:value="${station.station_num}">
+                          </option>
+                  </select>
               </div>
           </div>
+
           <div class="layui-form-item">
               <label for="L_pass" class="layui-form-label">
                   <span class="x-red">*</span>密码
@@ -96,7 +123,7 @@
               </button>
           </div>
       </form>
-    </div>
+
     <script>
         layui.use(['form','layer'], function(){
             $ = layui.jquery;
@@ -125,7 +152,7 @@
               $.ajax({
                   type:'post',
                   data:data.field,
-                  url:"UserRegister",
+                  url:"/UserRegister",
                   dataType:'json'
               })
             layer.alert("增加成功", {icon: 6},function () {

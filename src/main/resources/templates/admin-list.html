@@ -61,15 +61,15 @@
             <th>操作</th>
         </thead>
         <tbody>
-          <tr th:each="users,var:${users}">
+          <tr th:each="employee,var:${employee}">
             <td>
               <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
             </td>
-            <td th:text="${users.name}"></td>
-            <td th:text="${users.telephone}">18925139194</td>
+            <td th:text="${employee.name}"></td>
+            <td th:text="${employee.telephone}">18925139194</td>
             <td>113664000@qq.com</td>
-            <td th:text="${users.state}"></td>
-            <td th:text="${users.create_time}"></td>
+            <td th:text="${employee.state}"></td>
+            <td th:text="${employee.employeeState.type}"></td>
             <td class="td-status">
               <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>
             <td class="td-manage">
