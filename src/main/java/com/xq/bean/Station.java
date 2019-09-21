@@ -4,15 +4,29 @@ package com.xq.bean;
 public class Station {
 
   private Integer id;
-  private Integer stationNum;
+  private Integer station_num;
   private String name;
   private String address;
-  private Integer employeeId;
+  private Integer employee_id;
   private String telephone;
   private Double maxWeight;
   private Integer transfer;
-  private Integer transferId;
+  private Integer transfer_id;
 
+  @Override
+  public String toString() {
+    return "Station{" +
+            "id=" + id +
+            ", station_num=" + station_num +
+            ", name='" + name + '\'' +
+            ", address='" + address + '\'' +
+            ", employee_id=" + employee_id +
+            ", telephone='" + telephone + '\'' +
+            ", maxWeight=" + maxWeight +
+            ", transfer=" + transfer +
+            ", transfer_id=" + transfer_id +
+            '}';
+  }
 
   public Integer getId() {
     return id;
@@ -22,15 +36,13 @@ public class Station {
     this.id = id;
   }
 
-
-  public Integer getStationNum() {
-    return stationNum;
+  public Integer getStation_num() {
+    return station_num;
   }
 
-  public void setStationNum(Integer stationNum) {
-    this.stationNum = stationNum;
+  public void setStation_num(Integer station_num) {
+    this.station_num = station_num;
   }
-
 
   public String getName() {
     return name;
@@ -40,7 +52,6 @@ public class Station {
     this.name = name;
   }
 
-
   public String getAddress() {
     return address;
   }
@@ -49,15 +60,13 @@ public class Station {
     this.address = address;
   }
 
-
-  public Integer getEmployeeId() {
-    return employeeId;
+  public Integer getEmployee_id() {
+    return employee_id;
   }
 
-  public void setEmployeeId(Integer employeeId) {
-    this.employeeId = employeeId;
+  public void setEmployee_id(Integer employee_id) {
+    this.employee_id = employee_id;
   }
-
 
   public String getTelephone() {
     return telephone;
@@ -67,7 +76,6 @@ public class Station {
     this.telephone = telephone;
   }
 
-
   public Double getMaxWeight() {
     return maxWeight;
   }
@@ -75,7 +83,6 @@ public class Station {
   public void setMaxWeight(Double maxWeight) {
     this.maxWeight = maxWeight;
   }
-
 
   public Integer getTransfer() {
     return transfer;
@@ -85,13 +92,11 @@ public class Station {
     this.transfer = transfer;
   }
 
-
-  public Integer getTransferId() {
-    return transferId;
+  public Integer getTransfer_id() {
+    return transfer_id;
   }
 
-  public void setTransferId(Integer transferId) {
-    this.transferId = transferId;
+  public void setTransfer_id(Integer transfer_id) {
+    this.transfer_id = transfer_id;
   }
-
 }

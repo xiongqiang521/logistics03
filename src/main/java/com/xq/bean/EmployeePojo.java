@@ -12,7 +12,7 @@ public class EmployeePojo implements Serializable {
     private String sex;
     private String telephone;
     private Integer state;
-    private Integer stationNum;
+    private Integer station_num;
 
     @Override
     public String toString() {
@@ -24,7 +24,7 @@ public class EmployeePojo implements Serializable {
                 ", sex='" + sex + '\'' +
                 ", telephone='" + telephone + '\'' +
                 ", state=" + state +
-                ", stationNum=" + stationNum +
+                ", station_num=" + station_num +
                 '}';
     }
 
@@ -84,11 +84,11 @@ public class EmployeePojo implements Serializable {
         this.state = state;
     }
 
-    public Integer getStationNum() {
-        return stationNum;
+    public Integer getStation_num() {
+        return station_num;
     }
 
-    public void setStationNum(Integer stationNum) {
-        this.stationNum = stationNum;
+    public void setStation_num(Integer station_num) {
+        this.station_num = station_num;
     }
 }

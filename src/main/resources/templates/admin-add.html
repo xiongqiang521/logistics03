@@ -87,11 +87,10 @@
                 <input type="radio" name="state" value="3" lay-skin="primary" title="员工" checked="">
               </div>
               <div style="width: 200px; margin-left:110px;">
-                <select name="stationNum" >
-                    <a href="javascript:;" th:each="station : ${stations}">
-                    <option  th:attr="value=#{station.stationNum}" th:text="${station.name}"></option>
-                    </a>
-                </select>
+                  <select name="station_num" >
+                          <option th:each="station : ${stations}" th:text="${station.name}" th:value="${station.station_num}">
+                          </option>
+                  </select>
               </div>
           </div>
 
