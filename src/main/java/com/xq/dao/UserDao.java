@@ -22,4 +22,8 @@ public interface UserDao {
     //验证登录
     @Select("SELECT * FROM users WHERE NAME=#{NAME}")
     Users login(String name);
+
+    //通过手机号查找用户
+    @Select("select * from users where telephone=#{tel}")
+    Users selectTelephone(String tel);
 }

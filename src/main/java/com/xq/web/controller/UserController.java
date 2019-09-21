@@ -5,26 +5,24 @@ import com.xq.service.UserService;
 import com.xq.util.TimeUtils;
 import com.xq.util.UUIDUtils;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.IncorrectCredentialsException;
-import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.jws.WebParam;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Controller
 public class UserController {
 
 
-//    @RequestMapping("/index.html")
+//    @RequestMapping("/nose.html")
 //    public String indexhtml(){
 //        return "index";
 //    }
@@ -38,15 +36,27 @@ public class UserController {
 
 
     @Resource
-    private UserService service;
+    private UserService userService;
 
     //查询所有管理人员
     @RequestMapping("/admin-list.html")
     public ModelAndView getAll(ModelAndView mv){
-        List<Users> users = service.getAll();
+        List<Users> users = userService.getAll();
         //将获取到的管理员信息添加域中
         mv.addObject("users",users);
         mv.setViewName("admin-list");
+        return mv;
+    }
+
+    @RequestMapping("/admin-add.html")
+    public ModelAndView getAdd(ModelAndView mv){
+        List<Users> users = userService.getAll();
+        //将获取到的管理员信息添加域中
+        mv.addObject("list", users);
+        for (Users user : users) {
+            System.out.println(user);
+        }
+        mv.setViewName("admin-add");
         return mv;
     }
 
@@ -56,7 +66,7 @@ public class UserController {
     public Users UserRegist(Users users) throws ParseException {
         users.setUser_id(UUIDUtils.getUUID());
         users.setCreate_time(TimeUtils.getDateTimeToString());
-        service.UserRegist(users);
+        userService.UserRegist(users);
         return users;
     }
 

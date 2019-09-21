@@ -43,12 +43,12 @@ public class ShiroConfig {
         filterMap.put("/*", "authc");
         System.out.println(1111);
         //登录成功要跳转的连接
-        shiroFilterFactoryBean.setSuccessUrl("/index.html");
+        shiroFilterFactoryBean.setSuccessUrl("/nose.html");
         //未登录的时候，跳转的登录页面
         shiroFilterFactoryBean.setLoginUrl("/login.html");
         //设置未授权提示页面
         shiroFilterFactoryBean.setUnauthorizedUrl("/unAuth");
-        shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
+        // shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
         return shiroFilterFactoryBean;
     }
 
