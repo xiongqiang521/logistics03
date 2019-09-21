@@ -22,7 +22,7 @@ public class Station {
             ", address='" + address + '\'' +
             ", employee_id=" + employee_id +
             ", telephone='" + telephone + '\'' +
-            ", maxWeight=" + maxWeight +
+            ", maxWeight=" + max_weight +
             ", transfer=" + transfer +
             ", transfer_id=" + transfer_id +
             '}';
