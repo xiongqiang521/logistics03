@@ -3,6 +3,8 @@ package com.xq.web.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * 访问templates里的动态页面
  *
@@ -14,6 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HTMLController {
     @RequestMapping({"*.html","*/*.html","*/*/*.html"})
     public String welcome() {
-        return null;
+            return null;
     }
 }

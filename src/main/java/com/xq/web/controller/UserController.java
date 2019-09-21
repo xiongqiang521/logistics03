@@ -1,15 +1,16 @@
 package com.xq.web.controller;
 
-import com.xq.bean.Employee;
-import com.xq.bean.EmployeePojo;
-import com.xq.bean.Station;
-import com.xq.service.EmployeeService;
-import com.xq.service.StationService;
+import com.xq.bean.Users;
+import com.xq.service.UserService;
+import com.xq.util.TimeUtils;
+import com.xq.util.UUIDUtils;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -30,11 +31,11 @@ public class UserController {
 
 
     @Resource
+    private UserService service;
+    @Resource
     private EmployeeService employeeService;
     @Resource
     private StationService stationService;
-
-
 
     //查询所有管理人员
     @RequestMapping("/admin-list.html")
@@ -96,4 +97,7 @@ public class UserController {
             return mv;
         }
     }
+
+
+
 }
