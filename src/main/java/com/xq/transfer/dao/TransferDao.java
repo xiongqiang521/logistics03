@@ -30,9 +30,9 @@ public interface TransferDao {
     class TransferDaoProvider {
         public String findByPage(HashMap<String,Object> map) {
             String sql = "select * from order_transfer_info";
-           /* if(map.get("start")!=null && map.get("size")!=null ){
+            if(map.get("start")!=null && map.get("size")!=null ){
                 sql += " limit #{start},#{size}";
-            }*/
+            }
             return sql;
         }
     }
