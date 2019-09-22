@@ -54,21 +54,21 @@
               </div>
           </div>
           <div class="layui-form-item">
-              <label for="username" class="layui-form-label">
+              <label for="name" class="layui-form-label">
                   <span class="x-red">*</span>操作员
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="username" name="username" required="" lay-verify="required"
+                  <input type="text" id="name" name="name" required="" lay-verify="required"
                   autocomplete="off" class="layui-input">
               </div>
           </div>
             <div class="layui-form-item">
 
-                <label for="username" class="layui-form-label">
+                <label for="time" class="layui-form-label">
                     <span class="x-red">*</span>操作时间
                 </label>
                     <div class="layui-input-inline">
-                        <input type="text" class="layui-input" id="test5" placeholder="yyyy-MM-dd HH:mm:ss">
+                        <input type="text" class="layui-input" id="time" placeholder="yyyy-MM-dd HH:mm:ss">
                     </div>
 
             </div>
@@ -134,13 +134,24 @@
           <div class="layui-form-item">
               <label for="L_repass" class="layui-form-label">
               </label>
-              <button  class="layui-btn" lay-filter="add" lay-submit="">
+              <button  class="layui-btn" lay-filter="add" lay-submit="" id="L_repass">
                   增加
               </button>
           </div>
       </form>
     </div>
     <script>
+        layui.use('laydate', function() {
+            var laydate = layui.laydate;
+
+            //日期时间选择器
+            laydate.render({
+                elem: '#time'
+                ,type: 'datetime'
+                ,trigger: 'click'
+            });
+        });
+
         layui.use(['form','layer'], function(){
             $ = layui.jquery;
           var form = layui.form
