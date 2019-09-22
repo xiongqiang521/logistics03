@@ -29,7 +29,7 @@ public class ShiroConfig {
          *          perms：该资源必须得到资源权限才可以访问
          *          authc: 必须认证才可以访问
          *          manager: 如果使用rememberMe的功能可以直接访问
-         *          role: 该资源必须得到角色权限才可以访问
+         *          roles: 该资源必须得到角色权限才可以访问
          */
 
         Map<String, String> filterMap = new LinkedHashMap<>();
@@ -37,9 +37,10 @@ public class ShiroConfig {
         filterMap.put("/login.html", "anon");
         filterMap.put("/login", "anon");
         //授权过滤器
-        filterMap.put("/*", "perms[admin]");
-        filterMap.put("/manager/*", "perms[manager]");
-        filterMap.put("/orders/*", "perms[orders]");
+        filterMap.put("/orders/*", "roles[admin]");
+        filterMap.put("/manager/*", "roles[manager]");
+        filterMap.put("/*", "roles[orders,admin,manager]");
+//        filterMap.put("/manager/*", "perms[manager]");
         // 通配拦截
         filterMap.put("/*", "authc");
         System.out.println(1111);

@@ -7,8 +7,21 @@ public class PageBean {
 	private Integer pageSize;			// 每页显示记录数
 	private Long totalCount;			// 总记录数
 	private Integer totalPage;			// 总页数
-	
+
+
 	private List list = null;
+
+	@Override
+	public String toString() {
+		return "PageBean{" +
+				"currentPage=" + currentPage +
+				", pageSize=" + pageSize +
+				", totalCount=" + totalCount +
+				", totalPage=" + totalPage +
+				", list=" + list +
+				'}';
+	}
+
 
 	public Integer getCurrentPage() {
 		return currentPage;

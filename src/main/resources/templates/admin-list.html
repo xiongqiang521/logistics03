@@ -34,8 +34,14 @@
     <div class="x-body">
       <div class="layui-row">
         <form class="layui-form layui-col-md12 x-so">
-          <input class="layui-input" placeholder="开始日" name="start" id="start">
-          <input class="layui-input" placeholder="截止日" name="end" id="end">
+          <input class="layui-input" placeholder="姓名"  >
+<!--          <input class="layui-input" placeholder="站点"  >-->
+
+            <select name="station_num" class="layui-input" >
+                  <option th:each="station : ${stations}" th:text="${station.name}" th:value="${station.station_num}">
+                  </option>
+            </select>
+
           <input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
           <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
         </form>
@@ -55,8 +61,8 @@
             <th>手机</th>
 <!--            <th>登录名</th>-->
             <th>邮箱</th>
+            <th>工作区域</th>
             <th>级别</th>
-            <!--<th>加入时间</th>-->
             <th>状态</th>
             <th>操作</th>
         </thead>
@@ -68,7 +74,7 @@
             <td th:text="${employee.name}"></td>
             <td th:text="${employee.telephone}">18925139194</td>
             <td>113664000@qq.com</td>
-          <!--  <td th:text="${employee.state}"></td>-->
+            <td th:text="${employee.employeeState.station.name}"></td>
             <td th:text="${employee.employeeState.type}"></td>
             <td class="td-status">
               <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>
@@ -89,9 +95,9 @@
       <div class="page">
         <div>
           <a class="prev" href="">&lt;&lt;</a>
-          <a class="num" href="">1</a>
-          <span class="current">2</span>
-          <a class="num" href="">3</a>
+          <a class="num"  href="javascript:;" name="pageNum" onclick="pageBean(this.val())" th:each="pageNums , var : ${pageNum}" th:text="${pageNums}"></a>
+<!--          <span class="current">2</span>
+          <a class="num" href="">3</a>-->
           <a class="num" href="">489</a>
           <a class="next" href="">&gt;&gt;</a>
         </div>
@@ -112,6 +118,17 @@
           elem: '#end' //指定元素
         });
       });
+
+      /*分页*/
+     function pageBean(data) {
+       console.log(data.innerText)
+       $.ajax({
+         type:'post',
+         data:data.innerText,
+         url:'pageBean',
+         dataType:'text'
+       })
+     }
 
        /*用户-停用*/
       function member_stop(obj,id){

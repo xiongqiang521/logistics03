@@ -1,10 +1,7 @@
 package com.xq.dao;
 
 
-import com.xq.bean.Employee;
-import com.xq.bean.EmployeeState;
-import com.xq.bean.Station;
-import com.xq.bean.Users;
+import com.xq.bean.*;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -14,7 +11,7 @@ public interface EmployeeDao {
 
     //管理員注册
    @Insert("INSERT INTO employee(employee_num,name,password,sex,telephone,state) VALUES(#{employee_num},#{name},#{password},#{sex},#{telephone},#{state})")
-    void EmployeeRegist(Employee employee);
+    void EmployeeRegist(EmployeePojo employee);
 
    //查询所有管理人员
    @Select("SELECT * from employee")
@@ -28,7 +25,7 @@ public interface EmployeeDao {
     @Select("SELECT * from employee where employee_num=#{name}")
     @Results(id = "emMap",value = {
             @Result(column = "employee_num",property = "employee_num"),
-            @Result(column = "employee_num",property = "employeeState",one = @One(select ="com.xq.dao.EmployeeStateDao.getById" ))
+            @Result(column = "employee_num",property = "employeeState",one = @One(select ="com.xq.dao.EmployeeStateDao.getBylogin" ))
     })
     Employee login(Integer name);
 

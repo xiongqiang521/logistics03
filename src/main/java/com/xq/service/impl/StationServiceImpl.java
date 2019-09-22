@@ -1,5 +1,6 @@
 package com.xq.service.impl;
 
+import com.xq.bean.EmployeePojo;
 import com.xq.bean.EmployeeState;
 import com.xq.bean.Station;
 import com.xq.dao.StationDao;
@@ -15,10 +16,13 @@ public class StationServiceImpl implements StationService {
     @Resource
     private StationDao stationDao;
 
+
+
     @Override
     public List<Station> getStationname() {
         return stationDao.getStationname();
     }
+
 
 
 }

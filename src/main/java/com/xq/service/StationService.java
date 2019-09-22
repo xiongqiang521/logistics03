@@ -1,5 +1,6 @@
 package com.xq.service;
 
+import com.xq.bean.EmployeePojo;
 import com.xq.bean.EmployeeState;
 import com.xq.bean.Station;
 

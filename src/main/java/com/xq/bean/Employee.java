@@ -15,6 +15,7 @@ public class Employee implements Serializable {
 
   private EmployeeState employeeState;
 
+
   @Override
   public String toString() {
     return "Employee{" +
@@ -28,6 +29,7 @@ public class Employee implements Serializable {
             ", employeeState=" + employeeState +
             '}';
   }
+
 
   public Integer getId() {
     return id;

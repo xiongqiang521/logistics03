@@ -9,6 +9,7 @@ public class EmployeeState implements Serializable {
   private String type;
   private Integer group;
 
+  private Station station;
 
   @Override
   public String toString() {
@@ -16,6 +17,7 @@ public class EmployeeState implements Serializable {
             "id=" + id +
             ", type='" + type + '\'' +
             ", group=" + group +
+            ", station=" + station +
             '}';
   }
 
@@ -35,7 +37,6 @@ public class EmployeeState implements Serializable {
     this.type = type;
   }
 
-
   public Integer getGroup() {
     return group;
   }
@@ -44,4 +45,11 @@ public class EmployeeState implements Serializable {
     this.group = group;
   }
 
+  public Station getStation() {
+    return station;
+  }
+
+  public void setStation(Station station) {
+    this.station = station;
+  }
 }
