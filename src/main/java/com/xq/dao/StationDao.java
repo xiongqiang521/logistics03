@@ -4,6 +4,7 @@ import com.xq.bean.Station;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -17,4 +18,7 @@ public interface StationDao {
      */
     @Select("select station_num,name from station")
     List<Station> getStationname();
+
+    @Select("select * from station where station_num=#{id}")
+    Station getStationByStationId(Serializable id);
 }

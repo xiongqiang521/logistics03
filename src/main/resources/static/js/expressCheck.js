@@ -382,7 +382,7 @@
                 }
                 5 < e && $(".record").css("text-align", "left")
             }
-            $(".search_btn").click(function () {
+            /*$(".search_btn").click(function () {
                 var e = $(".query_txt").val(), i = e.length;
                 if ($(".ex_item").size() < 1) {
                     e && 12 <= i && i <= 16 ? 13 == i ? ztoAlert("提示", "请正确输入中通运单号，13位暂时不支持，最少12位,最大16位，多个用；号隔开！", "确定", "") : ($(".query_txt").before('<div class="ex_item">\t                                        <span>' + e + "</span>\t                                        <i></i>\t                                    </div>"), $(".query_txt").blur(), $(".query_txt").val("").attr("placeholder", ""), m()) : ztoAlert("提示", "请正确输入中通运单号，最少12位,最大16位，多个用；号隔开！", "确定", "");
@@ -401,7 +401,8 @@
                 } else {
                     m()
                 }
-            }), $(document).on("click", ".record-item span", function () {
+            })*/
+            $(document).on("click", ".record-item span", function () {
                 var e = $(this).html();
                 e.split(",");
                 $(".ex_item").remove(), $(".query_txt").before('<div class="ex_item"><span>' + e + "</span><i></i></div>"), expressCheck(e, !0), $(".record").removeClass("show"), $(".search_box").css("margin-bottom", "15px"), $(".query_txt").attr("placeholder", ""), $(".query_txt").focus(), $("html,body").animate({scrollTop: 700}, 500)
@@ -453,7 +454,7 @@
                 } else {
                     e.val("").attr("placeholder", "在此输入单号"), e.blur(), ztoAlert("提示", "单次查询订单数量最多为10条！", "确定", "")
                 }
-            }), $(".query_txt").keydown(function (e) {
+            }), /*$(".query_txt").keydown(function (e) {
                 var i, s, t = $(this), n = (i = t.val()).length;
                 8 == e.keyCode && ("" != (i = t.val()) && null != i && " " != i || $(".ex_item").last().remove());
                 if (13 == e.keyCode) {
@@ -472,7 +473,7 @@
                         m()
                     }
                 }
-            }), $(".search_txt").click(function () {
+            }),*/ $(".search_txt").click(function () {
                 $(".query_txt").focus()
             }), $(".inputGray").click(function () {
             }), $(".inputItem").click(function (e) {
@@ -563,11 +564,11 @@
                 $(this).find(".star").removeClass("cur"), $(this).addClass("num-" + r), r = 0
             }), $(".jump-btn.gradeok").click(function () {
                 $(".jump,.jump-cont").hide(), ztoAlert("成功", "评价已提交成功，非常感谢！", "确定", "close")
-            }), $(".result-list").on("click", ".map-link", function () {
+            }), /*$(".result-list").on("click", ".map-link", function () {
                 var e = $(this), i = e.parents(".result-item"), s = i.children(".branch-list"),
                     t = '<div class="map-iframe"><iframe src="https://apimapgis.zt-express.com/nose.html?billCode=' + i.children(".result-top").children(".numbers").find("span").text().replace(/\s+/g, "") + '"></iframe></div>';
                 "切换地图" === e.text() ? (i.append(t), s.find(".branch-circle").hide(), s.find(".branch-text").hide(), s.find(".result-add").hide(), s.find(".branch-line").hide(), s.find(".branch-time").hide(), s.find(".branch-item").removeClass("show"), e.text("切换详细")) : (i.children(".map-iframe").remove(), s.find(".branch-circle").show(), s.find(".branch-text").show(), s.find(".result-add").show(), s.find(".branch-line").show(), s.find(".branch-time").show(), s.find(".branch-item").addClass("show"), e.text("切换地图"))
-            }), $(".result-list").on("click", ".e-waybill", function () {
+            }),*/ $(".result-list").on("click", ".e-waybill", function () {
                 $(".detail").remove();
                 var o = $(this).data("code"), l = $(this).parents(".result-item");
                 HrPost("Order_QueryDetailByCode", {billCode: o}, function (e) {

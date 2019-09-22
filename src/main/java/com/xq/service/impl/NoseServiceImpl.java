@@ -1,14 +1,16 @@
 package com.xq.service.impl;
 
 import com.sun.org.apache.xpath.internal.operations.Or;
-import com.xq.bean.Order;
-import com.xq.bean.Users;
+import com.xq.bean.*;
 import com.xq.dao.OrderDao;
+import com.xq.dao.StationDao;
 import com.xq.dao.UserDao;
 import com.xq.service.NoseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,12 +20,22 @@ import java.util.List;
  */
 @Service
 public class NoseServiceImpl implements NoseService {
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     private OrderDao orderDao;
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     private UserDao userDao;
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+    @Autowired
+    private StationDao stationDao;
 
 
+    /**
+     * 通过电话号码查找订单列表
+     * @param tel
+     * @return
+     */
     @Override
     public List<Order> selectByTelephone(String tel) {
         // 通过电话号查找用户
@@ -33,9 +45,59 @@ public class NoseServiceImpl implements NoseService {
         return orders;
     }
 
+    /**
+     * 通过订单编号查询订单
+     * @param num
+     * @return
+     */
     @Override
-    public Order selectNum(Integer num) {
+    @Transactional
+    public NoseOrder selectNum(Integer num) {
         Order order = orderDao.selectByOrderId(num);
-        return order;
+        // 健壮性判断
+        if (order == null) {
+            return null;
+        }
+
+        NoseOrder noseOrder=new NoseOrder();
+
+        OrderState orderState = orderDao.selectOrderState(order.getOrder_state_id());
+
+        noseOrder.setMoney(order.getMoney());
+        noseOrder.setOrder_id(order.getOrder_id());
+        noseOrder.setReceive_address(order.getReceive_address());
+        noseOrder.setReceive_time(order.getReceive_time());
+        noseOrder.setSend_address(order.getSend_address());
+        noseOrder.setSend_time(order.getSend_time());
+        noseOrder.setWeight(order.getWeight());
+
+
+        noseOrder.setOrderState(orderState);
+        noseOrder.setReceive_user(userDao.selectById(order.getReceive_user_id()));
+        noseOrder.setSend_user(userDao.selectById(order.getSend_user_id()));
+
+
+        List<OrderTransferInfoName> names=new ArrayList<>();
+        // 查询订单的转运详情
+        List<OrderTransferInfo> infos=orderDao.selectInfoNum(num);
+        // 查询订单的地点
+        for (OrderTransferInfo info : infos) {
+            OrderTransferInfoName orderTransferInfoName=new OrderTransferInfoName();
+            Integer station_id = info.getStation_id();
+            Station station= stationDao.getStationByStationId(station_id);
+            orderTransferInfoName.setMode(info.getMode());
+            orderTransferInfoName.setTime(info.getTime());
+            orderTransferInfoName.setStationName(station.getName());
+
+
+            names.add(orderTransferInfoName);
+
+        }
+        noseOrder.setInfos(names);
+
+        // 封装至NoseOrder类中
+        return noseOrder;
     }
+
+
 }
