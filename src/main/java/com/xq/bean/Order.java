@@ -3,7 +3,7 @@ package com.xq.bean;;
 
 public class Order {
 
-  private String id;
+  private Integer id;
   private Integer order_id;
   private String send_time;
   private Integer send_user_id;
@@ -17,11 +17,11 @@ public class Order {
   private Integer order_info_id;
 
 
-  public String getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(String id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
