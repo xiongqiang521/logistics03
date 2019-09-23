@@ -2,6 +2,7 @@ package com.xq.service;
 
 import com.xq.bean.NoseOrder;
 import com.xq.bean.Order;
+import com.xq.bean.Users;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -20,9 +21,23 @@ public interface NoseService {
     NoseOrder selectNum(Integer num);
 
     /**
-     * 通过电话号码查找订单列表
+     * 通过电话号码查找订单列表 收件人
+     * @param user
+     * @return
+     */
+    List<Order> selectBySendUser(Users user);
+
+    /**
+     * 通过电话号码查找订单列表     寄件人
+     * @param user
+     * @return
+     */
+    List<Order> selectByReceiveUser(Users user);
+
+    /**
+     * 通过号码查找用户
      * @param tel
      * @return
      */
-    List<Order> selectByTelephone(String tel);
+    List<Users> selectTelephone(String tel);
 }
