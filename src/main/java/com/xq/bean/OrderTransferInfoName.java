@@ -11,6 +11,15 @@ public class OrderTransferInfoName {
     private String stationName;
     // private String employeeName;
     private String time;
+    private String address;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     public String getMode() {
         return mode;

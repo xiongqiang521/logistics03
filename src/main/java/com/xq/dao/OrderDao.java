@@ -45,4 +45,10 @@ public interface OrderDao {
      */
     @Select("select * from order_state where id=#{id}")
     OrderState selectOrderState(Serializable id);
+
+    /**
+     * 查询所有订单
+     */
+    @Select("select * from `order`")
+    List<Order> selectOrder();
 }

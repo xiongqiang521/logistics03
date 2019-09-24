@@ -108,6 +108,8 @@ public class NoseServiceImpl implements NoseService {
             orderTransferInfoName.setMode(info.getMode());
             orderTransferInfoName.setTime(info.getTime());
             orderTransferInfoName.setStationName(station.getName());
+            orderTransferInfoName.setAddress(station.getAddress());
+
 
             names.add(orderTransferInfoName);
 
