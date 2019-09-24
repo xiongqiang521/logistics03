@@ -1,4 +1,4 @@
-package com.xq.bean;;
+package com.xq.bean;
 
 
 public class Station {
@@ -13,6 +13,20 @@ public class Station {
   private Integer transfer;
   private Integer transfer_id;
 
+  @Override
+  public String toString() {
+    return "Station{" +
+            "id=" + id +
+            ", station_num=" + station_num +
+            ", name='" + name + '\'' +
+            ", address='" + address + '\'' +
+            ", employee_id=" + employee_id +
+            ", telephone='" + telephone + '\'' +
+            ", maxWeight=" + max_weight +
+            ", transfer=" + transfer +
+            ", transfer_id=" + transfer_id +
+            '}';
+  }
 
   public Integer getId() {
     return id;
@@ -21,7 +35,6 @@ public class Station {
   public void setId(Integer id) {
     this.id = id;
   }
-
 
   public Integer getStation_num() {
     return station_num;
@@ -49,7 +62,6 @@ public class Station {
     this.address = address;
   }
 
-
   public Integer getEmployee_id() {
     return employee_id;
   }
@@ -67,7 +79,6 @@ public class Station {
     this.telephone = telephone;
   }
 
-
   public Double getMax_weight() {
     return max_weight;
   }
@@ -84,7 +95,6 @@ public class Station {
   public void setTransfer(Integer transfer) {
     this.transfer = transfer;
   }
-
 
   public Integer getTransfer_id() {
     return transfer_id;

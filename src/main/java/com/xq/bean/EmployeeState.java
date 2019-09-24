@@ -1,12 +1,14 @@
 package com.xq.bean;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class EmployeeState implements Serializable {
 
   private Integer id;
   private String type;
   private Integer group;
+
 
   @Override
   public String toString() {

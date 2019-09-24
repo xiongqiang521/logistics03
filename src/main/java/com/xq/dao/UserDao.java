@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Mapper
@@ -22,4 +23,11 @@ public interface UserDao {
     //验证登录
     @Select("SELECT * FROM users WHERE NAME=#{NAME}")
     Users login(String name);
+
+    //通过手机号查找用户
+    @Select("select * from users where telephone=#{tel}")
+    List<Users> selectTelephone(String tel);
+
+    @Select("select * from users where id=#{id}")
+    Users selectById(Serializable id);
 }
