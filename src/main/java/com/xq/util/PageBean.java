@@ -2,13 +2,13 @@ package com.xq.util;
 
 import java.util.List;
 
-public class PageBean {
+public class  PageBean <T>{
 	private Integer currentPage;		// 当前页
 	private Integer pageSize;			// 每页显示记录数
 	private Long totalCount;			// 总记录数
 	private Integer totalPage;			// 总页数
 	
-	private List list = null;
+	private List<T> list = null;
 
 	public Integer getCurrentPage() {
 		return currentPage;
@@ -42,11 +42,11 @@ public class PageBean {
 		this.totalPage = totalPage;
 	}
 
-	public List getList() {
+	public List<T> getList() {
 		return list;
 	}
 
-	public void setList(List list) {
+	public void setList(List<T> list) {
 		this.list = list;
 	}
 	

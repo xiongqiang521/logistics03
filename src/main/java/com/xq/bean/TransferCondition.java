@@ -4,8 +4,7 @@ public class TransferCondition {
     private String startTime;
     private String lastTime;
     private String stationName;
-    private String orderState;
-    private String orderId;
+    private Integer orderId;
 
     public String getStartTime() {
         return startTime;
@@ -31,19 +30,11 @@ public class TransferCondition {
         this.stationName = stationName;
     }
 
-    public String getOrderState() {
-        return orderState;
-    }
-
-    public void setOrderState(String orderState) {
-        this.orderState = orderState;
-    }
-
-    public String getOrderId() {
+    public Integer getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(String orderId) {
+    public void setOrderId(Integer orderId) {
         this.orderId = orderId;
     }
 
@@ -53,7 +44,6 @@ public class TransferCondition {
                 "startTime='" + startTime + '\'' +
                 ", lastTime='" + lastTime + '\'' +
                 ", stationName='" + stationName + '\'' +
-                ", orderState='" + orderState + '\'' +
                 ", orderId='" + orderId + '\'' +
                 '}';
     }

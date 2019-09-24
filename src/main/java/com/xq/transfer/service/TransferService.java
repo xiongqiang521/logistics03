@@ -1,6 +1,7 @@
 package com.xq.transfer.service;
 
 import com.xq.bean.OrderState;
+import com.xq.bean.TransferCondition;
 import com.xq.util.PageBean;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public interface TransferService {
 
     PageBean findByPage(int currentPage,int pageSize);
 
-/*
+
     PageBean findTransferByConditionAndPage(int currentPage, int pageSize, TransferCondition condition);
-*/
+
 }

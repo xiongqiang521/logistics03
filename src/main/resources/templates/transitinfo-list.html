@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"><!--xmlns:th="http://www.w3.org/1999/xhtml"-->
   
   <head>
     <meta charset="UTF-8">
@@ -35,22 +35,16 @@
     </div>
     <div class="x-body">
       <div class="layui-row">
-        <form class="layui-form layui-col-md12 x-so" action="/findTransferByConditionAndPage">
-          <input class="layui-input" placeholder="开始日" name="start" id="start">
-          <input class="layui-input" placeholder="截止日" name="end" id="end">
-          <div class="layui-input-inline">
-            <select name="contrller">
-              <option>支付状态</option>
-              <option>已支付</option>
-              <option>未支付</option>
-            </select>
-          </div>
-          <div class="layui-input-inline" lay-filter="selectOrder" >
-            <select name="contrller" id="select1">
+        <form class="layui-form layui-col-md12 x-so" th:action="@{/findTransferByConditionAndPage(condition=${condition})}">
+          <input class="layui-input" placeholder="开始日" name="startTime" id="startTime">
+          <input class="layui-input" placeholder="截止日" name="lastTime" id="lastTime">
+          <input class="layui-input" placeholder="站点名称" name="stationName" id="stationName">
+          <!--<div class="layui-input-inline" lay-filter="selectOrder" >
+            <select name="orderState" id="select1">
               <option value="">订单状态</option>
-              <!--<option v-for="(item,index) in orderStateList" v-bind:value="item.id">
+              &lt;!&ndash;<option v-for="(item,index) in orderStateList" v-bind:value="item.id">
                 {{item.state}}
-              </option>-->
+              </option>&ndash;&gt;
               <option value="0">初始订单</option>
               <option value="1">待发货</option>
               <option value="2">已发货</option>
@@ -59,15 +53,15 @@
               <option value="5">取消订单</option>
             </select>
 
-          </div>
-          <input type="text"   placeholder="请输入订单号" autocomplete="off" class="layui-input" name="order_id">
+          </div>-->
+          <input type="text"   placeholder="请输入订单号" autocomplete="off" class="layui-input" name="orderId">
           <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
         </form>
       </div>
       <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
         <button class="layui-btn" onclick="x_admin_show('出入库','./transitinfo.html')"><i class="layui-icon"></i>出入库</button>
-        <span class="x-right" style="line-height:40px" >共有数据：{{pageBean.totalCount}} 条</span>
+        <span class="x-right" style="line-height:40px"> 共有数据：<span th:text="${pageBean.totalCount}"></span> 条</span>
       </xblock>
       <table class="layui-table" >
         <thead>
@@ -85,16 +79,22 @@
             </tr>
         </thead>
         <tbody >
-          <tr  v-for="(item,index) in pageBean.list ">
+          <tr th:each="transferInfo : ${pageBean.list}"><!--  v-for="(item,index) in pageBean.list "-->
             <td>
               <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
             </td>
-            <td>{{item.id}}</td>
+           <!-- <td>{{item.id}}</td>
             <td>{{item.order_id}}</td>
             <td>{{item.mode}}</td>
             <td>{{item.stationName}}</td>
             <td>{{item.employeeName}}</td>
-            <td>{{item.time}}</td>
+            <td>{{item.time}}</td>-->
+            <td th:text="${transferInfo.id}"></td>
+            <td th:text="${transferInfo.order_id}"></td>
+            <td th:text="${transferInfo.mode}"></td>
+            <td th:text="${transferInfo.stationName}"></td>
+            <td th:text="${transferInfo.employeeName}"></td>
+            <td th:text="${transferInfo.time}"></td>
             <td class="td-manage">
               <a title="查看"  onclick="x_admin_show('编辑','order-view.html')" href="javascript:;">
                 <i class="layui-icon">&#xe63c;</i>
@@ -106,14 +106,21 @@
           </tr>
         </tbody>
       </table>
-      <div class="page">
+      <div class="page" >
         <div>
-          <a class="prev" href="">&lt;&lt;</a>
-          <a class="num" href="">1</a>
-          <span class="current">2</span>
-          <a class="num" href="">3</a>
-          <a class="num" href="">489</a>
-          <a class="next" href="">&gt;&gt;</a>
+          <span class="prev" th:if="${pageBean.currentPage==1}">&lt;&lt;</span>
+          <a class="prev" th:if="${pageBean.currentPage>1}" th:href="@{/findTransferByConditionAndPage(currentPage=${pageBean.currentPage -1},condition=${condition})}"  >&lt;&lt;</a>
+          <span class="num" th:if="${pageBean.currentPage==1}">首页</span>
+          <a class="num" th:if="${pageBean.currentPage>1}" th:href="@{/findTransferByConditionAndPage(currentPage=1,condition=${condition})}">首页</a>
+          <span class="current" th:text="${pageBean.currentPage}"></span>
+          <a class="num" th:if="${pageBean.currentPage<pageBean.totalPage}" th:href="@{/findTransferByConditionAndPage(currentPage=${pageBean.totalPage},condition=${condition})}">末页</a>
+          <span class="num" th:if="${pageBean.currentPage==pageBean.totalPage}">末页</span>
+          <a class="next" th:if="${pageBean.currentPage<pageBean.totalPage}" th:href="@{/findTransferByConditionAndPage(currentPage=${pageBean.currentPage +1},condition=${condition})}">&gt;&gt;</a>
+          <span class="next" th:if="${pageBean.currentPage==pageBean.totalPage}">&gt;&gt;</span>
+          第<span th:text="${pageBean.currentPage}"></span>/共<span th:text="${pageBean.totalPage}"></span>页(<span th:text="${pageBean.totalCount}"></span>条)
+        </div>
+        <div class="page-bar">
+
         </div>
       </div>
 
@@ -197,7 +204,7 @@
       })();
 
     </script>
-    <script type="text/javascript">
+   <!--<script type="text/javascript">
       //让vue忽略某个标签
       Vue.config.ignoredElements = ['xblock']
       new Vue({
@@ -232,7 +239,7 @@
           /*分页显示中转信息列表*/
           findAllByPage: function () {
             var _this = this;
-            axios.get("/findByPage").then(function (response) {
+            axios.get("/findAllByPage").then(function (response) {
 
               _this.pageBean = response.data;
 
@@ -259,7 +266,7 @@
 
       });
 
-    </script>
+    </script>-->
   </body>
 
 </html>
