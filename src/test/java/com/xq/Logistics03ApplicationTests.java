@@ -1,6 +1,7 @@
 package com.xq;
 
 import com.xq.bean.NoseOrder;
+import com.xq.bean.OrderTransferInfoName;
 import com.xq.dao.OrderDao;
 import com.xq.util.ExcelUtil;
 import com.xq.util.IntegerIDUtils;
@@ -50,8 +51,14 @@ public class Logistics03ApplicationTests {
     @Test
     public void test() throws Exception {
         File file = new File("D:\\temp\\a.xls");
-        Map<String, List<NoseOrder>> map = controller.selectTel("13544587784");
-        ExcelUtil.excelExport("123123",map.get("orderReceive").get(0).getInfos(),file);
+
+        Map<String, List<NoseOrder>> map = controller.selectTel("15171567184");
+        List<OrderTransferInfoName> orderSend = map.get("orderSend").get(0).getInfos();
+
+        System.out.println(orderSend);
+        ExcelUtil.excelExport("123123",orderSend,file);
+
+
 
     }
 
