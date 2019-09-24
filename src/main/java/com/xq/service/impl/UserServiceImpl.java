@@ -15,6 +15,8 @@ public class UserServiceImpl implements UserService {
     @Resource
     private UserDao dao;
 
+
+
     @Override
     public void UserRegist(Users users) {
         dao.UserRegist(users);

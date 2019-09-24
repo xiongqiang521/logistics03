@@ -45,7 +45,7 @@ public class OrderUser {
     //寄件人地址
     private String receiveaddress;
     //重量
-    private double weiht;
+    private double weight;
 
 
 
@@ -66,11 +66,11 @@ public class OrderUser {
     }
 
     public double getWeiht() {
-        return weiht;
+        return weight;
     }
 
     public void setWeiht(double weiht) {
-        this.weiht = weiht;
+        this.weight = weiht;
     }
 
     public OrderUser(Integer id, String user_id, String name, String password, String create_time, String state, String telephone, Integer sid, String suser_id, String sname, String spassword, String screate_time, String sstate, String stelephone) {
@@ -114,7 +114,7 @@ public class OrderUser {
                 ", stelephone='" + stelephone + '\'' +
                 ", sendaddress='" + sendaddress + '\'' +
                 ", receiveaddress='" + receiveaddress + '\'' +
-                ", weiht=" + weiht +
+                ", weight=" + weight +
                 '}';
     }
 

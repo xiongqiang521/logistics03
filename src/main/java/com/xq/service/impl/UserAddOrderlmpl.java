@@ -1,13 +1,19 @@
 package com.xq.service.impl;
 
 import com.xq.bean.Order;
+import com.xq.bean.OrderUser;
 import com.xq.bean.Users;
 import com.xq.dao.UserAddOrderDao;
 import com.xq.service.UserAddOrderService;
 import com.xq.service.UserService;
+import com.xq.util.MoneyUtil;
+import com.xq.util.TimeUtils;
+import com.xq.util.UUIDUtils;
+import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Objects;
 
 /**
  * @ProjectName: logistics03
@@ -26,7 +32,79 @@ public class UserAddOrderlmpl implements UserAddOrderService {
     @Resource
     private UserAddOrderDao userAddOrderDao;
 
-/**
+    //查询
+    @Override
+    public Users selUserTel(OrderUser orderUser) {
+        System.out.println("答应了");
+        Users users = userAddOrderDao.sleUsersTel(orderUser.getTelephone());
+        //判断数据库是否有该电话
+        if (users == null) {
+            //如果没有，则添加用户，创建对象
+            Users user =new Users();
+            //添加姓名
+            user.setName(orderUser.getName());
+            //添加号码
+            user.setTelephone(orderUser.getTelephone());
+            //添加下单时间
+            user.setCreate_time(orderUser.getCreate_time());
+              //用户id
+            user.setUser_id(UUIDUtils.getUUID());
+            //用户姓名
+            user.setName(orderUser.getName());
+            //密码，可以为空
+            user.setPassword(orderUser.getPassword());
+            //寄件时间
+            user.setCreate_time(TimeUtils.getDateTimeToString());
+            //用户是否登录，我先默认为未登录
+            user.setState("1");
+
+            userAddOrderDao.addSend(user);
+        }else if (!Objects.equals(users.getName(),orderUser.getName())){
+            //修改
+            userAddOrderDao.upUsers(users);
+        }
+        return null;
+    }
+
+    //查询寄件人
+    @Override
+    public Users rselUserTel(OrderUser orderUser) {
+        Users users = userAddOrderDao.sleUsersTel(orderUser.getStelephone());
+        //判断数据库是否有该电话
+        if (users == null) {
+            //如果没有，则添加用户，创建对象
+            Users user =new Users();
+            //添加姓名
+            user.setName(orderUser.getSname());
+            //添加号码
+            user.setTelephone(orderUser.getStelephone());
+            //添加下单时间
+           // user.setCreate_time(orderUser.getCreate_time());
+            //用户id
+            user.setUser_id(UUIDUtils.getUUID());
+            //用户姓名
+            user.setName(orderUser.getSname());
+            //密码，可以为空
+            user.setPassword(orderUser.getPassword());
+            //寄件时间
+           // user.setCreate_time(TimeUtils.getDateTimeToString());
+            //用户是否登录，我先默认为未登录
+            user.setState("1");
+            userAddOrderDao.addSend(user);
+        }else if (!Objects.equals(users.getName(),orderUser.getName())){
+            //修改
+            userAddOrderDao.upUsers(users);
+        }
+        return null;
+    }
+
+    //修改
+    @Override
+    public void upUser(Users user) {
+     userAddOrderDao.upUsers(user);
+    }
+
+    /**
  * @Method
  * @Author yaoxiaolei
  * @Version  1.0
@@ -56,7 +134,29 @@ public class UserAddOrderlmpl implements UserAddOrderService {
     添加订单
  */
     @Override
-    public void setOrder(Order order) {
-     userAddOrderDao.addOrder(order);
+    public void setOrder(OrderUser orderl) {
+        //创建订单对象
+       Order order = new Order();
+        //生成订单id
+        order.setOrder_id(555555);
+        //生成寄件时间
+        order.setSend_time(TimeUtils.getDateTimeToString());
+        //寄件人id,改变属性
+        order.setSend_user_id(333333);
+        //取件时间
+        // order.setReceive_time(TimeUtils.getFutureTime());
+        //收件人id，改变属性
+        order.setReceive_user_id(5555);
+        //收获人地址
+        order.setSend_address(orderl.getSendaddress());
+        //寄件人地址
+        order.setReceive_address(orderl.getReceiveaddress());
+        //重量
+        order.setWeight(orderl.getWeiht());
+        //计算价格
+        double money = MoneyUtil.getMoney(orderl.getWeiht());
+        order.setMoney(money+"");
+        userAddOrderDao.addOrder(order);
+
     }
 }
