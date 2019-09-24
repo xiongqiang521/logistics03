@@ -46,7 +46,7 @@ public class UserAddOrderlmpl implements UserAddOrderService {
             //添加号码
             user.setTelephone(orderUser.getTelephone());
             //添加下单时间
-            user.setCreate_time(orderUser.getCreate_time());
+            user.setCreate_time(TimeUtils.getDateTimeToString());
               //用户id
             user.setUser_id(UUIDUtils.getUUID());
             //用户姓名
@@ -138,15 +138,24 @@ public class UserAddOrderlmpl implements UserAddOrderService {
         //创建订单对象
        Order order = new Order();
         //生成订单id
-        order.setOrder_id(555555);
+        order.setOrder_id(333);
         //生成寄件时间
         order.setSend_time(TimeUtils.getDateTimeToString());
-        //寄件人id,改变属性
-        order.setSend_user_id(333333);
+       // System.out.println(TimeUtils.getDateTimeToString());
+        //寄件人id,改变属性,需要查询，根据手机号查询,            根据要求设置Users表的id字段为用户id
+        String telephone = orderl.getTelephone();
+        Users users = userAddOrderDao.sleUsersTel(telephone);
+        Integer id = users.getId();
+        order.setSend_user_id(id);
+
         //取件时间
         // order.setReceive_time(TimeUtils.getFutureTime());
-        //收件人id，改变属性
-        order.setReceive_user_id(5555);
+        //收件人id，，根据手机号查询生成的用户id
+        String stelephone = orderl.getStelephone();
+        Users users1 = userAddOrderDao.sleUsersTel(stelephone);
+        Integer id1 = users1.getId();
+        order.setReceive_user_id(id1);
+
         //收获人地址
         order.setSend_address(orderl.getSendaddress());
         //寄件人地址
@@ -155,7 +164,7 @@ public class UserAddOrderlmpl implements UserAddOrderService {
         order.setWeight(orderl.getWeiht());
         //计算价格
         double money = MoneyUtil.getMoney(orderl.getWeiht());
-        order.setMoney(money+"");
+        order.setMoney(money);
         userAddOrderDao.addOrder(order);
 
     }
