@@ -1,20 +1,11 @@
 package com.xq.web.controller;
 
-import com.xq.bean.Order;
 import com.xq.bean.OrderUser;
 import com.xq.bean.Users;
 import com.xq.service.UserAddOrderService;
-import com.xq.service.impl.UserAddOrderlmpl;
-import com.xq.service.impl.UserServiceImpl;
-import com.xq.util.MoneyUtil;
-import com.xq.util.TimeUtils;
-import com.xq.util.UUIDUtils;
-import org.apache.catalina.User;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 

@@ -5,7 +5,7 @@ import com.xq.bean.OrderUser;
 import com.xq.bean.Users;
 import com.xq.dao.UserAddOrderDao;
 import com.xq.service.UserAddOrderService;
-import com.xq.service.UserService;
+import com.xq.util.IntegerIDUtils;
 import com.xq.util.MoneyUtil;
 import com.xq.util.TimeUtils;
 import com.xq.util.UUIDUtils;
@@ -138,7 +138,7 @@ public class UserAddOrderlmpl implements UserAddOrderService {
         //创建订单对象
        Order order = new Order();
         //生成订单id
-        order.setOrder_id(333);
+        order.setOrder_id(IntegerIDUtils.creatID());
         //生成寄件时间
         order.setSend_time(TimeUtils.getDateTimeToString());
        // System.out.println(TimeUtils.getDateTimeToString());
