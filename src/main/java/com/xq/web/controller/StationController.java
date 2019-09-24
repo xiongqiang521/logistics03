@@ -16,6 +16,7 @@ public class StationController {
     @Resource
     private StationService service;
 
+
     @ModelAttribute
     public ModelAndView getStationname(ModelAndView mv){
 
