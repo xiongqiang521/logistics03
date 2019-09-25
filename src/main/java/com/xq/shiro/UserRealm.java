@@ -47,10 +47,10 @@ public class UserRealm extends AuthorizingRealm {
             roles.add("manager");
         }
 
-        SimpleAuthorizationInfo info=new SimpleAuthorizationInfo(roles);
-    /*      Subject subject = SecurityUtils.getSubject();
-        Employee users = (Employee) subject.getPrincipal();
-        info.addStringPermission(users.getEmployeeState().getType());*/
+      SimpleAuthorizationInfo info=new SimpleAuthorizationInfo(roles);
+ /*         Subject subject = SecurityUtils.getSubject();
+        Employee users = (Employee) subject.getPrincipal();*/
+        info.addStringPermission(users.getEmployeeState().getType());
 
         return info;
     }
@@ -76,6 +76,7 @@ public class UserRealm extends AuthorizingRealm {
         }
         //判断密码是否正确
         return new SimpleAuthenticationInfo(users,users.getPassword(),"");
+
 
     }
     }

@@ -11,6 +11,7 @@ public class EmployeeState implements Serializable {
 
   private Station station;
 
+
   @Override
   public String toString() {
     return "EmployeeState{" +
@@ -18,8 +19,11 @@ public class EmployeeState implements Serializable {
             ", type='" + type + '\'' +
             ", group=" + group +
             ", station=" + station +
+
             '}';
   }
+
+
 
   public Integer getId() {
     return id;

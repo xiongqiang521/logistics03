@@ -4,6 +4,7 @@ package com.xq.dao;
 import com.xq.bean.*;
 import org.apache.ibatis.annotations.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Mapper
@@ -28,9 +29,6 @@ public interface EmployeeDao {
             @Result(column = "employee_num",property = "employeeState",one = @One(select ="com.xq.dao.EmployeeStateDao.getBylogin" ))
     })
     Employee login(Integer name);
-
-
-
 
 
 }

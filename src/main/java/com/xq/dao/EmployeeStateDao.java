@@ -36,4 +36,7 @@ public interface EmployeeStateDao {
      */
     @Select("select * from employee_state where id=#{id}")
     EmployeeState getBylogin(Serializable id);
+
+
+
 }

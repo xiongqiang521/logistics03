@@ -1,13 +1,13 @@
 package com.xq.service.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.xq.bean.Employee;
 import com.xq.bean.EmployeePojo;
-import com.xq.bean.EmployeeState;
 import com.xq.dao.EmployeeDao;
 import com.xq.dao.EmployeeStateDao;
 import com.xq.dao.PageDao;
 import com.xq.service.EmployeeService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -57,18 +57,25 @@ public class EmployeeServiceImpl implements EmployeeService {
         return dao.login(name);
     }
 
+
+
+
+    @Override
+    public Page<Employee> getPageAll(Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        Page<Employee> pageAll = pageDao.getPageAll();
+        return pageAll;
+    }
+
+
     /**
-     * 当前员工的总数量
+     * 条件查询
      * @return
      */
     @Override
-    public Integer count() {
-        return pageDao.count();
-    }
-
-    @Override
-    public List<Employee> pageAll() {
-        return pageDao.pageAll();
+    public Page<Employee> getPageByName() {
+        Page<Employee> pageAll = pageDao.getPageAll();
+        return pageAll;
     }
 
 

@@ -2,6 +2,8 @@ package com.xq.dao;
 
 import com.xq.bean.Station;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 
 import java.io.Serializable;
@@ -26,4 +28,7 @@ public interface StationDao {
      */
     @Select("select station_num,name from station where station_num=#{station_num}")
     List<Station> getStationAll(Serializable station_num);
+
+
+
 }

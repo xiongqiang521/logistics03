@@ -33,23 +33,22 @@
     </div>
     <div class="x-body">
       <div class="layui-row">
-        <form class="layui-form layui-col-md12 x-so">
-          <input class="layui-input" placeholder="姓名"  >
+        <form class="layui-form layui-col-md12 x-so" method="post" >
+<!--          <input class="layui-input" placeholder="姓名"  >-->
 <!--          <input class="layui-input" placeholder="站点"  >-->
 
-            <select name="station_num" class="layui-input" >
-                  <option th:each="station : ${stations}" th:text="${station.name}" th:value="${station.station_num}">
+            <select name="StationName" id="StationName" class="layui-input" >
+                  <option th:each="station : ${pageStations}" th:text="${station.name}" th:value="${station.name}">
                   </option>
             </select>
 
-          <input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
-          <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+          <input type="text" name="employeeName"  id="employeeName"  class="layui-input">
+          <input class="layui-btn"  type="submit" id="login" />
         </form>
       </div>
       <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
         <button class="layui-btn" onclick="x_admin_show('添加用户','./admin-add.html')"><i class="layui-icon"></i>添加</button>
-        <span class="x-right" style="line-height:40px">共有数据：88 条</span>
       </xblock>
       <table class="layui-table">
         <thead>
@@ -67,15 +66,15 @@
             <th>操作</th>
         </thead>
         <tbody>
-          <tr th:each="employee,var:${employee}">
+          <tr th:each="employees,var:${employee}">
             <td>
               <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
             </td>
-            <td th:text="${employee.name}"></td>
-            <td th:text="${employee.telephone}">18925139194</td>
+            <td th:text="${employees.name}"></td>
+            <td th:text="${employees.telephone}">18925139194</td>
             <td>113664000@qq.com</td>
-            <td th:text="${employee.employeeState.station.name}"></td>
-            <td th:text="${employee.employeeState.type}"></td>
+            <td th:text="${employees.employeeState.station.name}"></td>
+            <td th:text="${employees.employeeState.type}"></td>
             <td class="td-status">
               <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>
             <td class="td-manage">
@@ -94,12 +93,10 @@
       </table>
       <div class="page">
         <div>
-          <a class="prev" href="">&lt;&lt;</a>
-          <a class="num"  href="javascript:;" name="pageNum" onclick="pageBean(this.val())" th:each="pageNums , var : ${pageNum}" th:text="${pageNums}"></a>
-<!--          <span class="current">2</span>
-          <a class="num" href="">3</a>-->
-          <a class="num" href="">489</a>
-          <a class="next" href="">&gt;&gt;</a>
+          <a class="prev" th:href="@{'/page?pageNum='+${pageNum1}}">&lt;&lt;</a>
+          <a class="current"  th:href="@{'/page?pageNum='+${pages}}" th:each="pages : ${page}"  th:text="${pages}"></a>
+          共：<a class="num" href="javascript:;" th:text="${pageAll.pages}"></a>页
+          <a class="next" th:href="@{'/page?pageNum='+${pageNum2}}">&gt;&gt;</a>
         </div>
       </div>
 
@@ -120,15 +117,21 @@
       });
 
       /*分页*/
-     function pageBean(data) {
-       console.log(data.innerText)
-       $.ajax({
-         type:'post',
-         data:data.innerText,
-         url:'pageBean',
-         dataType:'text'
-       })
-     }
+    $(function () {
+      $("#login").click(function () {
+        var stationName=$("#StationName").val();
+        var employeeName=$("#employeeName").val();
+
+        $.ajax({
+          type:"post",
+          data:{StationName:stationName,
+                employeeName:employeeName},
+          dataType:"json",
+          url:"/getPageByName"
+
+        })
+      })
+    })
 
        /*用户-停用*/
       function member_stop(obj,id){

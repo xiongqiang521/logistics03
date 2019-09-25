@@ -1,6 +1,8 @@
 package com.xq.bean;
 
 
+import java.util.List;
+
 public class Station {
 
   private Integer id;
@@ -12,6 +14,9 @@ public class Station {
   private Double maxWeight;
   private Integer transfer;
   private Integer transfer_id;
+
+
+
 
   @Override
   public String toString() {
@@ -27,6 +32,8 @@ public class Station {
             ", transfer_id=" + transfer_id +
             '}';
   }
+
+
 
   public Integer getId() {
     return id;

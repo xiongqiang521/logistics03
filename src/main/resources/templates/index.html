@@ -1,6 +1,6 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"><head>
+<html lang="en"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro" xmlns:th="http://www.w3.org/1999/xhtml"><head>
 	<meta charset="UTF-8">
 	<title>后台系统管理</title>
 	<meta name="renderer" content="webkit|ie-comp|ie-stand">
@@ -36,12 +36,13 @@
         </ul>
         <ul class="layui-nav right" lay-filter="">
           <li class="layui-nav-item">
-            <a href="javascript:;">admin</a>
-            <dl class="layui-nav-child"> <!-- 二级菜单 -->
+            <a href="javascript:;" th:text="${employee}" ></a>
+
+<!--            <dl class="layui-nav-child"> &lt;!&ndash; 二级菜单 &ndash;&gt;
               <dd><a onclick="x_admin_show('个人信息','http://www.baidu.com')">个人信息</a></dd>
               <dd><a onclick="x_admin_show('切换帐号','http://www.baidu.com')">切换帐号</a></dd>
               <dd><a href="login.html">退出</a></dd>
-            </dl>
+            </dl>-->
           </li>
           <li class="layui-nav-item to-index"><a href="/static">前台首页</a></li>
         </ul>

@@ -1,10 +1,8 @@
 package com.xq.service;
 
+import com.github.pagehelper.Page;
 import com.xq.bean.Employee;
 import com.xq.bean.EmployeePojo;
-import com.xq.bean.EmployeeState;
-import com.xq.bean.Users;
-import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -19,9 +17,10 @@ public interface EmployeeService {
     //验证登录
     Employee login(Integer name);
 
-     //分页   当前总记录数
-     Integer count();
+    //分页查询
+    Page<Employee> getPageAll(Integer pageNum , Integer pageSize);
 
-    //分页当前页面数据
-    List<Employee> pageAll();
+    //条件查询
+    Page<Employee> getPageByName();
+
 }

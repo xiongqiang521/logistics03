@@ -1,8 +1,11 @@
 package com.xq.bean;
 
+import org.apache.ibatis.type.Alias;
+
 import java.io.Serializable;
 import java.util.List;
 
+@Alias("employee")
 public class Employee implements Serializable {
 
   private Integer id;
@@ -30,6 +33,9 @@ public class Employee implements Serializable {
             '}';
   }
 
+  public Employee() {
+    super();
+  }
 
   public Integer getId() {
     return id;
