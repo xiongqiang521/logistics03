@@ -12,10 +12,10 @@ public class TransferInfo {
     `time` datetime DEFAULT NULL,*/
 
     private Integer id;             //订单中转信息编号
-    private Integer order_id;       //订单号
+    private String order_id;        //订单号
     private String mode;            //出入库状态 出库或者入库
-    private Integer station_id;     //当前所在站点id
-    private Integer employee_id;    //操作员id
+    private String stationName;     //当前所在站点名称
+    private String employeeName;    //操作员姓名
     private String time;            //操作时间
 
     public Integer getId() {
@@ -26,11 +26,11 @@ public class TransferInfo {
         this.id = id;
     }
 
-    public Integer getOrder_id() {
+    public String getOrder_id() {
         return order_id;
     }
 
-    public void setOrder_id(Integer order_id) {
+    public void setOrder_id(String order_id) {
         this.order_id = order_id;
     }
 
@@ -42,20 +42,20 @@ public class TransferInfo {
         this.mode = mode;
     }
 
-    public Integer getStation_id() {
-        return station_id;
+    public String getStationName() {
+        return stationName;
     }
 
-    public void setStation_id(Integer station_id) {
-        this.station_id = station_id;
+    public void setStationName(String stationName) {
+        this.stationName = stationName;
     }
 
-    public Integer getEmployee_id() {
-        return employee_id;
+    public String getEmployeeName() {
+        return employeeName;
     }
 
-    public void setEmployee_id(Integer employee_id) {
-        this.employee_id = employee_id;
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
     }
 
     public String getTime() {
@@ -70,10 +70,10 @@ public class TransferInfo {
     public String toString() {
         return "TransferInfo{" +
                 "id=" + id +
-                ", order_id=" + order_id +
+                ", order_id='" + order_id + '\'' +
                 ", mode='" + mode + '\'' +
-                ", station_id=" + station_id +
-                ", employee_id=" + employee_id +
+                ", stationName='" + stationName + '\'' +
+                ", employeeName='" + employeeName + '\'' +
                 ", time='" + time + '\'' +
                 '}';
     }

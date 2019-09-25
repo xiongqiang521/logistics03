@@ -13,7 +13,10 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Mechrevo
@@ -34,8 +37,14 @@ public class ExcelUtil {
         Field[] fs = datas.get(0).getClass().getDeclaredFields();
         hssfSheet.addMergedRegion(new CellRangeAddress(0,0,0,fs.length));
 
+
+        HSSFRow row = hssfSheet.createRow(1);
         for (int i =0 ;i<fs.length;i++) {
-            hssfSheet.createRow(1).createCell(1).setCellValue(fs[i].getName());
+            String name = fs[i].getName();
+            System.out.println(name);
+
+            HSSFCell cell = row.createCell(i);
+            cell.setCellValue(name);
         }
 
 
@@ -54,8 +63,10 @@ public class ExcelUtil {
                 Method method = datas.get(i).getClass().getMethod(methodName);
                 //执行get方法获取对应数据
                 Object text = method.invoke(datas.get(i));
+
                 //加入到对应单元格
                 HSSFCell hssfCell = hssfRow.createCell(j);
+
                 if (text != null) {
                     hssfCell.setCellValue(text.toString());
                 }
@@ -64,8 +75,10 @@ public class ExcelUtil {
         BufferedOutputStream bos=null;
 
         try {
+
+            FileOutputStream fileOutputStream = new FileOutputStream(file);
             // 创建文件输出流
-            bos=new BufferedOutputStream(new FileOutputStream(file));
+            bos=new BufferedOutputStream(fileOutputStream);
 
             //写入到输出流中
             hssfWorkbook.write(bos);

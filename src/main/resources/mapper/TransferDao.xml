@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!--
+<mapper namespace="com.xq.transfer.dao.TransferDao">
+    <select id="findTransferByConditionAndPage" resultType="transferInfo" parameterType="transferCondition, map" >
+        select order_transfer_info.`id`,`order`.`order_id`,`mode`,`station`.`name` stationName,`employee`.`name` employeeName,`order_transfer_info`.`time`
+    from order_transfer_info
+    left join `order`
+    on order_transfer_info.`order_id`=`order`.`order_id`
+    left join `employee`
+    on order_transfer_info.`employee_id`=`employee`.`employee_num`
+    left join `station`
+    on `order_transfer_info`.`station_id`=`station`.`station_num`
+    where 1=1 and `order`.`order_id` = 10000001
+    </select>
+</mapper>-->
