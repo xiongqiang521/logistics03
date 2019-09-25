@@ -542,7 +542,8 @@
         map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
         var routePolicy = [BMAP_DRIVING_POLICY_LEAST_TIME, BMAP_DRIVING_POLICY_LEAST_DISTANCE, BMAP_DRIVING_POLICY_AVOID_HIGHWAYS];
         var driving = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true},policy: routePolicy[0]});
-
+        var p3 = new BMap.Point("天津火车站");
+        var p4 = new BMap.Point("赤壁北站");
         driving.search(start,end);
     };
     /*点击关闭按钮*/
