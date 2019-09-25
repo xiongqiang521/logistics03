@@ -443,8 +443,6 @@
                 </div>
                 <div class="search_box">
                     <input type="button" class="search_btn" value="查询" @click="selectNum"/>
-
-                    <span class="lately-record">最近查询记录（ <i></i>）</span>
                     <div class="record">
                         <i class="record-arrow"></i>
                     </div>
@@ -573,6 +571,9 @@
 
 
 <script>
+    var send_address="武汉体育学院";
+    var receive_address="光谷广场";
+    var stationNames=[];
     /*点击弹出按钮*/
     function popBox() {
         var popBox = document.getElementById("popBox");
@@ -584,9 +585,9 @@
         map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
         var routePolicy = [BMAP_DRIVING_POLICY_LEAST_TIME, BMAP_DRIVING_POLICY_LEAST_DISTANCE, BMAP_DRIVING_POLICY_AVOID_HIGHWAYS];
         var driving = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true},policy: routePolicy[0]});
-        var start = JSON.stringify(this.result.send_address);
-        var end = JSON.stringify(this.result.receive_address);
-        driving.search(start,end);
+        var start = JSON.stringify(send_address);
+        var end = JSON.stringify(receive_address);
+        driving.search(start,end,{waypoints:stationNames});
     };
     /*点击关闭按钮*/
     function closeBox() {
@@ -595,6 +596,7 @@
         popBox.style.display = "none";
         popLayer.style.display = "none";
     }
+    Vue.config.ignoredElements=['form'];
     new Vue({
         el:"#wayExpressBox",
         data:{
@@ -619,6 +621,9 @@
                         response.data.infos.forEach(function (item) {
                             stationNames.push(item.stationName);
                         });
+                        receive_address= response.data.receive_address;
+                        send_address=response.data.send_address;
+
                     }
                 ).catch(function (error) {
                     alert("订单号错误"+
