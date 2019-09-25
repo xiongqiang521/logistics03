@@ -64,16 +64,16 @@ public interface TransferDao {
         //分页
         public String selectCountByCondition(TransferCondition condition) {
             String sql = " select count(1) from order_transfer_info left join `order` on order_transfer_info.`order_id`=`order`.`order_id` left join `employee` on order_transfer_info.`employee_id`=`employee`.`employee_num` left join `station` on `order_transfer_info`.`station_id`=`station`.`station_num` where 1=1 ";
-            if(condition.getStartTime()!=null ){
+            if(condition.getStartTime()!=null && !"".equals(condition.getStartTime())){
                 sql += " and time >= #{startTime} ";
             }
-            if(condition.getLastTime()!=null ){
+            if(condition.getLastTime()!=null && !"".equals(condition.getLastTime())){
                 sql += " and time <= #{lastTime} ";
             }
-            if(condition.getStationName()!=null && "".equals(condition.getStationName()) ){
+            if(condition.getStationName()!=null && !"".equals(condition.getStationName()) ){
                 sql += " and `station`.`name` = #{stationName} ";
             }
-            if(condition.getOrderId()!=null && "".equals(condition.getOrderId())){
+            if(condition.getOrderId()!=null && !"".equals(condition.getOrderId())){
                 sql += " and `order`.`order_id` = #{orderId} ";
             }
             return sql;
@@ -84,18 +84,18 @@ public interface TransferDao {
 " select order_transfer_info.`id`,`order`.`order_id`,`mode`,`station`.`name` stationName,`employee`.`name` employeeName,`order_transfer_info`.`time` from" +
 " order_transfer_info left join `order` on order_transfer_info.`order_id`=`order`.`order_id` left join `employee` on order_transfer_info.`employee_id`=`employee`.`employee_num` " +
 "left join `station` on `order_transfer_info`.`station_id`=`station`.`station_num` where 1=1 " ;
-            if(((TransferCondition) map.get("condition")).getStartTime()!=null && "".equals(((TransferCondition) map.get("condition")).getStartTime()) ){
+            if(((TransferCondition) map.get("condition")).getStartTime()!=null && !"".equals(((TransferCondition) map.get("condition")).getStartTime()) ){
                 sql += " and time >= #{condition.startTime} ";
             }
-            if(((TransferCondition) map.get("condition")).getLastTime()!=null && "".equals(((TransferCondition) map.get("condition")).getLastTime()) ){
+            if(((TransferCondition) map.get("condition")).getLastTime()!=null && !"".equals(((TransferCondition) map.get("condition")).getLastTime()) ){
                 sql += " and time <= #{condition.lastTime} ";
             }
-            if(((TransferCondition) map.get("condition")).getStationName()!=null && "".equals(((TransferCondition) map.get("condition")).getStationName()) ){
+            if(((TransferCondition) map.get("condition")).getStationName()!=null && !"".equals(((TransferCondition) map.get("condition")).getStationName()) ){
                 sql += " and `station`.`name` = #{condition.stationName} ";
             }
-            if(((TransferCondition) map.get("condition")).getOrderId()!=null && "".equals(((TransferCondition) map.get("condition")).getOrderId())){
+            if(((TransferCondition) map.get("condition")).getOrderId()!=null && !"".equals(((TransferCondition) map.get("condition")).getOrderId())){
               sql += " and `order`.`order_id` = #{condition.orderId} ";
-           }
+            }
             if(map.get("start")!=null && map.get("size")!=null ){
                 sql += " limit #{start},#{size}";
             }

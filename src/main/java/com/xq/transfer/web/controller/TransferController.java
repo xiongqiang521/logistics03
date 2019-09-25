@@ -50,6 +50,7 @@ public class TransferController {
        PageBean pageBean = transferService.findByPage(currentPage, pageSize);
 
         mv.addObject("pageBean",pageBean);
+        mv.addObject("condition",new TransferCondition());
         mv.setViewName("transitinfo-list");
         return mv;
     }
@@ -67,17 +68,18 @@ public class TransferController {
             System.out.println(pageBean);
             return mv;
         }
-        if (condition==null && request.getSession().getAttribute("condition")!=null){
-            System.out.println(444);
-            condition = (TransferCondition)request.getSession().getAttribute("condition");
-        }else {
-            System.out.println(555);
-            request.getSession().setAttribute("condition",condition);
-        }
+        // if (condition==null && request.getSession().getAttribute("condition")!=null){
+        //     System.out.println(444);
+        //     condition = (TransferCondition)request.getSession().getAttribute("condition");
+        // }else {
+        //     System.out.println(555);
+        //     request.getSession().setAttribute("condition",condition);
+        // }
         pageBean=transferService.findTransferByConditionAndPage(currentPage,pageSize,condition) ;
         System.out.println("66666:"+condition);
         mv.addObject("pageBean",pageBean);
         mv.addObject("condition",condition);
+
         mv.setViewName("transitinfo-list");
         return mv;
     }

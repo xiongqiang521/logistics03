@@ -36,9 +36,10 @@
     <div class="x-body">
       <div class="layui-row">
         <form class="layui-form layui-col-md12 x-so" th:action="@{/findTransferByConditionAndPage(condition=${condition})}">
-          <input class="layui-input" placeholder="开始日" name="startTime" id="startTime">
-          <input class="layui-input" placeholder="截止日" name="lastTime" id="lastTime">
-          <input class="layui-input" placeholder="站点名称" name="stationName" id="stationName">
+          <input type="hidden" value="1" name="currentPage" id="currentPage">
+          <input class="layui-input" placeholder="开始日" name="startTime" id="startTime" th:value="${condition.getStartTime()}">
+          <input class="layui-input" placeholder="截止日" name="lastTime" id="lastTime" th:value="${condition.getLastTime()}">
+          <input class="layui-input" placeholder="站点名称" name="stationName" id="stationName" th:value="${condition.getStationName()}">
           <!--<div class="layui-input-inline" lay-filter="selectOrder" >
             <select name="orderState" id="select1">
               <option value="">订单状态</option>
@@ -54,7 +55,7 @@
             </select>
 
           </div>-->
-          <input type="text"   placeholder="请输入订单号" autocomplete="off" class="layui-input" name="orderId">
+          <input type="text"   placeholder="请输入订单号" autocomplete="off" class="layui-input" name="orderId" th:value="${condition.getOrderId()}">
           <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
         </form>
       </div>
@@ -115,7 +116,7 @@
           <span class="current" th:text="${pageBean.currentPage}"></span>
           <a class="num" th:if="${pageBean.currentPage<pageBean.totalPage}" th:href="@{/findTransferByConditionAndPage(currentPage=${pageBean.totalPage},condition=${condition})}">末页</a>
           <span class="num" th:if="${pageBean.currentPage==pageBean.totalPage}">末页</span>
-          <a class="next" th:if="${pageBean.currentPage<pageBean.totalPage}" th:href="@{/findTransferByConditionAndPage(currentPage=${pageBean.currentPage +1},condition=${condition})}">&gt;&gt;</a>
+          <a class="next" th:if="${pageBean.currentPage<pageBean.totalPage}" th:attr="href='javascript:ConditionAndPage('+${pageBean.currentPage +1}+')'" >&gt;&gt;</a>
           <span class="next" th:if="${pageBean.currentPage==pageBean.totalPage}">&gt;&gt;</span>
           第<span th:text="${pageBean.currentPage}"></span>/共<span th:text="${pageBean.totalPage}"></span>页(<span th:text="${pageBean.totalCount}"></span>条)
         </div>
@@ -127,7 +128,33 @@
     </div>
     <script>
 
-      layui.use('laydate', function(){
+      function ConditionAndPage(pageNum){
+        // alert(pageNum);
+        $("#currentPage").val(pageNum);
+        var formData=$("form").serialize();
+        alert(formData);
+
+        window.location.href="/findTransferByConditionAndPage?"+formData;
+        // $.post(
+        //         "findTransferByConditionAndPage",formData
+        // );
+      }
+
+      layui.use(['form', 'layedit', 'laydate'], function(){
+        var form=layui.form;
+        form.on('submit(sreach)', function(data){
+          // layer.alert(JSON.stringify(data.field), {
+          //   title: '最终的提交信息'
+          // });
+          $.post(
+                  "findTransferByConditionAndPage",JSON.stringify(data.field)
+          );
+          return true;
+        });
+
+
+
+      // layui.use('laydate', function(){
         var laydate = layui.laydate;
 
         //执行一个laydate实例
