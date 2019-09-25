@@ -20,7 +20,7 @@ public class NoseOrder {
     private String receive_address;
 
     private Double weight;
-    private String money;
+    private Double money;
     private OrderState orderState;
     private List<OrderTransferInfoName> infos;
 
@@ -88,11 +88,11 @@ public class NoseOrder {
         this.weight = weight;
     }
 
-    public String getMoney() {
+    public Double getMoney() {
         return money;
     }
 
-    public void setMoney(String money) {
+    public void setMoney(Double money) {
         this.money = money;
     }
 
