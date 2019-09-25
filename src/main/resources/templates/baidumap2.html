@@ -34,7 +34,7 @@
             var p2 = new BMap.Point(116.508328,39.919141);
             var p3 = new BMap.Point(116.365942,39.996165);
             var p4 = new BMap.Point(116.408757,39.995704);
-            driving.search(start, end);//waypoints表示途经点
+            driving.search(p1, p2,{waypoints:[p3,p4]});//waypoints表示途经点
             // for (var i = 0; i < 25; i ++) {
             //     var point = new BMap.Point(sw.lng + lngSpan * (Math.random() * 0.7), ne.lat - latSpan * (Math.random() * 0.7));
             //     addMarker(point);
