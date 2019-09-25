@@ -49,7 +49,7 @@
                   <span class="x-red">*</span>所在站点
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="phone" name="phone" required="" lay-verify="phone"
+                  <input type="text" id="phone" name="phone" required="" lay-verify="required"
                   autocomplete="off" class="layui-input">
               </div>
           </div>
@@ -158,7 +158,7 @@
           ,layer = layui.layer;
         
           //自定义验证规则
-          form.verify({
+          /*form.verify({
             nikename: function(value){
               if(value.length < 5){
                 return '昵称至少得5个字符啊';
@@ -170,7 +170,7 @@
                     return '两次密码不一致';
                 }
             }
-          });
+          });*/
 
           //监听提交
           form.on('submit(add)', function(data){
@@ -182,6 +182,7 @@
                 //关闭当前frame
                 parent.layer.close(index);
             });
+              parent.location.replace(parent.location.href);
             return false;
           });
           

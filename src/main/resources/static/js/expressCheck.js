@@ -435,7 +435,7 @@
                 }
                 $(".query_txt").focus()
             }
-            $(".query_txt").keyup(function () {
+            /*$(".query_txt").keyup(function () {
                 var e = $(this), i = e.val().replace(/\,|\，|\;|\；|\s+/g, ","), s = (i.length, $(".ex_item").size());
                 if (s < 10) {
                     var t = i.split(",");
@@ -454,7 +454,7 @@
                 } else {
                     e.val("").attr("placeholder", "在此输入单号"), e.blur(), ztoAlert("提示", "单次查询订单数量最多为10条！", "确定", "")
                 }
-            }), /*$(".query_txt").keydown(function (e) {
+            }),*/ /*$(".query_txt").keydown(function (e) {
                 var i, s, t = $(this), n = (i = t.val()).length;
                 8 == e.keyCode && ("" != (i = t.val()) && null != i && " " != i || $(".ex_item").last().remove());
                 if (13 == e.keyCode) {

@@ -380,15 +380,14 @@
             </div>
 
             <!-- 运单查询模块 -->
-            <div class="wayExpressBox" id="wayExpressBox" @keyup.enter="selectNum" >
+            <div class="wayExpressBox" id="wayExpressBox"  >
                 <div class="search_txt">
                     <div class="inputItem">
                         <textarea
                                 id="txtbill"
                                 class="query_txt"
-                                placeholder="输入1个或最多10个运单号（多个请用；隔开）"
-                                onkeyup="this.value = this.value.replace(/[\u4e00-\u9fa5_]/g, '')"
-
+                                placeholder="输入运单号"
+                                @keyup.enter.prevent="selectNum"
                         ></textarea>
                     </div>
                     <div class="inputGray"></div>
@@ -437,7 +436,7 @@
             </div>
 
             <!-- 手机号查询模块 -->
-            <div class="phoneExpressBox hidden" id="phoneExpressBox" @keyup.enter="selectOrdersTel">
+            <div class="phoneExpressBox hidden" id="phoneExpressBox" @keyup.enter.prevent="selectOrdersTel">
                 <div class="inputBox">
                     <span>手机号：</span>
                     <input type="text" class="phoneInput" placeholder="请输入手机号" />
@@ -515,7 +514,8 @@
 
 
 <script>
-    new Vue({
+    var stationNames=[];
+    var vueDemo1= new Vue({
         el:"#wayExpressBox",
         data:{
             isShow:false,
@@ -536,6 +536,9 @@
                         _this.result=response.data;
                         console.log(response.data);
                         _this.isShow=true;
+                        response.data.infos.forEach(function (item) {
+                            stationNames.push(item.stationName);
+                        });
                     }
                 ).catch(function (error) {
                     alert("订单号错误"+
@@ -573,6 +576,7 @@
             selectOrdersTel:function () {
                 var _this=this;
                 var tel = $(".phoneInput").val();
+                alert(tel)
                 axios.get("selectOrdersTel?tel="+tel).then(
                     function (value) {
                         _this.orders=value.data;
