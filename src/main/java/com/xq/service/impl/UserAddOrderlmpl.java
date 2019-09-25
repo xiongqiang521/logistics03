@@ -49,19 +49,20 @@ public class UserAddOrderlmpl implements UserAddOrderService {
             user.setCreate_time(TimeUtils.getDateTimeToString());
               //用户id
             user.setUser_id(UUIDUtils.getUUID());
-            //用户姓名
-            user.setName(orderUser.getName());
+
             //密码，可以为空
             user.setPassword(orderUser.getPassword());
-            //寄件时间
-            user.setCreate_time(TimeUtils.getDateTimeToString());
+
             //用户是否登录，我先默认为未登录
             user.setState("1");
 
             userAddOrderDao.addSend(user);
-        }else if (!Objects.equals(users.getName(),orderUser.getName())){
-            //修改
-            userAddOrderDao.upUsers(users);
+        }else {
+            //判断用户名是否更改
+             if(!Objects.equals(users.getName(),orderUser.getName())){
+                     //修改
+                     userAddOrderDao.upUsers(users);
+             }
         }
         return null;
     }
@@ -91,9 +92,12 @@ public class UserAddOrderlmpl implements UserAddOrderService {
             //用户是否登录，我先默认为未登录
             user.setState("1");
             userAddOrderDao.addSend(user);
-        }else if (!Objects.equals(users.getName(),orderUser.getName())){
-            //修改
-            userAddOrderDao.upUsers(users);
+        }else {
+            //判断用户名是否更改
+            if(!Objects.equals(users.getName(),orderUser.getSname())){
+                //修改
+                userAddOrderDao.upUsers(users);
+            }
         }
         return null;
     }
@@ -136,6 +140,7 @@ public class UserAddOrderlmpl implements UserAddOrderService {
     @Override
     public void setOrder(OrderUser orderl) {
         //创建订单对象
+        System.out.println("正在创建订单");
        Order order = new Order();
         //生成订单id
         order.setOrder_id(IntegerIDUtils.creatID());

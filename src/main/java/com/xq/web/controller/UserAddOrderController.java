@@ -1,5 +1,6 @@
 package com.xq.web.controller;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import com.xq.bean.OrderUser;
 import com.xq.bean.Users;
 import com.xq.service.UserAddOrderService;
@@ -38,6 +39,7 @@ private UserAddOrderService userAddOrderlmpl;
     @RequestMapping(value = "addorder" ,method = {RequestMethod.POST})
     public String addOrder(OrderUser ou){
 
+        System.out.println(ou);
         //添加寄件人
         Users users = userAddOrderlmpl.selUserTel(ou);
         //添加收件人

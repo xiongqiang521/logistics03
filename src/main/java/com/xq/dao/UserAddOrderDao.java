@@ -28,7 +28,7 @@ public interface UserAddOrderDao {
      Users sleUsersTel(String telephone);
 
     //修改
-    @Update("UPDATE `users` SET telephone=#{telephone},name=#{name}")
+    @Update("UPDATE `users` SET telephone=#{telephone},name=#{name},create_time=#{create_time} where telephone=#{telephone}")
     void upUsers(Users user);
 
     //添加寄件人信息
