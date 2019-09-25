@@ -99,8 +99,6 @@
 <script>
 
     function popBox() {
-
-
         var popBox = document.getElementById("popBox");
         var popLayer = document.getElementById("popLayer");
         popBox.style.display = "block";
@@ -133,7 +131,10 @@
     new Vue({
         el:"#allmap",
         data:{
-            stations:{}
+            isShow:false,
+            result:{
+                stations:{}
+            }
         },
         methods:{
             sss:function () {

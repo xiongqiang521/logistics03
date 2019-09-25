@@ -532,6 +532,7 @@
     /*点击弹出按钮*/
     var start = "";
     var end ="";
+    var stationaddressdetail = [];
     function popBox() {
         var popBox = document.getElementById("popBox");
         var popLayer = document.getElementById("popLayer");
@@ -542,9 +543,7 @@
         map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
         var routePolicy = [BMAP_DRIVING_POLICY_LEAST_TIME, BMAP_DRIVING_POLICY_LEAST_DISTANCE, BMAP_DRIVING_POLICY_AVOID_HIGHWAYS];
         var driving = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true},policy: routePolicy[0]});
-        var start = JSON.stringify(this.result.send_address);
-        var end = JSON.stringify(this.result.receive_address);
-        driving.search(start,end);
+        driving.search(start,end,{waypoints:stationaddressdetail});
     };
     /*点击关闭按钮*/
     function closeBox() {
@@ -572,7 +571,13 @@
                 axios.get("selectOrderNum?num="+value).then(function (response){
                     _this.result=response.data;
                     console.log(response.data);
+                    start =response.data.send_address;
+                    end =response.data.receive_address;
                     _this.isShow=true;
+                    response.data.infos.forEach(function (item) {
+                        stationaddressdetail.push(item.address);
+                    });
+
                 }).catch(function (error) {
                     alert("订单号错误"+
                     error);
