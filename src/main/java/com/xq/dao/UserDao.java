@@ -26,7 +26,7 @@ public interface UserDao {
 
     //通过手机号查找用户
     @Select("select * from users where telephone=#{tel}")
-    Users selectTelephone(String tel);
+    List<Users> selectTelephone(String tel);
 
     @Select("select * from users where id=#{id}")
     Users selectById(Serializable id);

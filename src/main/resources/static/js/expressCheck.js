@@ -28,7 +28,7 @@
                 })
             }, login: function () {
                 0 <= navigator.userAgent.indexOf("Mobile") && (window.location.href = "https://m.zto.com/"), zto.auth.getToken() && HrPost("auth_account_getUserLoginProvider", null, function (e) {
-                    e.status && ($(".login,.registere").hide(), $(".header-right").append('<div class="user">\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<img src="../imgs/login.png" alt="用户"><a href="' + zto.config.centerceUrl + '" data-phone="' + e.result.mobile + '">' + e.result.mobile + "</a>\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>"), $(".user").show())
+                    e.status && ($(".login,.registere").hide(), $(".header-right").append('<div class="user">\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<img src="./images/login.png" alt="用户"><a href="' + zto.config.centerceUrl + '" data-phone="' + e.result.mobile + '">' + e.result.mobile + "</a>\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>"), $(".user").show())
                 })
             }, fixed: function () {
                 if (0 < $(".js-nav-fixed").size()) {
@@ -325,7 +325,7 @@
                 s()
             });
             var t = !1, n = 60;
-            $(".validateInputBtn").click(function () {
+/*            $(".validateInputBtn").click(function () {
                 f($(".phoneInput").val(), function (e) {
                     if (e) {
                         ztoAlert("提示", e, "确定", "");
@@ -350,10 +350,10 @@
                         }))
                     }
                 })
-            });
+            });*/
             var o = !0;
 
-            function l() {
+            /*function l() {
                 o && (o = !1, HrPost("auth_account_loginOrRegisterBySmsVerifyCode", {
                     isAgainBind: !1,
                     mobile: Number($(".phoneInput").val()),
@@ -361,9 +361,9 @@
                 }, function (e) {
                     o = !0, e && (1 == e.status ? (zto.auth.setToken(e.result.token), location.href = zto.config.centerceUrl) : ($(".alert").remove(), ztoAlert("失败", e.message, "确定", "close")))
                 }))
-            }
+            }*/
 
-            if ($(".submitLogin").click(function () {
+            /*if ($(".submitLogin").click(function () {
                 f($(".phoneInput").val(), function (e) {
                     e ? ztoAlert("提示", e, "确定", "") : $(".validateInput").val() ? zto.auth.getToken() ? HrPost("auth_account_getUserLoginProvider", null, function (e) {
                         e.status ? e.result.mobile === Number($(".phoneInput").val()) ? window.open(zto.config.centerceUrl, "_blank") : ($("body").append('<div class="alert">\t            <span class="alert-close"></span>\t            <span>亲爱的用户，您好</span>\t            <div class="alert-text">\t                <p><img src="../imgs/express/sun.png"/></p>\t            </div>\t            <strong style="font-size: 20px; display: block; margin-bottom: 20px;">您已经登录了中通个人中心</strong>\t            <div style="color:#818181;margin-bottom: 30px;">是否切换手机号登录查询?</div>\t            <div>\t                <input type="button" style="border: none;padding: 10px 20px;border-radius: 4px;background: #33A2F7;color: #fff;cursor: pointer;" class="yesLogin" value="是的，切换登录">\t                <input type="button" style="position: relative;display: inline-block;margin-left: 30px;    width: auto;height: auto;background: #B0C0C7;border: none;border-radius: 4px;color: #fff;padding: 10px 20px;" class="alert-close" value="否，不查询">\t            </div>\t        </div>'), $(".alert").addClass("show").css("margin-top", "-" + ($(".alert").height() / 2 + 40) + "px"), $(".yesLogin").click(function () {
@@ -381,7 +381,7 @@
                     $(".record").append('<em class="record-item"><span>' + c[0] + "</span><i></i></em>")
                 }
                 5 < e && $(".record").css("text-align", "left")
-            }
+            }*/
             /*$(".search_btn").click(function () {
                 var e = $(".query_txt").val(), i = e.length;
                 if ($(".ex_item").size() < 1) {
@@ -435,7 +435,7 @@
                 }
                 $(".query_txt").focus()
             }
-            $(".query_txt").keyup(function () {
+            /*$(".query_txt").keyup(function () {
                 var e = $(this), i = e.val().replace(/\,|\，|\;|\；|\s+/g, ","), s = (i.length, $(".ex_item").size());
                 if (s < 10) {
                     var t = i.split(",");
@@ -454,7 +454,7 @@
                 } else {
                     e.val("").attr("placeholder", "在此输入单号"), e.blur(), ztoAlert("提示", "单次查询订单数量最多为10条！", "确定", "")
                 }
-            }), /*$(".query_txt").keydown(function (e) {
+            }),*/ /*$(".query_txt").keydown(function (e) {
                 var i, s, t = $(this), n = (i = t.val()).length;
                 8 == e.keyCode && ("" != (i = t.val()) && null != i && " " != i || $(".ex_item").last().remove());
                 if (13 == e.keyCode) {

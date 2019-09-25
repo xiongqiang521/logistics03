@@ -49,26 +49,26 @@
                   <span class="x-red">*</span>所在站点
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="phone" name="phone" required="" lay-verify="phone"
+                  <input type="text" id="phone" name="phone" required="" lay-verify="required"
                   autocomplete="off" class="layui-input">
               </div>
           </div>
           <div class="layui-form-item">
-              <label for="username" class="layui-form-label">
+              <label for="name" class="layui-form-label">
                   <span class="x-red">*</span>操作员
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="username" name="username" required="" lay-verify="required"
+                  <input type="text" id="name" name="name" required="" lay-verify="required"
                   autocomplete="off" class="layui-input">
               </div>
           </div>
             <div class="layui-form-item">
 
-                <label for="username" class="layui-form-label">
+                <label for="time" class="layui-form-label">
                     <span class="x-red">*</span>操作时间
                 </label>
                     <div class="layui-input-inline">
-                        <input type="text" class="layui-input" id="test5" placeholder="yyyy-MM-dd HH:mm:ss">
+                        <input type="text" class="layui-input" id="time" placeholder="yyyy-MM-dd HH:mm:ss">
                     </div>
 
             </div>
@@ -134,20 +134,31 @@
           <div class="layui-form-item">
               <label for="L_repass" class="layui-form-label">
               </label>
-              <button  class="layui-btn" lay-filter="add" lay-submit="">
+              <button  class="layui-btn" lay-filter="add" lay-submit="" id="L_repass">
                   增加
               </button>
           </div>
       </form>
     </div>
     <script>
+        layui.use('laydate', function() {
+            var laydate = layui.laydate;
+
+            //日期时间选择器
+            laydate.render({
+                elem: '#time'
+                ,type: 'datetime'
+                ,trigger: 'click'
+            });
+        });
+
         layui.use(['form','layer'], function(){
             $ = layui.jquery;
           var form = layui.form
           ,layer = layui.layer;
         
           //自定义验证规则
-          form.verify({
+          /*form.verify({
             nikename: function(value){
               if(value.length < 5){
                 return '昵称至少得5个字符啊';
@@ -159,7 +170,7 @@
                     return '两次密码不一致';
                 }
             }
-          });
+          });*/
 
           //监听提交
           form.on('submit(add)', function(data){
@@ -171,6 +182,7 @@
                 //关闭当前frame
                 parent.layer.close(index);
             });
+              parent.location.replace(parent.location.href);
             return false;
           });
           

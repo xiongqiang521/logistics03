@@ -1,18 +1,25 @@
 package com.xq;
 
+import com.xq.bean.NoseOrder;
+import com.xq.bean.OrderTransferInfoName;
+import com.xq.dao.OrderDao;
+import com.xq.util.ExcelUtil;
 import com.xq.util.IntegerIDUtils;
+import com.xq.web.controller.NoseController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.io.File;
+import java.util.*;
 
-// @RunWith(SpringRunner.class)
+@RunWith(SpringRunner.class)
 @SpringBootTest
 public class Logistics03ApplicationTests {
+    @Autowired
+    private NoseController controller;
 
 
 
@@ -39,6 +46,20 @@ public class Logistics03ApplicationTests {
                 }
             }
         });
+    }
+
+    @Test
+    public void test() throws Exception {
+        File file = new File("D:\\temp\\a.xls");
+
+        Map<String, List<NoseOrder>> map = controller.selectTel("15171567184");
+        List<OrderTransferInfoName> orderSend = map.get("orderSend").get(0).getInfos();
+
+        System.out.println(orderSend);
+        ExcelUtil.excelExport("123123",orderSend,file);
+
+
+
     }
 
 

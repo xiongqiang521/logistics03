@@ -32,17 +32,37 @@ public class NoseServiceImpl implements NoseService {
 
 
     /**
-     * 通过电话号码查找订单列表
-     * @param tel
+     * 通过电话号码查找订单列表     寄件人
+     * @param user
      * @return
      */
     @Override
-    public List<Order> selectByTelephone(String tel) {
-        // 通过电话号查找用户
-        Users users = userDao.selectTelephone(tel);
+    public List<Order> selectByReceiveUser(Users user) {
+
         // 通过用户查找订单列表
-        List<Order> orders = orderDao.selectByReceiveUserId(users.getId());
+        List<Order> orders = orderDao.selectByReceiveUserId(user.getId());
+
+
         return orders;
+    }
+    /**
+     * 通过电话号码查找订单列表     收件人
+     * @param user
+     * @return
+     */
+    @Override
+    public List<Order> selectBySendUser(Users user) {
+
+        // 通过用户查找订单列表
+        List<Order> orders = orderDao.selectBySendUserId(user.getId());
+
+        return orders;
+    }
+
+    @Override
+    public List<Users> selectTelephone(String tel){
+        List<Users> users = userDao.selectTelephone(tel);
+        return users;
     }
 
     /**
@@ -88,6 +108,7 @@ public class NoseServiceImpl implements NoseService {
             orderTransferInfoName.setMode(info.getMode());
             orderTransferInfoName.setTime(info.getTime());
             orderTransferInfoName.setStationName(station.getName());
+            orderTransferInfoName.setAddress(station.getAddress());
 
 
             names.add(orderTransferInfoName);
@@ -98,6 +119,7 @@ public class NoseServiceImpl implements NoseService {
         // 封装至NoseOrder类中
         return noseOrder;
     }
+
 
 
 }
