@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta
+            content="中通快递官网为您提供中通快递单号(运单)跟踪查询,投诉电话查询,运费报价查询,中通营业网点查询,在线下单(寄件)等服务,全国统一客服热线：95311"
+            name="Description"
+    />
+    <meta content="中通快递单号查询,网点查询,投诉电话查询,在线寄件" name="Keywords" />
+    <meta
+            content="中通快递官网为您提供中通快递单号(运单)跟踪查询,投诉电话查询,运费报价查询,中通营业网点查询,在线下单(寄件)等服务,全国统一客服热线：95311"
+            name="searchtitle"
+    />
+    <!--    <script>-->
+    <!--      var _hmt = _hmt || []-->
+    <!--      ;(function() {-->
+    <!--        var hm = document.createElement('script')-->
+    <!--        hm.src = 'https://hm.baidu.com/hm.js?53a93979e64ab8e76c06653f6830c385'-->
+    <!--        var s = document.getElementsByTagName('script')[0]-->
+    <!--        s.parentNode.insertBefore(hm, s)-->
+    <!--      })()-->
+    <!--    </script>-->
+    <title>查件 - 中通快递</title>
+    <link rel="stylesheet" type="text/css" href="./css/expressCheck.css?v=c66d583e3b" />
+    <link rel="shortcut icon" type="image/x-icon" href="./images/logo.ico" media="screen" />
+    <script type="text/javascript" src="./js/vuejs-2.5.16.js"></script>
+    <script type="text/javascript" src="./js/axios-0.18.0.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=4IU3oIAMpZhfWZsMu7xzqBBAf6vMHcoa"></script>
+    <!--<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>-->
+    <script src="./js/jquery-1.9.1.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+        body, html {width: 100%;height: 100%; margin:0;font-family:"微软雅黑";}
+        #allmap{height:100%;width:100%;}
+        #r-result table{width:100%;}
+        /*背景层*/
+        #popLayer {
+            display: none;
+            background-color: #B3B3B3;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 10;
+            -moz-opacity: 0.8;
+            opacity:.80;
+            filter: alpha(opacity=80);/* 只支持IE6、7、8、9 */
+        }
+        /*弹出层*/
+        #popBox {
+            display: none;
+            background-color: #FFFFFF;
+            z-index: 11;
+            width: 400px;
+            height: 400px;
+            position:fixed;
+            top:0;
+            right:0;
+            left:0;
+            bottom:0;
+            margin:auto;
+        }
+        #popBox .close{
+            text-align: right;
+            margin-right: 5px;
+            background-color: #F8F8F8;
+        }
+        /*关闭按钮*/
+        #popBox .close a {
+            text-decoration: none;
+            color: #2D2C3B;
+        }
+    </style>
+</head>
+
+<body>
+<input type="button" name="popBox" value="弹出框" onclick="popBox()">
+<div id="popLayer"></div>
+<div id="popBox">
+    <div class="close">
+        <a href="javascript:void(0)" onclick="closeBox()">关闭</a>
+    </div>
+    <div id="allmap">
+
+    </div>
+</div>
+
+<script src="./js/bundle.js"></script>
+<script src="./js/jquery.validate.min.js"></script>
+<script src="./js/public.js"></script>
+<script src="./js/expressCheck.js"></script>
+<script src="./js/JsBarcode.js"></script>
+
+
+<script>
+
+    function popBox() {
+
+
+        var popBox = document.getElementById("popBox");
+        var popLayer = document.getElementById("popLayer");
+        popBox.style.display = "block";
+        popLayer.style.display = "block";
+        var map = new BMap.Map("allmap");
+        map.enableScrollWheelZoom(true);
+        map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
+        function addMarker(point){
+            var marker = new BMap.Marker(point);
+            map.addOverlay(marker);
+        }
+        // 随机向地图添加25个标注
+        var bounds = map.getBounds();
+        var sw = bounds.getSouthWest();
+        var ne = bounds.getNorthEast();
+        var lngSpan = Math.abs(sw.lng - ne.lng);
+        var latSpan = Math.abs(ne.lat - sw.lat);
+        for (var i = 0; i < 25; i ++) {
+            var point = new BMap.Point(sw.lng + lngSpan * (Math.random() * 0.7), ne.lat - latSpan * (Math.random() * 0.7));
+            addMarker(point);
+        }
+    };
+    /*点击关闭按钮*/
+    function closeBox() {
+        var popBox = document.getElementById("popBox");
+        var popLayer = document.getElementById("popLayer");
+        popBox.style.display = "none";
+        popLayer.style.display = "none";
+    }
+    new Vue({
+        el:"#allmap",
+        data:{
+            stations:{}
+        },
+        methods:{
+            sss:function () {
+                var _this=this;
+                axios.get("/stationAddress").then(function (value) {
+                    _this.result=response.data;
+                    console.log(response.data);
+                    alert(response.data)
+                }).catch(function (reason) {
+                    console.log(reason.message)
+                });
+            }
+        }
+
+    });
+
+
+</script>
+</body>
+</html>
