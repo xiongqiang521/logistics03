@@ -141,13 +141,13 @@ public class ShiroConfig {
         return cookieRememberMeManager;
     }
 
-    @Bean
-    public SimpleMappingExceptionResolver simpleMappingExceptionResolver(){
-        SimpleMappingExceptionResolver resolver=new SimpleMappingExceptionResolver();
-        Properties properties=new Properties();
-        //未授权页面处理
-        properties.setProperty("org.apache.shiro.authz.UnauthorizedException","/unAuth");
-        resolver.setExceptionMappings(properties);
-        return resolver;
-    }
+    // @Bean
+    // public SimpleMappingExceptionResolver simpleMappingExceptionResolver(){
+    //     SimpleMappingExceptionResolver resolver=new SimpleMappingExceptionResolver();
+    //     Properties properties=new Properties();
+    //     //未授权页面处理
+    //     properties.setProperty("org.apache.shiro.authz.UnauthorizedException","/unAuth");
+    //     resolver.setExceptionMappings(properties);
+    //     return resolver;
+    // }
 }

@@ -23,12 +23,12 @@ public interface EmployeeDao {
    List<Employee> getAll();
 
     //验证登录
-    @Select("SELECT * from employee where name=#{name}")
+    @Select("SELECT * from employee where employee_num=#{name}")
     @Results(id = "emMap",value = {
             @Result(column = "state",property = "state"),
             @Result(column = "state",property = "employeeState",one = @One(select ="com.xq.dao.EmployeeStateDao.getById" ))
     })
-    Employee login(String name);
+    Employee login(Integer name);
 
     //根据id查询管理人员
     @Select("SELECT * from employee where employee_num=#{num}")
