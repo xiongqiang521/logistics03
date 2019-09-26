@@ -1,8 +1,10 @@
 package com.xq.transfer.dao;
 
 import com.xq.bean.OrderState;
+import com.xq.bean.OrderTransferInfo;
 import com.xq.bean.TransferCondition;
 import com.xq.bean.TransferInfo;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;
@@ -50,6 +52,15 @@ public interface TransferDao {
 
     @SelectProvider(type = TransferDaoProvider.class, method = "findTransferByConditionAndPage")
     List<TransferInfo> findTransferByConditionAndPage(Map<String, Object> map);
+
+    @Select("select employee_num from employee where name = #{employeeName}")
+    Integer findEmployeeIdByName(String employeeName);
+
+    @Select("select station_num from station where name = #{stationName}")
+    Integer findStationIdByName(String stationName);
+
+    @Insert("insert into `order_transfer_info`(order_id,`mode`,station_id,employee_id,`time`) values(#{order_id},#{mode},#{station_id},#{employee_id},#{time})")
+    void addTransferInfo(OrderTransferInfo orderTransferInfo);
 
     public class TransferDaoProvider {
         public String findByPage(HashMap<String,Object> map) {

@@ -12,7 +12,7 @@ public class TransferInfo {
     `time` datetime DEFAULT NULL,*/
 
     private Integer id;             //订单中转信息编号
-    private String order_id;        //订单号
+    private Integer order_id;        //订单号
     private String mode;            //出入库状态 出库或者入库
     private String stationName;     //当前所在站点名称
     private String employeeName;    //操作员姓名
@@ -26,11 +26,11 @@ public class TransferInfo {
         this.id = id;
     }
 
-    public String getOrder_id() {
+    public Integer getOrder_id() {
         return order_id;
     }
 
-    public void setOrder_id(String order_id) {
+    public void setOrder_id(Integer order_id) {
         this.order_id = order_id;
     }
 

@@ -1,6 +1,7 @@
 package com.xq.transfer.service;
 
 import com.xq.bean.OrderState;
+import com.xq.bean.OrderTransferInfo;
 import com.xq.bean.TransferCondition;
 import com.xq.util.PageBean;
 
@@ -18,4 +19,10 @@ public interface TransferService {
 
     PageBean findTransferByConditionAndPage(int currentPage, int pageSize, TransferCondition condition);
 
+    Integer findEmployeeIdByName(String employeeName);
+
+
+    Integer findStationIdByName(String stationName);
+
+    void addTransferInfo(OrderTransferInfo orderTransferInfo);
 }

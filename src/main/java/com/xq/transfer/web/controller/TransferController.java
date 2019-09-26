@@ -1,12 +1,15 @@
 package com.xq.transfer.web.controller;
 
+import com.xq.bean.OrderTransferInfo;
 import com.xq.bean.TransferCondition;
+import com.xq.bean.TransferInfo;
 import com.xq.transfer.service.TransferService;
 import com.xq.util.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -82,5 +85,33 @@ public class TransferController {
 
         mv.setViewName("transitinfo-list");
         return mv;
+    }
+    @RequestMapping("addTransferInfo")
+    @ResponseBody
+    public String addTransferInfo(TransferInfo transferInfo){
+        System.out.println(transferInfo);
+        //获取参数
+        String employeeName = transferInfo.getEmployeeName();
+        String stationName = transferInfo.getStationName();
+        //通过名称查询对象id
+        Integer employee_id = transferService.findEmployeeIdByName(employeeName);
+        Integer station_id = transferService.findStationIdByName(stationName);
+
+        OrderTransferInfo orderTransferInfo = new OrderTransferInfo();
+
+        //封装orderTransferInfo对象数据
+        orderTransferInfo.setOrder_id(transferInfo.getOrder_id());
+        orderTransferInfo.setMode(transferInfo.getMode());
+        orderTransferInfo.setEmployee_id(employee_id);
+        orderTransferInfo.setStation_id(station_id);
+        orderTransferInfo.setTime(transferInfo.getTime());
+        //添加出入库信息
+        transferService.addTransferInfo(orderTransferInfo);
+        System.out.println(101);
+//        ModelAndView mv=new ModelAndView();
+//        mv = findByPage(1, 6, mv);
+
+        return "success";
+
     }
 }
