@@ -8,6 +8,8 @@ import java.util.List;
  * 2019/9/21 16:42
  */
 public class NoseOrder {
+
+
     // private String id;
     private Integer order_id;
 
@@ -25,6 +27,7 @@ public class NoseOrder {
     private List<OrderTransferInfoName> infos;
 
     public Integer getOrder_id() {
+
         return order_id;
     }
 

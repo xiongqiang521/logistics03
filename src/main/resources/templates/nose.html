@@ -573,7 +573,7 @@
 <script>
     var send_address="武汉体育学院";
     var receive_address="光谷广场";
-    var stationNames=[];
+    var stationAddress=[];
     /*点击弹出按钮*/
     function popBox() {
         var popBox = document.getElementById("popBox");
@@ -619,10 +619,12 @@
                         console.log(response.data);
                         _this.isShow=true;
                         response.data.infos.forEach(function (item) {
-                            stationNames.push(item.stationName);
+                            stationAddress.push(item.address);
                         });
                         receive_address= response.data.receive_address;
                         send_address=response.data.send_address;
+
+                        alert(stationAddress)
 
                     }
                 ).catch(function (error) {
