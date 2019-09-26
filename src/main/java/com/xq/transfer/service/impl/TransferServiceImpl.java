@@ -1,6 +1,7 @@
 package com.xq.transfer.service.impl;
 
 import com.xq.bean.OrderState;
+import com.xq.bean.OrderTransferInfo;
 import com.xq.bean.TransferCondition;
 import com.xq.bean.TransferInfo;
 import com.xq.transfer.dao.TransferDao;
@@ -14,6 +15,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
+
+/**
+ * 中转业务service实现层
+ */
 @Service
 @Transactional(isolation = Isolation.DEFAULT,propagation = Propagation.REQUIRED)
 public class TransferServiceImpl implements TransferService {
@@ -81,5 +86,22 @@ public class TransferServiceImpl implements TransferService {
         pageBean.setList(list);
         return pageBean;
 
+    }
+
+    //根据员工姓名查询员工id
+    @Override
+    public Integer findEmployeeIdByName(String employeeName) {
+
+        return transferDao.findEmployeeIdByName(employeeName);
+    }
+
+    @Override
+    public Integer findStationIdByName(String stationName) {
+        return transferDao.findStationIdByName(stationName);
+    }
+
+    @Override
+    public void addTransferInfo(OrderTransferInfo orderTransferInfo) {
+        transferDao.addTransferInfo(orderTransferInfo);
     }
 }
