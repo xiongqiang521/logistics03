@@ -32,47 +32,8 @@
     <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
     <![endif]-->
     <style type="text/css">
-        body, html {width: 100%;height: 100%; margin:0;font-family:"微软雅黑";}
-        #allmap{height:100%;width:100%;}
-        #r-result table{width:100%;}
-        /*背景层*/
-        #popLayer {
-            display: none;
-            background-color: #B3B3B3;
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            z-index: 10;
-            -moz-opacity: 0.8;
-            opacity:.80;
-            filter: alpha(opacity=80);/* 只支持IE6、7、8、9 */
-        }
-        /*弹出层*/
-        #popBox {
-            display: none;
-            background-color: #FFFFFF;
-            z-index: 11;
-            width: 400px;
-            height: 400px;
-            position:fixed;
-            top:0;
-            right:0;
-            left:0;
-            bottom:0;
-            margin:auto;
-        }
-        #popBox .close{
-            text-align: right;
-            margin-right: 5px;
-            background-color: #F8F8F8;
-        }
-        /*关闭按钮*/
-        #popBox .close a {
-            text-decoration: none;
-            color: #2D2C3B;
-        }
+        body, html{width: 100%;height: 100%;margin:0;font-family:"微软雅黑";}
+        #l-map{height:100%;width:100%;float: right;}
     </style>
 </head>
 
@@ -422,144 +383,8 @@
             </div>
         </div>
         <div class="express-cont">
-            <div class="express-title-box">
-                <h2 class="express-title exCheck selectedExCheck wayExpress">运单号查询</h2>
-                <h2 class="express-title exCheck phoneExpress">手机号查询</h2>
-            </div>
-
-            <!-- 运单查询模块 -->
-            <div class="wayExpressBox" id="wayExpressBox" @keyup.enter="selectNum" >
-                <div class="search_txt">
-                    <div class="inputItem">
-                        <textarea
-                                id="txtbill"
-                                class="query_txt"
-                                placeholder="输入1个或最多10个运单号（多个请用；隔开）"
-                                onkeyup="this.value = this.value.replace(/[\u4e00-\u9fa5_]/g, '')"
-
-                        ></textarea>
-                    </div>
-                    <div class="inputGray"></div>
-                </div>
-                <div class="search_box">
-                    <input type="button" class="search_btn" value="查询" @click="selectNum"/>
-                    <div class="record">
-                        <i class="record-arrow"></i>
-                    </div>
-                </div>
-                <div class="result-list" >
-                    <div class="result-item" v-show="isShow">
-                        <div class="result-top"><strong class="numbers"><em>运单号:</em><span>{{result.order_id}}</span><i
-                                style="" class="sendTime"></i> </strong>
-                            <p class="branch-text">快件从<em class="city">【{{result.send_address}}】</em> <span>发往 <em
-                                    class="color">【{{result.receive_address}}】</em></span></p>
-                            <div class="result-static static-2"><em class="static-text">{{result.orderState.state}}</em></div>
-                        </div>
-                        <div class="branch-list">
-                            <div id="popLayer"></div>
-                            <div id="popBox">
-                                <div class="close">
-                                    <a href="javascript:void(0)" onclick="closeBox()">关闭</a>
-                                </div>
-                                <div id="allmap"></div>
-                            </div>
-                            <div class="branch-item first show">
-                                <a href="javascript:;" class="map-link" onclick="popBox()">切换地图</a>
-                            </div>
-                            <!--<div class="branch-item first show">
-                                <div class="branch-circle">最新</div>
-                                <div class="branch-line"></div>
-                                <span data-order="75176327474169" class="branch-contact telWebsite">联系网点</span><a
-                                    href="javascript:;" class="map-link" target="_blank">切换地图</a><a href="javascript:;"
-                                    onclick="jumpService(75176327474169)" class="service-link"
-                                    target="_blank">在线客服</a><a href="javascript:;" class="way" target="_blank"
-                                    data-code="75176327474169"></a>
-                                <p class="branch-text"><em class="city">【成都市】</em> <span>快件离开 <em
-                                        class="color">【成都金堂】</em> 已发往 <em class="color">武汉中转部</em></span></p>
-                                <p class="branch-time">2019-09-21 19:59:27</p></div>-->
-                            <div class="branch-item last show" v-for="item in result.infos">
-                                <div class="branch-circle"><em></em></div>
-                                <div class="branch-line"></div>
-                                <p class="branch-text">
-                                    <span>
-                                        <em class="color">【{{item.stationName}}】</em>
-                                     {{item.mode}}
-                                    </span></p>
-                                <p class="branch-time">{{item.time}}</p></div>
-                            <span class="result-add hide"><span>收起内容</span><i></i></span></div>
-                    </div>
-                </div>
-                <a href="https://my.zto.com/create" class="ship-again">再寄一单</a>
-            </div>
-
-            <!-- 手机号查询模块 -->
-            <div class="phoneExpressBox hidden" id="phoneExpressBox" @keyup.enter.prevent="selectOrdersTel">
-                <div class="inputBox">
-                    <span>手机号：</span>
-                    <input type="text" class="phoneInput" placeholder="请输入手机号" />
-                </div>
-                <!--<div class="inputBox">
-                    <div>
-                        <span>图形验证码：</span>
-                        <input type="text" class="picValidateCode" id="picValidateCode" placeholder="请输入图形验证码" />
-                        <img src="" class="picValidate" id="picValidate" />
-                    </div>
-                </div>
-                <div class="inputBox">
-                    <div>
-                        <span>验证码：</span>
-                        <input type="text" class="validateInput" placeholder="请输入验证码" />
-                    </div>
-                    <input type="button" class="validateInputBtn" value="获取验证码" />
-                </div>-->
-                <input type="button" id="phoneSearchBtn" class="submitLogin" value="查询" @click="selectOrdersTel" />
-                <div><em style="color: #34a2f7;line-height: 22px">需该手机号接受的快件</em></div>
-                <div class="result-list" v-for="result in orders.orderReceive" ><!--v-for="result in results"-->
-                    <div class="result-item" v-show="isShow1">
-                        <div class="result-top"><strong class="numbers"><em>运单号:</em><span>{{result.order_id}}</span><i
-                                style="" class="sendTime"></i> </strong>
-                            <p class="branch-text">快件从<em class="city">【{{result.send_address}}】</em> <span>发往 <em
-                                    class="color">【{{result.receive_address}}】</em></span></p>
-                            <div class="result-static static-2"><em class="static-text">{{result.orderState.state}}</em></div>
-                        </div>
-                        <div class="branch-list">
-                            <div class="branch-item last show" v-for="item in result.infos">
-                                <div class="branch-circle"><em></em></div>
-                                <div class="branch-line"></div>
-                                <p class="branch-text">
-                                    <span>
-                                        <em class="color">【{{item.stationName}}】</em>
-                                     {{item.mode}}
-                                    </span></p>
-                                <p class="branch-time">{{item.time}}</p></div>
-                            <span class="result-add hide"><span>收起内容</span><i></i></span></div>
-                    </div>
-                </div>
-                <div><em style="color: #34a2f7;line-height: 22px">以该手机号寄出的快件</em></div>
-                <div class="result-list" v-for="result in orders.orderSend"><!--v-for="result in results"-->
-                    <div class="result-item" v-show="isShow2">
-                        <div class="result-top"><strong class="numbers"><em>运单号:</em><span>{{result.order_id}}</span><i
-                                style="" class="sendTime"></i> </strong>
-                            <p class="branch-text">快件从<em class="city">【{{result.send_address}}】</em> <span>发往 <em
-                                    class="color">【{{result.receive_address}}】</em></span></p>
-                            <div class="result-static static-2"><em class="static-text">{{result.orderState.state}}</em></div>
-                        </div>
-                        <div class="branch-list">
-                            <div class="branch-item last show" v-for="item in result.infos">
-                                <div class="branch-circle"><em></em></div>
-                                <div class="branch-line"></div>
-                                <p class="branch-text">
-                                    <span>
-                                        <em class="color">【{{item.stationName}}】</em>
-                                     {{item.mode}}
-                                    </span></p>
-                                <p class="branch-time">{{item.time}}</p></div>
-                            <span class="result-add hide"><span>收起内容</span><i></i></span></div>
-                    </div>
-                </div>
-            </div>
+            <div id="l-map"></div>
         </div>
-
     </div>
 </div>
 
@@ -571,74 +396,57 @@
 
 
 <script>
-    var send_address="武汉体育学院";
-    var receive_address="光谷广场";
-    var stationNames=[];
-    /*点击弹出按钮*/
-    var start = "";
-    var end ="";
-    var stationaddressdetail = [];
-    function popBox() {
-        var popBox = document.getElementById("popBox");
-        var popLayer = document.getElementById("popLayer");
-        popBox.style.display = "block";
-        popLayer.style.display = "block";
-        var map = new BMap.Map("allmap");
-        map.enableScrollWheelZoom(true);
-        map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
-        var routePolicy = [BMAP_DRIVING_POLICY_LEAST_TIME, BMAP_DRIVING_POLICY_LEAST_DISTANCE, BMAP_DRIVING_POLICY_AVOID_HIGHWAYS];
-        var driving = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true},policy: routePolicy[0]});
-        var start = JSON.stringify(send_address);
-        var end = JSON.stringify(receive_address);
-        driving.search(start,end,{waypoints:stationNames});
-        driving.search(start,end,{waypoints:stationaddressdetail});
-    };
-    /*点击关闭按钮*/
-    function closeBox() {
-        var popBox = document.getElementById("popBox");
-        var popLayer = document.getElementById("popLayer");
-        popBox.style.display = "none";
-        popLayer.style.display = "none";
+    // 百度地图API功能
+    var stationaddressdetail1 = [];
+    gg();
+    var map = new BMap.Map("l-map");
+    map.centerAndZoom(new BMap.Point(114.37184,30.543798), 13);
+    map.enableScrollWheelZoom(true);
+    var index = 0;
+    var myGeo = new BMap.Geocoder();
+    var adds = stationaddressdetail1;
+    setTimeout(function(){
+        bdGEO();
+    } ,10000);//延时3秒后执行
+    map.enableContinuousZoom();
+    var size = new BMap.Size(10, 20);
+    map.addControl(new BMap.CityListControl({
+        anchor: BMAP_ANCHOR_TOP_LEFT,
+        offset: size,
+    }));
+    function bdGEO(){
+        var add = adds[index];
+        geocodeSearch(add);
+        index++;
     }
-    Vue.config.ignoredElements=['form'];
-    new Vue({
-        el:"#wayExpressBox",
-        data:{
-            isShow:false,
-            result:{
-                send_user:{},
-                receive_user:{},
-                orderState:{},
-                infos:[]
-            }
-        },
-        methods:{
-            selectNum:function () {
-                //获取文本框值
-                var _this=this;
-                var value = $("#txtbill").val();
-                axios.get("selectOrderNum?num="+value).then(function (response){
-                    _this.result=response.data;
-                    console.log(response.data);
-                    start =response.data.send_address;
-                    end =response.data.receive_address;
-                    _this.isShow=true;
-                    response.data.infos.forEach(function (item) {
-                        stationaddressdetail.push(item.address);
-                            stationAddress.push(item.address);
-                    });
-                        receive_address= response.data.receive_address;
-                        send_address=response.data.send_address;
-
-                    }
-                ).catch(function (error) {
-                    alert("订单号错误"+
-                    error);
-                });
-
-            }
+    function geocodeSearch(add){
+        if(index < adds.length){
+            setTimeout(window.bdGEO,400);
         }
-    });
+        myGeo.getPoint(add, function(point){
+            if (point) {
+                //document.getElementById("result").innerHTML +=  index + "、" + add + ":" + point.lng + "," + point.lat + "</br>";
+                var address = new BMap.Point(point.lng, point.lat);
+                addMarker(address,new BMap.Label(index+":"+add,{offset:new BMap.Size(20,-10)}));
+            }
+        }, "武汉市");
+    }
+    // 编写自定义函数,创建标注
+    function addMarker(point,label){
+        var marker = new BMap.Marker(point);
+        map.addOverlay(marker);
+        marker.setLabel(label);
+    }
+    function gg(){
+        $.get(
+            "Stationaddress",//服务器地址
+            function(results) {
+                for (var i = 0; i < results.length; i++) {
+                    stationaddressdetail1.push(results[i]);
+
+                }
+            })
+    }
 </script>
 </body>
 </html>
