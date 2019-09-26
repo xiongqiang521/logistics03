@@ -12,6 +12,8 @@ import org.apache.shiro.web.servlet.SimpleCookie;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.HandlerExceptionResolver;
+import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -42,11 +44,12 @@ public class ShiroConfig {
 
         //释放静态资源
         filterMap.put("/static/**","anon");
+        filterMap.put("/UsersByNameAndPassword","anon");
         filterMap.put("/css/**","anon");
         filterMap.put("/fonts/**","anon");
         filterMap.put("/images/**","anon");
         filterMap.put("/js/**","anon");
-        filterMap.put("/layui/**","anon");
+        filterMap.put("/lib.layui/**","anon");
         filterMap.put("/user.json","anon");
         //放行页面
         filterMap.put("/login.html", "anon");
@@ -56,7 +59,7 @@ public class ShiroConfig {
         //授权过滤器
         filterMap.put("/orders/*", "roles[admin]");
         filterMap.put("/manager/*", "roles[manager]");
-        filterMap.put("/*", "roles[orders,admin,manager]");
+        filterMap.put("/user/*", "roles[orders,admin,manager]");
 //        filterMap.put("/manager/*", "perms[manager]");
         // 通配拦截
         filterMap.put("/*", "authc");
@@ -66,7 +69,7 @@ public class ShiroConfig {
         //未登录的时候，跳转的登录页面
         shiroFilterFactoryBean.setLoginUrl("/login.html");
         //设置未授权提示页面
-        shiroFilterFactoryBean.setUnauthorizedUrl("/unAuth");
+        shiroFilterFactoryBean.setUnauthorizedUrl("/unAuth.html");
          shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
         return shiroFilterFactoryBean;
     }
@@ -138,5 +141,13 @@ public class ShiroConfig {
         return cookieRememberMeManager;
     }
 
-
+    @Bean
+    public SimpleMappingExceptionResolver simpleMappingExceptionResolver(){
+        SimpleMappingExceptionResolver resolver=new SimpleMappingExceptionResolver();
+        Properties properties=new Properties();
+        //未授权页面处理
+        properties.setProperty("org.apache.shiro.authz.UnauthorizedException","/unAuth");
+        resolver.setExceptionMappings(properties);
+        return resolver;
+    }
 }
