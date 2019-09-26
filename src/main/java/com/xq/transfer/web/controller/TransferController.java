@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -86,7 +87,8 @@ public class TransferController {
         return mv;
     }
     @RequestMapping("addTransferInfo")
-    public ModelAndView addTransferInfo(TransferInfo transferInfo){
+    @ResponseBody
+    public String addTransferInfo(TransferInfo transferInfo){
         System.out.println(transferInfo);
         //获取参数
         String employeeName = transferInfo.getEmployeeName();
@@ -106,10 +108,10 @@ public class TransferController {
         //添加出入库信息
         transferService.addTransferInfo(orderTransferInfo);
         System.out.println(101);
-        ModelAndView mv=new ModelAndView();
-        mv = findByPage(1, 6, mv);
+//        ModelAndView mv=new ModelAndView();
+//        mv = findByPage(1, 6, mv);
 
-        return mv;
+        return "success";
 
     }
 }
