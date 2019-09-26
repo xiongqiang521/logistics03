@@ -62,26 +62,25 @@ public class UserController {
     }
 
     @RequestMapping("/unAuth")
-    public String unAuth() {
+    public String unAuth(){
         return "unAuth";
     }
 
     /**
-     * 使用shiro 验证登录
-     *
+     *    使用shiro 验证登录
      * @param name
      * @param password
      * @param mv
      * @return
      */
     @RequestMapping("/login")
-    public ModelAndView login(String name, String password, ModelAndView mv) {
-        //使用shiro编写认证操作
+    public ModelAndView login(String name,String password, ModelAndView mv){
+      //使用shiro编写认证操作
         //1.获取Subject
         Subject subject = SecurityUtils.getSubject();
         //封装用户信息
-        UsernamePasswordToken token = new UsernamePasswordToken(name, password);
-        System.out.println("user-----------" + name + password);
+        UsernamePasswordToken token=new UsernamePasswordToken(name,password);
+        System.out.println("user-----------"+name+password);
         try {
             subject.login(token);
             mv.setViewName("redirect:/index.html");
@@ -90,11 +89,9 @@ public class UserController {
         } catch (Exception e) {
             //登录失败：用户名不存在或密码错误
             mv.setViewName("login.html");
-            mv.addObject("msg", "用户名或密码错误");
+            mv.addObject("msg","用户名或密码错误");
             System.out.println(111);
             return mv;
         }
     }
-
-
 }

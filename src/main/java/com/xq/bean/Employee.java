@@ -1,8 +1,11 @@
 package com.xq.bean;
 
+import org.apache.ibatis.type.Alias;
+
 import java.io.Serializable;
 import java.util.List;
 
+@Alias("employee")
 public class Employee implements Serializable {
 
   private Integer id;
@@ -14,6 +17,7 @@ public class Employee implements Serializable {
   private Integer state;
 
   private EmployeeState employeeState;
+
 
   @Override
   public String toString() {
@@ -29,13 +33,8 @@ public class Employee implements Serializable {
             '}';
   }
 
-
-  public EmployeeState getEmployeeState() {
-    return employeeState;
-  }
-
-  public void setEmployeeState(EmployeeState employeeState) {
-    this.employeeState = employeeState;
+  public Employee() {
+    super();
   }
 
   public Integer getId() {
@@ -46,7 +45,6 @@ public class Employee implements Serializable {
     this.id = id;
   }
 
-
   public Integer getEmployee_num() {
     return employee_num;
   }
@@ -54,7 +52,6 @@ public class Employee implements Serializable {
   public void setEmployee_num(Integer employee_num) {
     this.employee_num = employee_num;
   }
-
 
   public String getName() {
     return name;
@@ -64,7 +61,6 @@ public class Employee implements Serializable {
     this.name = name;
   }
 
-
   public String getPassword() {
     return password;
   }
@@ -72,7 +68,6 @@ public class Employee implements Serializable {
   public void setPassword(String password) {
     this.password = password;
   }
-
 
   public String getSex() {
     return sex;
@@ -82,7 +77,6 @@ public class Employee implements Serializable {
     this.sex = sex;
   }
 
-
   public String getTelephone() {
     return telephone;
   }
@@ -90,7 +84,6 @@ public class Employee implements Serializable {
   public void setTelephone(String telephone) {
     this.telephone = telephone;
   }
-
 
   public Integer getState() {
     return state;
@@ -100,4 +93,11 @@ public class Employee implements Serializable {
     this.state = state;
   }
 
+  public EmployeeState getEmployeeState() {
+    return employeeState;
+  }
+
+  public void setEmployeeState(EmployeeState employeeState) {
+    this.employeeState = employeeState;
+  }
 }
