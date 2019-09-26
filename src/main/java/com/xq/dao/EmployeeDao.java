@@ -29,4 +29,12 @@ public interface EmployeeDao {
             @Result(column = "state",property = "employeeState",one = @One(select ="com.xq.dao.EmployeeStateDao.getById" ))
     })
     Employee login(String name);
+
+    //根据id查询管理人员
+    @Select("SELECT * from employee where employee_num=#{num}")
+    @Results(id = "getAll",value = {
+            @Result(column = "state",property = "state"),
+            @Result(column = "state",property = "employeeState",one = @One(select ="com.xq.dao.EmployeeStateDao.getById" ))
+    })
+    Employee getEmployeeByNum(Integer num);
 }

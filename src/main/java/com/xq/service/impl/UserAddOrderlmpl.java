@@ -1,8 +1,8 @@
 package com.xq.service.impl;
 
-import com.xq.bean.Order;
-import com.xq.bean.OrderUser;
-import com.xq.bean.Users;
+import com.xq.bean.*;
+import com.xq.dao.EmployeeDao;
+import com.xq.dao.OrderTransferInfoDao;
 import com.xq.dao.UserAddOrderDao;
 import com.xq.service.UserAddOrderService;
 import com.xq.util.IntegerIDUtils;
@@ -10,9 +10,12 @@ import com.xq.util.MoneyUtil;
 import com.xq.util.TimeUtils;
 import com.xq.util.UUIDUtils;
 import org.apache.catalina.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.security.KeyStore;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -31,6 +34,11 @@ public class UserAddOrderlmpl implements UserAddOrderService {
 
     @Resource
     private UserAddOrderDao userAddOrderDao;
+
+    @Resource
+    private OrderTransferInfoDao orderTransferInfoDao;
+    @Resource
+    private EmployeeDao employeeDao;
 
     //查询
     @Override
@@ -138,12 +146,13 @@ public class UserAddOrderlmpl implements UserAddOrderService {
     添加订单
  */
     @Override
-    public void setOrder(OrderUser orderl) {
+    public void setOrder(OrderUser orderl, Employee employee) {
         //创建订单对象
         System.out.println("正在创建订单");
        Order order = new Order();
         //生成订单id
-        order.setOrder_id(IntegerIDUtils.creatID());
+        Integer oid = IntegerIDUtils.creatID();
+        order.setOrder_id(oid);
         //生成寄件时间
         order.setSend_time(TimeUtils.getDateTimeToString());
        // System.out.println(TimeUtils.getDateTimeToString());
@@ -171,6 +180,27 @@ public class UserAddOrderlmpl implements UserAddOrderService {
         double money = MoneyUtil.getMoney(orderl.getWeiht());
         order.setMoney(money);
         userAddOrderDao.addOrder(order);
+
+
+        // 获取数据
+        OrderTransferInfo orderTransferInfo = new OrderTransferInfo();
+        orderTransferInfo.setOrder_id(oid);
+        orderTransferInfo.setMode("入库");
+        orderTransferInfo.setTime(TimeUtils.getDateTimeToString());
+
+        // 获取登录员工信息
+        if (employee == null) {
+
+            throw new RuntimeException("获取员工信息异常");
+        }
+        orderTransferInfo.setEmployee_id(employee.getEmployee_num());
+        orderTransferInfo.setStation_id(employee.getEmployeeState().getGroup());
+        // Employee employeeByNum = employeeDao.getEmployeeByNum(employee.getEmployee_num());
+
+
+        // 添加order_transfer_info表数据
+        orderTransferInfoDao.addOrderTransferInfo(orderTransferInfo);
+
 
     }
 }

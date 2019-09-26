@@ -1,5 +1,6 @@
 package com.xq.service;
 
+import com.xq.bean.Employee;
 import com.xq.bean.Order;
 import com.xq.bean.OrderUser;
 import com.xq.bean.Users;
@@ -36,7 +37,7 @@ public interface UserAddOrderService {
     void setRecevie(Users user);
 
     //添加订单信息到数据库
-    void setOrder(OrderUser order);
+    void setOrder(OrderUser order , Employee employee);
 
 
 }
