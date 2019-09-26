@@ -12,7 +12,7 @@ public class Order {
   private Integer receive_user_id;
   private String receive_address;
   private Double weight;
-  private String money;
+  private Double money;
   private Integer order_state_id;
   private Integer order_info_id;
 
@@ -98,11 +98,11 @@ public class Order {
   }
 
 
-  public String getMoney() {
+  public Double getMoney() {
     return money;
   }
 
-  public void setMoney(String money) {
+  public void setMoney(Double money) {
     this.money = money;
   }
 

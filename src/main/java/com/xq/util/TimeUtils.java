@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -51,6 +52,26 @@ public class TimeUtils {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String dateTime = dateFormat.format(timeNum);
         return dateTime;
+    }
+/**
+ * @Method
+ * @Author yaoxiaolei
+ * @Version  1.0
+ * @Description
+ 返回应送到的时间
+ * @Return
+ * @Exception
+ * @Date 2019/9/20 15:25
+ */
+    public static String getFutureTime(){
+        Date d = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String currdate = format.format(d);
+        Calendar ca = Calendar.getInstance();
+        ca.add(Calendar.DATE, 3);// num为增加的天数，可以改变的
+        d = ca.getTime();
+        String enddate = format.format(d);
+        return enddate;
     }
 
 
