@@ -5,8 +5,10 @@ import com.xq.bean.OrderUser;
 import com.xq.bean.Users;
 import com.xq.service.UserAddOrderService;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 
@@ -21,6 +23,7 @@ import javax.annotation.Resource;
  */
 @Controller
 public class UserAddOrderController {
+
 /**
  * @Method
  * @Author yaoxiaolei
@@ -36,8 +39,9 @@ public class UserAddOrderController {
 private UserAddOrderService userAddOrderlmpl;
 
 
-    @RequestMapping(value = "addorder" ,method = {RequestMethod.POST})
-    public String addOrder(OrderUser ou){
+    @RequestMapping(value = "/addorder" ,method = {RequestMethod.POST})
+    @ResponseBody
+    public String addOrder( OrderUser ou){
 
         System.out.println(ou);
         //添加寄件人

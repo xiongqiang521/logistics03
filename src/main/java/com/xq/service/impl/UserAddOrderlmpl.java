@@ -32,11 +32,12 @@ public class UserAddOrderlmpl implements UserAddOrderService {
     @Resource
     private UserAddOrderDao userAddOrderDao;
 
-    //查询
+    //查询寄件人
     @Override
     public Users selUserTel(OrderUser orderUser) {
         System.out.println("答应了");
         Users users = userAddOrderDao.sleUsersTel(orderUser.getTelephone());
+        System.out.println(users);
         //判断数据库是否有该电话
         if (users == null) {
             //如果没有，则添加用户，创建对象
@@ -59,9 +60,11 @@ public class UserAddOrderlmpl implements UserAddOrderService {
             userAddOrderDao.addSend(user);
         }else {
             //判断用户名是否更改
-             if(!Objects.equals(users.getName(),orderUser.getName())){
+             if(!orderUser.getName().equals(users.getName())){
                      //修改
+                 users.setName(orderUser.getName());
                      userAddOrderDao.upUsers(users);
+                 System.out.println("修改成功");
              }
         }
         return null;
@@ -71,6 +74,7 @@ public class UserAddOrderlmpl implements UserAddOrderService {
     @Override
     public Users rselUserTel(OrderUser orderUser) {
         Users users = userAddOrderDao.sleUsersTel(orderUser.getStelephone());
+        System.out.println(users);
         //判断数据库是否有该电话
         if (users == null) {
             //如果没有，则添加用户，创建对象
@@ -94,19 +98,19 @@ public class UserAddOrderlmpl implements UserAddOrderService {
             userAddOrderDao.addSend(user);
         }else {
             //判断用户名是否更改
-            if(!Objects.equals(users.getName(),orderUser.getSname())){
+            if(!orderUser.getSname().equals(users.getName())){
                 //修改
+                users.setName(orderUser.getSname());
+                //将前端用户名塞入
                 userAddOrderDao.upUsers(users);
+                System.out.println("修改成功");
             }
         }
         return null;
     }
 
     //修改
-    @Override
-    public void upUser(Users user) {
-     userAddOrderDao.upUsers(user);
-    }
+
 
     /**
  * @Method

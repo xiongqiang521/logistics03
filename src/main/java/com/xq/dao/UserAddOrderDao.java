@@ -1,6 +1,7 @@
 package com.xq.dao;
 
 import com.xq.bean.Order;
+import com.xq.bean.OrderUser;
 import com.xq.bean.Users;
 import org.apache.ibatis.annotations.*;
 
