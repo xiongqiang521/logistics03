@@ -49,12 +49,15 @@ public class ShiroConfig {
         filterMap.put("/fonts/**","anon");
         filterMap.put("/images/**","anon");
         filterMap.put("/js/**","anon");
-        filterMap.put("/lib.layui/**","anon");
+        filterMap.put("/lib/layui/**","anon");
         filterMap.put("/user.json","anon");
         //放行页面
+        filterMap.put("/index.html","anon");
+
         filterMap.put("/login.html", "anon");
         filterMap.put("/login", "anon");
         filterMap.put("/**","user");
+
 
         //授权过滤器
         filterMap.put("/orders/*", "roles[admin]");
@@ -70,7 +73,7 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setLoginUrl("/login.html");
         //设置未授权提示页面
         shiroFilterFactoryBean.setUnauthorizedUrl("/unAuth.html");
-         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
+        shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
         return shiroFilterFactoryBean;
     }
 

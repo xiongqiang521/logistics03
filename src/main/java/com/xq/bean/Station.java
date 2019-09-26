@@ -1,9 +1,10 @@
 package com.xq.bean;
 
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Station {
+public class Station implements Serializable {
 
   private Integer id;
   private Integer station_num;

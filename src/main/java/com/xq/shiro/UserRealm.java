@@ -48,11 +48,12 @@ public class UserRealm extends AuthorizingRealm {
         }
 
       SimpleAuthorizationInfo info=new SimpleAuthorizationInfo(roles);
- /*         Subject subject = SecurityUtils.getSubject();
-        Employee users = (Employee) subject.getPrincipal();*/
+ //         Subject subject = SecurityUtils.getSubject();
+  //      Employee users = (Employee) subject.getPrincipal();
         info.addStringPermission(users.getEmployeeState().getType());
 
         return info;
+
     }
 
     /**

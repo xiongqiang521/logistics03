@@ -24,15 +24,15 @@ public interface EmployeeDao {
 
     //验证登录
     @Select("SELECT * from employee where employee_num=#{name}")
-    @Results(id = "emMap",value = {
-            @Result(column = "state",property = "state"),
-            @Result(column = "state",property = "employeeState",one = @One(select ="com.xq.dao.EmployeeStateDao.getById" ))
+    @Results(value = {
+            @Result(column = "employee_num",property = "employee_num"),
+            @Result(column = "employee_num",property = "employeeState",one = @One(select ="com.xq.dao.EmployeeStateDao.getById" ))
     })
     Employee login(Integer name);
 
     //根据id查询管理人员
     @Select("SELECT * from employee where employee_num=#{num}")
-    @Results(id = "getAll",value = {
+    @Results(value = {
             @Result(column = "state",property = "state"),
             @Result(column = "state",property = "employeeState",one = @One(select ="com.xq.dao.EmployeeStateDao.getById" ))
     })

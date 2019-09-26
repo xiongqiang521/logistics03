@@ -27,15 +27,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-
 public class EmployeeController {
-
-    @RequestMapping("/hello")
-    public ModelAndView index(ModelAndView mv){
-        System.out.println("员工");
-        mv.setViewName("index.html");
-        return mv;
-    }
+    //
+    // @RequestMapping("/hello")
+    // public ModelAndView index(ModelAndView mv){
+    //     System.out.println("员工");
+    //     mv.setViewName("index.html");
+    //     return mv;
+    // }
 
 
     @Resource

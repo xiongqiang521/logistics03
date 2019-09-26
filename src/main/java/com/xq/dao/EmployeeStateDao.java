@@ -18,7 +18,7 @@ public interface EmployeeStateDao {
     @Select("select * from employee_state where id=#{id}")
     @Results(id = "getById",value = {
             @Result(column = "group",property = "group"),
-            @Result(column = "group",property = "station",one = @One(select ="com.xq.dao.StationDao.getStationAll" ))
+            @Result(column = "group",property = "station",one = @One(select ="com.xq.dao.StationDao.getStationByStationId" ))
     })
     EmployeeState getById(Serializable id);
 
