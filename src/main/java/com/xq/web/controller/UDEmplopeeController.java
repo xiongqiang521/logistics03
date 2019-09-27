@@ -28,7 +28,7 @@ public class UDEmplopeeController {
     }
 
     @RequestMapping("/DeleteEmplopee")
-//    @ResponseBody
+    @ResponseBody
     public void deleteEmplopee(String ids){
         String[] d=ids.split(",");
         for (int i = 0; i < d.length; i++) { // 编程式
@@ -37,6 +37,14 @@ public class UDEmplopeeController {
             Integer in_num=Integer.valueOf(id);
             UpdateEmplopeeServiceImpl.DeleteEmployee(in_num);
              }
+    }
+    @RequestMapping("/DeleteoneEmplopee")
+    @ResponseBody
+    public String deleteoneEmplopee(String ids){
+            System.out.println("眼删除的编号"+ids);
+            Integer in_num=Integer.valueOf(ids);
+            UpdateEmplopeeServiceImpl.DeleteEmployee(in_num);
+            return "success";
     }
 
 
