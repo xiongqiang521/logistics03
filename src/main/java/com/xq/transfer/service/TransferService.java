@@ -34,4 +34,6 @@ public interface TransferService {
     void updateTransfer(OrderTransferInfo orderTransferInfo);
 
     void deleteTransfer(Integer id);
+
+    List<OrderTransferInfo> getTransferById(Integer order_id);
 }

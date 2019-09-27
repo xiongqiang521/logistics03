@@ -126,4 +126,9 @@ public class TransferServiceImpl implements TransferService {
     public void deleteTransfer(Integer id) {
         transferDao.deleteTransfer(id);
     }
+
+    @Override
+    public List<OrderTransferInfo> getTransferById(Integer order_id) {
+        return transferDao.findOrderByOrderId(order_id);
+    }
 }

@@ -1,5 +1,6 @@
 package com.xq.transfer.web.controller;
 
+import com.xq.bean.Employee;
 import com.xq.bean.OrderTransferInfo;
 import com.xq.bean.TransferCondition;
 import com.xq.bean.TransferInfo;
@@ -19,6 +20,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 中转管理的controller
@@ -207,5 +209,34 @@ public class TransferController {
         System.out.println(933);
         transferService.deleteTransfer(id);
         return "success";
+    }
+
+    //
+    @RequestMapping("OutInto")
+    @ResponseBody
+    public Boolean getTransfer(Integer order_id,HttpServletRequest request){
+        List<OrderTransferInfo> infos= transferService.getTransferById(order_id);
+
+        if (infos.size()==0 || infos==null) {
+            throw new RuntimeException("订单号输入错误");
+        }
+
+        Employee employee = (Employee) request.getSession().getAttribute("name");
+        Integer station_num = employee.getEmployeeState().getStation().getStation_num();
+
+        boolean temp=false;
+        for (OrderTransferInfo info : infos) {
+            if (Objects.equals(info.getStation_id(),station_num)) {
+
+                temp=!temp;
+            }
+        }
+        if (temp){
+            // 可以入库
+        }else{
+            // 可以出库
+        }
+        return temp;
+
     }
 }

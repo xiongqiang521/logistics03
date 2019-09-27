@@ -32,8 +32,8 @@ public interface TransferDao {
     List<TransferInfo> findAll();*/
 
     //根据订单id查询订单
-    /*@Select("select * from `order` where order_id = #{order_id}")
-    Order findOrderByOrderId(Integer id);*/
+    @Select("select * from `order_transfer_info` where order_id = #{id}")
+    List<OrderTransferInfo> findOrderByOrderId(Integer id);
 
 
     //查询中转记录总数
