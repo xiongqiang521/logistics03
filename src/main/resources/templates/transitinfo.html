@@ -82,6 +82,13 @@
       </form>
     </div>
     <script>
+
+        $.get("getEmployee",function (response) {
+            $("#stationName").val(response.employeeState.station.name);
+            $("#employeeName").val(response.name);
+
+        });
+
         layui.use('laydate', function() {
             var laydate = layui.laydate;
 

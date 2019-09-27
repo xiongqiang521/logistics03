@@ -2,12 +2,11 @@ package com.xq.web.controller;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
+import com.xq.bean.Employee;
 import com.xq.bean.OrderAll;
 import com.xq.bean.OrderCondition;
 import com.xq.service.OrderService;
 import com.xq.util.ExcelUtil;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.poi.util.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +19,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -34,12 +32,12 @@ public class OrderController {
     private OrderService orderService;
 
 
-    private Map<String ,Object> map=new HashMap<>(3);
+    private Map<String, Object> map = new HashMap<>(3);
 
     @RequestMapping("getOrders")
     @ResponseBody
-    public Map getOrders(){
-        PageHelper.startPage(1,7);
+    public Map getOrders() {
+        PageHelper.startPage(1, 7);
         Page<OrderAll> ordersPage = orderService.getOrders();
 
         long total = ordersPage.getTotal();
@@ -47,15 +45,14 @@ public class OrderController {
 
 
         OrderCondition condition = new OrderCondition(1, ordersPage.getPageSize(), ordersPage.getTotal(), ordersPage.getPages());
-        map.put("ordersPage",ordersPage);
-        map.put("orders",ordersPage.getResult());
-        map.put("condition",condition);
+        map.put("ordersPage", ordersPage);
+        map.put("orders", ordersPage.getResult());
+        map.put("condition", condition);
         return map;
     }
 
     @RequestMapping("orderExcel")
-    public void getExcel(HttpServletRequest request, HttpServletResponse response){
-
+    public void getExcel(HttpServletRequest request, HttpServletResponse response) {
 
 
         FileInputStream fis = null;
@@ -64,12 +61,12 @@ public class OrderController {
 
             Page<OrderAll> orders = orderService.getOrders();
 
-            ExcelUtil.excelExport("orders",orders.getResult(),file);
+            ExcelUtil.excelExport("orders", orders.getResult(), file);
 
 
             fis = new FileInputStream(file);
-            response.setHeader("Content-Disposition", "attachment; filename="+file.getName());
-            IOUtils.copy(fis,response.getOutputStream());
+            response.setHeader("Content-Disposition", "attachment; filename=" + file.getName());
+            IOUtils.copy(fis, response.getOutputStream());
             response.flushBuffer();
         } catch (Exception e) {
             e.printStackTrace();
@@ -86,7 +83,7 @@ public class OrderController {
 
     @RequestMapping("orderCondition")
     @ResponseBody
-    public Map orderCondition(OrderCondition condition){
+    public Map orderCondition(OrderCondition condition) {
 
         if (condition.getPageNum() == null) {
             condition.setPageNum(1);
@@ -94,7 +91,7 @@ public class OrderController {
 
         System.out.println(condition);
 
-        PageHelper.startPage(condition.getPageNum(),7);
+        PageHelper.startPage(condition.getPageNum(), 7);
         Page<OrderAll> ordersPage = orderService.getOrdersCondition(condition);
 
         OrderCondition orderCondition = new OrderCondition(condition.getPageNum(), ordersPage.getPageSize(),
@@ -106,10 +103,18 @@ public class OrderController {
         long total = ordersPage.getTotal();
         System.out.println(total);
 
-        map.put("ordersPage",ordersPage);
-        map.put("orders",ordersPage.getResult());
-        map.put("condition",condition);
+        map.put("ordersPage", ordersPage);
+        map.put("orders", ordersPage.getResult());
+        map.put("condition", condition);
 
         return map;
+    }
+
+    @RequestMapping("getEmployee")
+    @ResponseBody
+    public Employee getEmployee(HttpServletRequest request) {
+        Employee name = (Employee) request.getSession().getAttribute("name");
+        return name;
+
     }
 }
