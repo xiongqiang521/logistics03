@@ -42,7 +42,11 @@ public class ShiroConfig {
         //释放静态资源
         filterMap.put("/static/**","anon");
         filterMap.put("/UsersByNameAndPassword","anon");
+        filterMap.put("/Message","anon");
+        filterMap.put("/MessageLogin","anon");
+        filterMap.put("/MessageRegister","anon");
         filterMap.put("/css/**","anon");
+        filterMap.put("/font/**","anon");
         filterMap.put("/fonts/**","anon");
         filterMap.put("/images/**","anon");
         filterMap.put("/js/**","anon");
@@ -51,6 +55,8 @@ public class ShiroConfig {
         //放行页面
         filterMap.put("/login.html", "anon");
         filterMap.put("/login", "anon");
+        filterMap.put("/login-nose.html", "anon");
+        filterMap.put("/user-add.html", "anon");
         filterMap.put("/**","user");
 
         //授权过滤器

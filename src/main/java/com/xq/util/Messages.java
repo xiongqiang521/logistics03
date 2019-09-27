@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class Messages {
 
-    private void Messages(String tel,String code){
+    public  String Messages(String tel){
         String host = "http://yzxyx.market.alicloudapi.com";
         String path = "/yzx/marketSms";
         String method = "POST";
@@ -20,7 +20,7 @@ public class Messages {
         headers.put("Authorization", "APPCODE " + appcode);
         //验证码随机数
         Integer codes=(int)((Math.random() * 9 + 1) * 100000);
-        code = Integer.toString(codes);
+      String  code = Integer.toString(codes);
         Map<String, String> querys = new HashMap<String, String>();
         querys.put("phone", tel);
         querys.put("templateId", "TP19092626");
@@ -42,8 +42,10 @@ public class Messages {
             System.out.println(response.toString());
             //获取response的body
             //System.out.println(EntityUtils.toString(response.getEntity()));
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return code;
     }
 }
