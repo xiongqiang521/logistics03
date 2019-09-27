@@ -64,4 +64,15 @@ public class OrderTransferInfo {
     this.time = time;
   }
 
+  @Override
+  public String toString() {
+    return "OrderTransferInfo{" +
+            "id=" + id +
+            ", order_id=" + order_id +
+            ", mode='" + mode + '\'' +
+            ", station_id=" + station_id +
+            ", employee_id=" + employee_id +
+            ", time='" + time + '\'' +
+            '}';
+  }
 }

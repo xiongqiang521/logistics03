@@ -35,10 +35,10 @@
     </div>
     <div class="x-body">
       <div class="layui-row">
-        <form class="layui-form layui-col-md12 x-so" th:action="@{/findTransferByConditionAndPage(condition=${condition})}">
+        <form id="searchForm" class="layui-form layui-col-md12 x-so" th:action="@{/findTransferByConditionAndPage(condition=${condition})}">
           <input type="hidden" value="1" name="currentPage" id="currentPage">
-          <input class="layui-input" placeholder="开始日" name="startTime" id="startTime" th:value="${condition.getStartTime()}">
-          <input class="layui-input" placeholder="截止日" name="lastTime" id="lastTime" th:value="${condition.getLastTime()}">
+          <input class="layui-input" placeholder="开始日" name="startTime" id="start" th:value="${condition.getStartTime()}">
+          <input class="layui-input" placeholder="截止日" name="lastTime" id="end" th:value="${condition.getLastTime()}">
           <input class="layui-input" placeholder="站点名称" name="stationName" id="stationName" th:value="${condition.getStationName()}">
           <!--<div class="layui-input-inline" lay-filter="selectOrder" >
             <select name="orderState" id="select1">
@@ -60,7 +60,7 @@
         </form>
       </div>
       <xblock>
-        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
+        <button type="button" id="exportXlsBtn" class="layui-btn layui-btn-sm"><i class="layui-icon"></i>导出xcel报表</button>
         <button class="layui-btn" onclick="x_admin_show('出入库','./transitinfo.html')"><i class="layui-icon"></i>出入库</button>
         <span class="x-right" style="line-height:40px"> 共有数据：<span th:text="${pageBean.totalCount}"></span> 条</span>
       </xblock>
@@ -75,7 +75,7 @@
             <th>出入库</th>
             <th>所在站点</th>
             <th>操作员id</th>
-            <th>操作时间</th>
+            <th>出入库时间</th>
             <th >操作</th>
             </tr>
         </thead>
@@ -97,10 +97,10 @@
             <td th:text="${transferInfo.employeeName}"></td>
             <td th:text="${transferInfo.time}"></td>
             <td class="td-manage">
-              <a title="查看"  onclick="x_admin_show('编辑','order-view.html')" href="javascript:;">
+              <a title="编辑" href="javascript:;" th:data-name="${transferInfo.id}"  onclick="update(this.getAttribute('data-name'))" >
                 <i class="layui-icon">&#xe63c;</i>
               </a>
-              <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
+              <a title="删除" th:data-name="${transferInfo.id}" onclick="member_del(this,this.getAttribute('data-name'))" href="javascript:;">
                 <i class="layui-icon">&#xe640;</i>
               </a>
             </td>
@@ -127,6 +127,15 @@
 
     </div>
     <script>
+      function update(id){
+       //alert(id);
+        window.location.href="/findTransferById?id="+id;
+      }
+      //导出excel表格
+      $("#exportXlsBtn").click(function () {
+        $("#searchForm").attr("action","/exportXls");
+        $("#searchForm").submit();
+      })
 
       function ConditionAndPage(pageNum){
         // alert(pageNum);
@@ -202,14 +211,51 @@
       }
 
       /*用户-删除*/
-      function member_del(obj,id){
+      /*function member_del(obj,id){
+
           layer.confirm('确认要删除吗？',function(index){
               //发异步删除数据
-              $(obj).parents("tr").remove();
-              layer.msg('已删除!',{icon:1,time:1000});
+              //$(obj).parents("tr").remove();
+           /!* $.post(
+              "deleteTransfer",JSON.stringify(data.field)
+            );*!/
+            alert(id);
+            $.ajax({
+              type: "post",
+              url: '/deleteTransfer',
+              data: {'id': id},
+              type: JSON
+            });
+            alert(111);
+            layer.msg('已删除!', {icon: 1, time: 1000});
           });
-      }
-
+      }*/
+      function member_del(obj,id){
+        layui.use('layer',function(){
+          var layer = layui.layer;
+          layer.msg('你确定删除么？', {
+            time: 2000 ,//2秒自动关闭
+            btn: ['确定', '取消'],
+            yes: function(index){
+              console.log(id);
+              $.ajax({
+                url:"deleteTransfer",
+                data:{'id':id},
+                type:"Post",
+                dataType:"json",
+                success:function(){
+                  layer.msg('已删除!');
+                  location.reload(); //删除成功后再刷新
+                }/*,
+                error:function(data){
+                  $.messager.alert('错误',data.msg);
+                }*/
+              });
+              layer.close(index);
+            }
+          });
+        });
+      };
 
 
       function delAll (argument) {
