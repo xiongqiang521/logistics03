@@ -1,5 +1,4 @@
-package com.xq.bean;;
-
+package com.xq.bean;
 
 public class OrderAll {
 

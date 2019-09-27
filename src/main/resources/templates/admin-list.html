@@ -32,10 +32,10 @@
         <i class="layui-icon" style="line-height:30px">ဂ</i></a>
     </div>
     <div class="x-body">
-      <div class="layui-row">
+      <!--<div class="layui-row">
         <form class="layui-form layui-col-md12 x-so" method="post" >
-<!--          <input class="layui-input" placeholder="姓名"  >-->
-<!--          <input class="layui-input" placeholder="站点"  >-->
+          <input class="layui-input" placeholder="姓名"  >
+          <input class="layui-input" placeholder="站点"  >
 
             <select name="StationName" id="StationName" class="layui-input" >
                   <option th:each="station : ${pageStations}" th:text="${station.name}" th:value="${station.name}">
@@ -45,7 +45,7 @@
           <input type="text" name="employeeName"  id="employeeName"  class="layui-input">
           <input class="layui-btn"  type="submit" id="login" />
         </form>
-      </div>
+      </div>-->
       <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
         <button class="layui-btn" onclick="x_admin_show('添加用户','./admin-add.html')"><i class="layui-icon"></i>添加</button>

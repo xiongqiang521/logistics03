@@ -18,7 +18,7 @@ public class UsersLoginController {
      //用户账户登录
      @RequestMapping("/UsersByNameAndPassword")
      @ResponseBody
-         public ModelAndView UsersByNameAndPassword(String username, String password,ModelAndView mv){
+    public ModelAndView UsersByNameAndPassword(String username, String password,ModelAndView mv){
          System.out.println(username+password);
          Users usersByNameAndPassword = loginServics.getUsersByNameAndPassword(username, password);
          System.out.println(usersByNameAndPassword);

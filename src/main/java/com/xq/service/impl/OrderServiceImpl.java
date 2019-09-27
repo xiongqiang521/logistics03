@@ -1,6 +1,8 @@
 package com.xq.service.impl;
 
+import com.github.pagehelper.Page;
 import com.xq.bean.OrderAll;
+import com.xq.bean.OrderCondition;
 import com.xq.dao.OrderDao;
 import com.xq.service.OrderService;
 import org.springframework.stereotype.Service;
@@ -19,8 +21,15 @@ public class OrderServiceImpl implements OrderService {
     private OrderDao orderDao;
 
     @Override
-    public List<OrderAll> getOrders() {
-        List<OrderAll> orders = orderDao.getOrders();
+    public Page<OrderAll> getOrders() {
+        Page<OrderAll> orders = orderDao.getOrders();
         return orders;
+    }
+
+    @Override
+    public Page<OrderAll> getOrdersCondition(OrderCondition condition) {
+        Page<OrderAll> ordersCondition = orderDao.getOrdersCondition(condition);
+
+        return ordersCondition;
     }
 }

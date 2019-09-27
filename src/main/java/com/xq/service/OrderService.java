@@ -1,6 +1,8 @@
 package com.xq.service;
 
+import com.github.pagehelper.Page;
 import com.xq.bean.OrderAll;
+import com.xq.bean.OrderCondition;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +15,8 @@ import java.util.List;
 @Service
 public interface OrderService {
 
-    List<OrderAll> getOrders();
+    Page<OrderAll> getOrders();
+
+    Page<OrderAll> getOrdersCondition(OrderCondition condition);
 
 }

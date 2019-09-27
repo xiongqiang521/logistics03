@@ -1,11 +1,10 @@
 package com.xq.dao;
 
-import com.xq.bean.Order;
-import com.xq.bean.OrderAll;
-import com.xq.bean.OrderState;
-import com.xq.bean.OrderTransferInfo;
+import com.github.pagehelper.Page;
+import com.xq.bean.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectProvider;
 
 import java.io.Serializable;
 import java.util.List;
@@ -57,5 +56,31 @@ public interface OrderDao {
      * 查询所有订单所有信息
      */
     @Select("select * from `order_all`")
-    List<OrderAll> getOrders();
+    Page<OrderAll> getOrders();
+
+    /**
+     * 查询所有订单所有信息
+     */
+    @SelectProvider(type = OrdersConditionSQL.class, method = "findUserById")
+    Page<OrderAll> getOrdersCondition(OrderCondition condition);
+
+
+    class OrdersConditionSQL{
+        public String findUserById(OrderCondition condition) {
+            String sql = "select * from `order_all` where 1=1 ";
+            if(condition.getOrderNum()!=null && !"".equals(condition.getOrderNum())){
+                sql += " and o_order_id = #{orderNum}";
+            }
+            if(condition.getOrderStationNum()!=null && !"".equals(condition.getOrderStationNum())){
+                sql += " and s_station_num = #{stationNum}";
+            }
+            if(condition.getStartTime()!=null && !"".equals(condition.getStartTime())){
+                sql += " and otf_time >= #{startTime}";
+            }
+            if(condition.getEndTime()!=null && !"".equals(condition.getEndTime())){
+                sql += " and otf_time <= #{endTime}";
+            }
+            return sql;
+        }
+    }
 }
