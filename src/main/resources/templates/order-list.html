@@ -68,7 +68,7 @@
       </div>
       <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" onclick="x_admin_show('添加用户','./order-add.html')"><i class="layui-icon"></i>添加</button>
+        <button class="layui-btn" onclick="x_admin_show('添加用户','./addOrder.html')"><i class="layui-icon"></i>添加</button>
         <span class="x-right" style="line-height:40px">共有数据：88 条</span>
       </xblock>
       <table class="layui-table">
@@ -78,16 +78,40 @@
               <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
             </th>
             <th>订单编号</th>
-            <th>收货人</th>
-            <th>总金额</th>
-            <th>应付金额</th>
-            <th>订单状态</th>
-            <th>支付状态</th>
-            <th>发货状态</th>
-            <th>支付方式</th>
-            <th>配送方式</th>
-            <th>下单时间</th>
-            <th >操作</th>
+            <th>寄件时间</th>
+            <th>o_send_user_id</th>
+            <th>寄件地址</th>
+            <th>签收时间</th>
+            <th>o_receive_user_id</th>
+            <th>收件地址</th>
+            <th>重量</th>
+            <th>o_order_state_id</th>
+            <th>otf_id</th>
+            <th >otf_order_id</th>
+            <th >出入库</th>
+            <th >otf_station_id</th>
+            <th >otf_employee_id</th>
+            <th >出入库时间</th>
+            <th >寄件人姓名</th>
+            <th >ur_password</th>
+            <th >ur_create_time</th>
+            <th >寄件人电话</th>
+            <th >收件人姓名</th>
+            <th >us_create_time</th>
+            <th >us_state</th>
+            <th >收件人地址</th>
+            <th >站点编号</th>
+            <th >站点名称</th>
+            <th >站点地址</th>
+            <th >操作员工编号</th>
+            <th >员工姓名</th>
+            <th >e_password</th>
+            <th >e_sex</th>
+            <th >员工电话</th>
+            <th >员工工作地点</th>
+            <th >员工职位</th>
+
+            <th>操作</th>
             </tr>
         </thead>
         <tbody>
@@ -95,16 +119,39 @@
             <td>
               <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
             </td>
-            <td>2017009171822298053</td>
-            <td>老王:18925139194</td>
-            <td>7829.10</td>
-            <td>7854.10</td>
-            <td>待确认</td>
-            <td>未支付</td>
-            <td>未发货</td>
-            <td>其他方式</td>
-            <td>申通物流</td>
-            <td>2017-08-17 18:22</td>
+            <th>o_order_id</th>
+            <th>o_send_time</th>
+            <th>o_send_user_id</th>
+            <th>o_send_address</th>
+            <th>o_receive_time</th>
+            <th>o_receive_user_id</th>
+            <th>o_receive_address</th>
+            <th>o_weight</th>
+            <th>o_order_state_id</th>
+            <th>otf_id</th>
+            <th >otf_order_id</th>
+            <th >otf_mode</th>
+            <th >otf_station_id</th>
+            <th >otf_employee_id</th>
+            <th >otf_time</th>
+            <th >ur_name</th>
+            <th >ur_password</th>
+            <th >ur_create_time</th>
+            <th >ur_telephone</th>
+            <th >us_name</th>
+            <th >us_create_time</th>
+            <th >us_state</th>
+            <th >us_telephone</th>
+            <th >s_station_num</th>
+            <th >s_name</th>
+            <th >s_address</th>
+            <th >e_employee_num</th>
+            <th >e_name</th>
+            <th >e_password</th>
+            <th >e_sex</th>
+            <th >e_telephone</th>
+            <th >es_group</th>
+            <th >es_type</th>
             <td class="td-manage">
               <a title="查看"  onclick="x_admin_show('编辑','order-view.html')" href="javascript:;">
                 <i class="layui-icon">&#xe63c;</i>

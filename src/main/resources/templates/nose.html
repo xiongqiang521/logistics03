@@ -571,13 +571,11 @@
 
 
 <script>
-    var send_address="武汉体育学院";
-    var receive_address="光谷广场";
-    var stationNames=[];
+    var send_address="";
+    var receive_address="";
+    // var stationAddress=[];
     /*点击弹出按钮*/
-    var start = "";
-    var end ="";
-    var stationaddressdetail = [];
+    var stationAddressDetail = [];
     function popBox() {
         var popBox = document.getElementById("popBox");
         var popLayer = document.getElementById("popLayer");
@@ -590,8 +588,8 @@
         var driving = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true},policy: routePolicy[0]});
         var start = JSON.stringify(send_address);
         var end = JSON.stringify(receive_address);
-        driving.search(start,end,{waypoints:stationNames});
-        driving.search(start,end,{waypoints:stationaddressdetail});
+        // driving.search(start,end,{waypoints:stationNames});
+        driving.search(start,end,{waypoints:stationAddressDetail});
     };
     /*点击关闭按钮*/
     function closeBox() {
@@ -624,8 +622,8 @@
                     end =response.data.receive_address;
                     _this.isShow=true;
                     response.data.infos.forEach(function (item) {
-                        stationaddressdetail.push(item.address);
-                            stationAddress.push(item.address);
+                    stationaddressdetail.push(item.address);
+                    stationAddress.push(item.address);
                     });
                         receive_address= response.data.receive_address;
                         send_address=response.data.send_address;

@@ -1,6 +1,7 @@
 package com.xq.dao;
 
 import com.xq.bean.Order;
+import com.xq.bean.OrderAll;
 import com.xq.bean.OrderState;
 import com.xq.bean.OrderTransferInfo;
 import org.apache.ibatis.annotations.Mapper;
@@ -51,4 +52,10 @@ public interface OrderDao {
      */
     @Select("select * from `order`")
     List<Order> selectOrder();
+
+    /**
+     * 查询所有订单所有信息
+     */
+    @Select("select * from `order_all`")
+    List<OrderAll> getOrders();
 }
