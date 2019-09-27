@@ -38,11 +38,14 @@ public class UserRealm extends AuthorizingRealm {
         //给资源进行授权
 
         Subject subject = SecurityUtils.getSubject();
-        Employee users = (Employee) subject.getPrincipal();
+        Employee employee = (Employee) subject.getPrincipal();
+
+        subject.getSession().setAttribute("name",employee);
+
         //利用登录的信息来用户当前的角色或权限
         Set<String> roles=new HashSet<>();
         roles.add("admin");
-        if("orders".equals(users.getEmployeeState().getType())){
+        if("orders".equals(employee.getEmployeeState().getType())){
             roles.add("orders");
             roles.add("manager");
         }
@@ -50,7 +53,7 @@ public class UserRealm extends AuthorizingRealm {
       SimpleAuthorizationInfo info=new SimpleAuthorizationInfo(roles);
  //         Subject subject = SecurityUtils.getSubject();
   //      Employee users = (Employee) subject.getPrincipal();
-        info.addStringPermission(users.getEmployeeState().getType());
+        info.addStringPermission(employee.getEmployeeState().getType());
 
         return info;
 
@@ -69,15 +72,18 @@ public class UserRealm extends AuthorizingRealm {
         UsernamePasswordToken t = (UsernamePasswordToken) token;
         String username = t.getUsername();
         Integer integer = Integer.valueOf(username);
-        Employee users = service.login(integer);
-        System.out.println("name----------" + users);
-        if(users==null){
+        Employee employee = service.login(integer);
+        System.out.println("name----------" + employee);
+
+
+
+        if(employee==null){
             //判断用户名是否存在  否则底层会抛出UnKnowAccountException
             return null;
         }
         //判断密码是否正确
-        return new SimpleAuthenticationInfo(users,users.getPassword(),"");
+        return new SimpleAuthenticationInfo(employee,employee.getPassword(),"");
 
 
     }
-    }
+}
