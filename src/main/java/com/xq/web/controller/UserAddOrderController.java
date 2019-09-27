@@ -1,7 +1,6 @@
 package com.xq.web.controller;
 
 import ch.qos.logback.core.net.SyslogOutputStream;
-import com.xq.bean.Employee;
 import com.xq.bean.OrderUser;
 import com.xq.bean.Users;
 import com.xq.service.UserAddOrderService;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * @ProjectName: logistics03
@@ -23,9 +21,19 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 public class UserAddOrderController {
-    //导入
-    @Resource
-    private UserAddOrderService userAddOrderlmpl;
+/**
+ * @Method
+ * @Author yaoxiaolei
+ * @Version  1.0
+ * @Description
+
+ * @Return
+ * @Exception
+ * @Date 2019/9/20 14:07
+ */
+//导入
+@Resource
+private UserAddOrderService userAddOrderlmpl;
 
 
     @RequestMapping(value = "addorder" ,method = {RequestMethod.POST})

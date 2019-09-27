@@ -32,7 +32,7 @@ public class OrderUser {
     private String create_time;
     private String state;
     private String telephone;
-//这是寄件人 属性
+    //这是寄件人 属性
     private Integer sid;
     private String suser_id;
     private String sname;
