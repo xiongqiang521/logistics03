@@ -17,4 +17,19 @@ public class UsersLoginServicImpl implements UsersLoginServics {
     public Users getUsersByNameAndPassword(String username, String password) {
         return dao.getUsersByNameAndPassword(username,password);
     }
+
+    @Override
+    public String getTel(String tel) {
+        return dao.getTel(tel);
+    }
+
+    @Override
+    public void MessageRegister(Users users) {
+        dao.MessageRegister(users);
+    }
+
+    @Override
+    public String getName(String name) {
+        return dao.getName(name);
+    }
 }
