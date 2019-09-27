@@ -104,4 +104,31 @@ public class TransferServiceImpl implements TransferService {
     public void addTransferInfo(OrderTransferInfo orderTransferInfo) {
         transferDao.addTransferInfo(orderTransferInfo);
     }
+
+    @Override
+    public List<TransferInfo> findTransferByCondition(TransferCondition condition) {
+        HashMap<String,Object> map=new HashMap();
+        map.put("condition",condition);
+        return transferDao.findTransferByConditionAndPage(map);
+    }
+
+    @Override
+    public TransferInfo findTransferById(Integer id) {
+        return transferDao.findTransferById(id);
+    }
+
+    @Override
+    public void updateTransfer(OrderTransferInfo orderTransferInfo) {
+        transferDao.updateTransfer(orderTransferInfo);
+    }
+
+    @Override
+    public void deleteTransfer(Integer id) {
+        transferDao.deleteTransfer(id);
+    }
+
+    @Override
+    public List<OrderTransferInfo> getTransferById(Integer order_id) {
+        return transferDao.findOrderByOrderId(order_id);
+    }
 }

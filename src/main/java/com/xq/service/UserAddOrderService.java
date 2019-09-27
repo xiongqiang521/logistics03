@@ -26,8 +26,7 @@ public interface UserAddOrderService {
 
 
 
-    //修改
-    void upUser(Users user);
+
 
 
     //添加寄件人信息到数据库

@@ -4,10 +4,7 @@ import com.xq.bean.OrderState;
 import com.xq.bean.OrderTransferInfo;
 import com.xq.bean.TransferCondition;
 import com.xq.bean.TransferInfo;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -35,8 +32,8 @@ public interface TransferDao {
     List<TransferInfo> findAll();*/
 
     //根据订单id查询订单
-    /*@Select("select * from `order` where order_id = #{order_id}")
-    Order findOrderByOrderId(Integer id);*/
+    @Select("select * from `order_transfer_info` where order_id = #{id}")
+    List<OrderTransferInfo> findOrderByOrderId(Integer id);
 
 
     //查询中转记录总数
@@ -62,6 +59,15 @@ public interface TransferDao {
     @Insert("insert into `order_transfer_info`(order_id,`mode`,station_id,employee_id,`time`) values(#{order_id},#{mode},#{station_id},#{employee_id},#{time})")
     void addTransferInfo(OrderTransferInfo orderTransferInfo);
 
+    @SelectProvider(type = TransferDaoProvider.class, method = "findTransferById")
+    TransferInfo findTransferById(Integer id);
+
+    @Update("update `order_transfer_info` set order_id = #{order_id},mode=#{mode},station_id=#{station_id},employee_id=#{employee_id},time=#{time} where id=#{id} ")
+    void updateTransfer(OrderTransferInfo orderTransferInfo);
+
+    @Delete("delete from order_transfer_info where id=#{id}")
+    void deleteTransfer(Integer id);
+
     public class TransferDaoProvider {
         public String findByPage(HashMap<String,Object> map) {
 
@@ -74,7 +80,7 @@ public interface TransferDao {
         }
         //分页
         public String selectCountByCondition(TransferCondition condition) {
-            String sql = " select count(1) from order_transfer_info left join `order` on order_transfer_info.`order_id`=`order`.`order_id` left join `employee` on order_transfer_info.`employee_id`=`employee`.`employee_num` left join `station` on `order_transfer_info`.`station_id`=`station`.`station_num` where 1=1 ";
+            String sql = " select count(distinct order_transfer_info.id ) from order_transfer_info left join `order` on order_transfer_info.`order_id`=`order`.`order_id` left join `employee` on order_transfer_info.`employee_id`=`employee`.`employee_num` left join `station` on `order_transfer_info`.`station_id`=`station`.`station_num` where 1=1 ";
             if(condition.getStartTime()!=null && !"".equals(condition.getStartTime())){
                 sql += " and time >= #{startTime} ";
             }
@@ -92,7 +98,7 @@ public interface TransferDao {
         //多条件查询+分页
         public String findTransferByConditionAndPage(HashMap<String, Object> map) {  //  and `order`.`order_id` = 10000001
             String sql =
-" select order_transfer_info.`id`,`order`.`order_id`,`mode`,`station`.`name` stationName,`employee`.`name` employeeName,`order_transfer_info`.`time` from" +
+" select distinct  order_transfer_info.`id`,`order`.`order_id`,`mode`,`station`.`name` stationName,`employee`.`name` employeeName,`order_transfer_info`.`time` from" +
 " order_transfer_info left join `order` on order_transfer_info.`order_id`=`order`.`order_id` left join `employee` on order_transfer_info.`employee_id`=`employee`.`employee_num` " +
 "left join `station` on `order_transfer_info`.`station_id`=`station`.`station_num` where 1=1 " ;
             if(((TransferCondition) map.get("condition")).getStartTime()!=null && !"".equals(((TransferCondition) map.get("condition")).getStartTime()) ){
@@ -110,6 +116,13 @@ public interface TransferDao {
             if(map.get("start")!=null && map.get("size")!=null ){
                 sql += " limit #{start},#{size}";
             }
+            return sql;
+        }
+        public String findTransferById(Integer id) {
+            String sql = " select order_transfer_info.`id`,`order`.`order_id`,`mode`,`station`.`name` stationName,`employee`.`name` employeeName,`order_transfer_info`.`time` from " +
+                    "order_transfer_info left join `order` on order_transfer_info.`order_id`=`order`.`order_id` left join `employee` on order_transfer_info.`employee_id`=`employee`.`employee_num` " +
+                    "left join `station` on `order_transfer_info`.`station_id`=`station`.`station_num` where `order_transfer_info`.`id`=#{1} ";
+
             return sql;
         }
     }

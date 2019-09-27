@@ -3,6 +3,7 @@ package com.xq.transfer.service;
 import com.xq.bean.OrderState;
 import com.xq.bean.OrderTransferInfo;
 import com.xq.bean.TransferCondition;
+import com.xq.bean.TransferInfo;
 import com.xq.util.PageBean;
 
 import java.util.List;
@@ -25,4 +26,14 @@ public interface TransferService {
     Integer findStationIdByName(String stationName);
 
     void addTransferInfo(OrderTransferInfo orderTransferInfo);
+
+    List<TransferInfo> findTransferByCondition(TransferCondition condition);
+
+    TransferInfo findTransferById(Integer id);
+
+    void updateTransfer(OrderTransferInfo orderTransferInfo);
+
+    void deleteTransfer(Integer id);
+
+    List<OrderTransferInfo> getTransferById(Integer order_id);
 }

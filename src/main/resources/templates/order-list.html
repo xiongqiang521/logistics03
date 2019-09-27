@@ -13,6 +13,10 @@
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="./lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="./js/xadmin.js"></script>
+<!--    <link rel="stylesheet" href="//res.layui.com/layui/dist/css/layui.css"  media="all">-->
+<!--    <script src="//res.layui.com/layui/dist/layui.js" charset="utf-8"></script>-->
+    <script type="text/javascript" src="./js/vuejs-2.5.16.js"></script>
+    <script type="text/javascript" src="./js/axios-0.18.0.js"></script>
     <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
     <!--[if lt IE 9]>
       <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
@@ -20,7 +24,7 @@
     <![endif]-->
   </head>
   
-  <body>
+  <body >
     <div class="x-nav">
       <span class="layui-breadcrumb">
         <a href="">首页</a>
@@ -31,154 +35,170 @@
       <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
         <i class="layui-icon" style="line-height:30px">ဂ</i></a>
     </div>
-    <div class="x-body">
+    <div class="x-body" id="x-body">
       <div class="layui-row">
         <form class="layui-form layui-col-md12 x-so">
-          <input class="layui-input" placeholder="开始日" name="start" id="start">
-          <input class="layui-input" placeholder="截止日" name="end" id="end">
+          <input class="layui-input" placeholder="出入库开始日" name="startTime" id="start">
+          <input class="layui-input" placeholder="出入库截止日" name="endTime" id="end">
+
+<!--          <div class="layui-input-inline">-->
+<!--            <select name="contrller">-->
+<!--              <option>支付方式</option>-->
+<!--              <option>支付宝</option>-->
+<!--              <option>微信</option>-->
+<!--              <option>货到付款</option>-->
+<!--            </select>-->
+<!--          </div>-->
           <div class="layui-input-inline">
-            <select name="contrller">
-              <option>支付状态</option>
-              <option>已支付</option>
-              <option>未支付</option>
-            </select>
-          </div>
-          <div class="layui-input-inline">
-            <select name="contrller">
-              <option>支付方式</option>
-              <option>支付宝</option>
-              <option>微信</option>
-              <option>货到付款</option>
-            </select>
-          </div>
-          <div class="layui-input-inline">
-            <select name="contrller">
+            <select name="orderStationNum">
               <option value="">订单状态</option>
-              <option value="0">待确认</option>
-              <option value="1">已确认</option>
-              <option value="2">已收货</option>
-              <option value="3">已取消</option>
-              <option value="4">已完成</option>
+              <option value="0">初始订单</option>
+              <option value="1">待发货</option>
+              <option value="2">已发货</option>
+              <option value="3">待签收</option>
+              <option value="4">已签收</option>
               <option value="5">已作废</option>
             </select>
           </div>
-          <input type="text" name="username"  placeholder="请输入订单号" autocomplete="off" class="layui-input">
+          <input type="text" name="OrderNum"  placeholder="请输入订单号" autocomplete="off" class="layui-input">
+          <input type="hidden" name="pageNum" id="pageNum" value="1">
           <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+
         </form>
       </div>
       <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
         <button class="layui-btn" onclick="x_admin_show('添加用户','./addOrder.html')"><i class="layui-icon"></i>添加</button>
-        <span class="x-right" style="line-height:40px">共有数据：88 条</span>
+        <button class="layui-btn layui-btn-danger" onclick="excel()">导出数据到EXCEL</button>
+        <span class="x-right" style="line-height:40px">共有数据：{{condition.total}} 条</span>
       </xblock>
-      <table class="layui-table">
-        <thead>
-          <tr>
-            <th>
-              <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
-            </th>
-            <th>订单编号</th>
-            <th>寄件时间</th>
-            <th>o_send_user_id</th>
-            <th>寄件地址</th>
-            <th>签收时间</th>
-            <th>o_receive_user_id</th>
-            <th>收件地址</th>
-            <th>重量</th>
-            <th>o_order_state_id</th>
-            <th>otf_id</th>
-            <th >otf_order_id</th>
-            <th >出入库</th>
-            <th >otf_station_id</th>
-            <th >otf_employee_id</th>
-            <th >出入库时间</th>
-            <th >寄件人姓名</th>
-            <th >ur_password</th>
-            <th >ur_create_time</th>
-            <th >寄件人电话</th>
-            <th >收件人姓名</th>
-            <th >us_create_time</th>
-            <th >us_state</th>
-            <th >收件人地址</th>
-            <th >站点编号</th>
-            <th >站点名称</th>
-            <th >站点地址</th>
-            <th >操作员工编号</th>
-            <th >员工姓名</th>
-            <th >e_password</th>
-            <th >e_sex</th>
-            <th >员工电话</th>
-            <th >员工工作地点</th>
-            <th >员工职位</th>
+      <div  style="overflow-x:scroll">
+        <table class="layui-table" id="orderTable" style="table-layout:fixed ; width: 100%;" >
+          <colgroup>
+            <col width="50">
+            <col width="100">
+            <col width="200">
+            <col width="200">
+            <col width="200">
+            <col width="200">
+            <col width="60">
+            <col width="100">
+            <col width="200">
+            <col width="120">
+            <col width="120">
+            <col width="120">
+            <col width="120">
+            <col width="100">
+            <col width="100">
+            <col width="200">
+            <col width="120">
+            <col width="100">
+            <col width="120">
+            <col width="140">
+            <col width="100">
+            <col width="100">
+          </colgroup>
+          <thead>
+            <tr>
+              <th>
+                <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
+              </th>
+              <th>订单编号</th>
+              <th>寄件时间</th>
 
-            <th>操作</th>
+              <th>寄件地址</th>
+              <th>签收时间</th>
+
+              <th>收件地址</th>
+              <th>重量</th>
+
+
+              <th >出入库</th>
+
+              <th >出入库时间</th>
+              <th >寄件人姓名</th>
+
+              <th >寄件人电话</th>
+              <th >收件人姓名</th>
+
+              <th >收件人地址</th>
+              <th >站点编号</th>
+              <th >站点名称</th>
+              <th >站点地址</th>
+              <th >操作员工编号</th>
+              <th >员工姓名</th>
+              <th >员工电话</th>
+              <th >员工工作地点</th>
+              <th >员工职位</th>
+
+              <th>操作</th>
+              </tr>
+          </thead>
+          <tbody>
+            <tr v-for="order in orders">
+              <td>
+                <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
+              </td>
+              <th>{{order.o_order_id}}</th>
+              <th>{{order.o_send_time}}</th>
+              <th>{{order.o_send_address}}</th>
+              <th>{{order.o_receive_time}}</th>
+              <th>{{order.o_receive_address}}</th>
+              <th>{{order.o_weight}}</th>
+              <th>{{order.otf_mode}}</th>
+              <th>{{order.otf_time}}</th>
+              <th>{{order.ur_name}}</th>
+              <th>{{order.ur_telephone}}</th>
+              <th>{{order.us_name}}</th>
+              <th>{{order.us_telephone}}</th>
+              <th>{{order.s_station_num}}</th>
+              <th>{{order.s_name}}</th>
+              <th>{{order.s_address}}</th>
+              <th>{{order.e_employee_num}}</th>
+              <th>{{order.e_name}}</th>
+              <th>{{order.e_telephone}}</th>
+              <th>{{order.es_group}}</th>
+              <th>{{order.es_type}}</th>
+              <td class="td-manage">
+                <a title="查看"  onclick="x_admin_show('编辑','order-view.html')" href="javascript:;">
+                  <i class="layui-icon">&#xe63c;</i>
+                </a>
+                <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
+                  <i class="layui-icon">&#xe640;</i>
+                </a>
+              </td>
             </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
-            </td>
-            <th>o_order_id</th>
-            <th>o_send_time</th>
-            <th>o_send_user_id</th>
-            <th>o_send_address</th>
-            <th>o_receive_time</th>
-            <th>o_receive_user_id</th>
-            <th>o_receive_address</th>
-            <th>o_weight</th>
-            <th>o_order_state_id</th>
-            <th>otf_id</th>
-            <th >otf_order_id</th>
-            <th >otf_mode</th>
-            <th >otf_station_id</th>
-            <th >otf_employee_id</th>
-            <th >otf_time</th>
-            <th >ur_name</th>
-            <th >ur_password</th>
-            <th >ur_create_time</th>
-            <th >ur_telephone</th>
-            <th >us_name</th>
-            <th >us_create_time</th>
-            <th >us_state</th>
-            <th >us_telephone</th>
-            <th >s_station_num</th>
-            <th >s_name</th>
-            <th >s_address</th>
-            <th >e_employee_num</th>
-            <th >e_name</th>
-            <th >e_password</th>
-            <th >e_sex</th>
-            <th >e_telephone</th>
-            <th >es_group</th>
-            <th >es_type</th>
-            <td class="td-manage">
-              <a title="查看"  onclick="x_admin_show('编辑','order-view.html')" href="javascript:;">
-                <i class="layui-icon">&#xe63c;</i>
-              </a>
-              <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
-                <i class="layui-icon">&#xe640;</i>
-              </a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
+
       <div class="page">
-        <div>
-          <a class="prev" href="">&lt;&lt;</a>
-          <a class="num" href="">1</a>
-          <span class="current">2</span>
-          <a class="num" href="">3</a>
-          <a class="num" href="">489</a>
-          <a class="next" href="">&gt;&gt;</a>
+        <div >
+<!--          <a class="prev" href="javascript:;">&lt;&lt;</a>-->
+
+
+<!--          <a class="num" href="javascript:;">1</a>-->
+<!--          <span class="current">2</span>-->
+<!--          <a class="num" href="javascript:;">3</a>-->
+<!--          <a class="num" href="javascript:;">489</a>-->
+<!--          <a class="next" href="javascript:;" onclick="vue0.getOrderPage(2)">&gt;&gt;</a>-->
         </div>
       </div>
 
     </div>
     <script>
-      layui.use('laydate', function(){
+      layui.use(['form', 'layedit', 'laydate'], function(){
+        var form=layui.form;
         var laydate = layui.laydate;
-        
+
+        form.on('submit(sreach)', function(data) {
+          // $.post(
+          //         "/orderCondition", (data.field)
+          // );
+          vue0.getOrderPage();
+          return false;
+        });
+
         //执行一个laydate实例
         laydate.render({
           elem: '#start' //指定元素
@@ -188,7 +208,9 @@
         laydate.render({
           elem: '#end' //指定元素
         });
+
       });
+
 
        /*用户-停用*/
       function member_stop(obj,id){
@@ -213,7 +235,6 @@
               
           });
       }
-
       /*用户-删除*/
       function member_del(obj,id){
           layer.confirm('确认要删除吗？',function(index){
@@ -222,19 +243,97 @@
               layer.msg('已删除!',{icon:1,time:1000});
           });
       }
-
-
-
       function delAll (argument) {
-
         var data = tableCheck.getData();
-  
         layer.confirm('确认要删除吗？'+data,function(index){
             //捉到所有被选中的，发异步进行删除
             layer.msg('删除成功', {icon: 1});
             $(".layui-form-checked").not('.header').parents('tr').remove();
         });
       }
+      function excel() {
+        window.location.href="orderExcel";
+      }
+
+    </script>
+
+    <script>
+
+      var vue0=new Vue({
+        el:"#x-body",
+        data:{
+          orders:[{}],
+          condition:{},
+          ordersPage:{}
+        },
+        mounted:function(){
+          this.getAll();
+        },
+        methods:{
+          getAll:function () {
+            axios.get("getOrders").then(function (value) {
+              console.log(value.data);
+              vue0.orders =value.data.orders;
+              vue0.condition =value.data.condition;
+              vue0.ordersPage=value.data.ordersPage;
+
+              // 分页处理
+              var pageNum =vue0.condition.pageNum;
+              $(".page").html("");
+              if (pageNum >1){
+                $(".page").append('<a class="prev" href="javascript:;" onclick="vue0.getOrderPage('+(pageNum-1)+')" > &lt;&lt;</a>');
+              }
+              for(var i = 1; i<=vue0.condition.pages;i++){
+                if(i == pageNum){
+                  $(".page").append('<span class="current">'+i+'</span>');
+                }else{
+                  $(".page").append('<a class="num" href="javascript:;" onclick="vue0.getOrderPage('+i+')">'+i+'</a>');
+                }
+              }
+              if (pageNum < vue0.condition.pages) {
+                $(".page").append('<a class="next" href="javascript:;" onclick="vue0.getOrderPage(' +( pageNum + 1) + ')">&gt;&gt;</a>');
+              }
+
+
+
+            }).catch(function (reason) {
+              alert(reason);
+            });
+          },
+          getOrderPage:function (pageNum) {
+            $("#pageNum").val(pageNum);
+            var formData=$("form").serialize();
+
+            axios.post("orderCondition",formData).then(function (value) {
+              console.log(value.data);
+
+              vue0.orders =value.data.orders;
+              vue0.condition =value.data.condition;
+              vue0.ordersPage=value.data.ordersPage;
+
+              // 分页处理
+              var pageNum =vue0.condition.pageNum;
+              $(".page").html("");
+              if (pageNum >1){
+                $(".page").append('<a class="prev" href="javascript:;" onclick="vue0.getOrderPage('+(pageNum-1)+')" > &lt;&lt;</a>');
+              }
+              for(var i = 1; i<=vue0.condition.pages;i++){
+                if(i == pageNum){
+                  $(".page").append('<span class="current">'+i+'</span>');
+                }else{
+                  $(".page").append('<a class="num" href="javascript:;" onclick="vue0.getOrderPage('+i+')">'+i+'</a>');
+                }
+              }
+              if (pageNum < vue0.condition.pages) {
+                $(".page").append('<a class="next" href="javascript:;" onclick="vue0.getOrderPage(' +( pageNum + 1) + ')">&gt;&gt;</a>');
+              }
+
+            }).catch(function (reason) {
+              alert(reason);
+            });
+          }
+        }
+      })
     </script>
     <script>var _hmt = _hmt || []; (function() {
         var hm = document.createElement("script");

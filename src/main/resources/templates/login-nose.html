@@ -1,9 +1,8 @@
-
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-    <title>天下酒店</title>
+    <title>路路通FAST物流管理平台</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/iconfont.css">
     <script src="js/jquery.js"></script>
@@ -14,7 +13,7 @@
     <ul class="f-r">
         <li><a href="#">首页</a></li>
         <li><a href="#">登录</a></li>
-        <li><a href="#">注册</a></li>
+        <li><a href="user-register.html">注册</a></li>
         <li><a href="#">关于</a></li>
     </ul>
 </div>
@@ -36,7 +35,7 @@
             </form>
             <div class="from-line"></div>
             <div class="form-group">
-                <a href="javascript:;" class="move-signup a-tag tran blue-border">还没有帐号？免费注册<i class="iconfont tran">&#xe606;</i></a>
+                <a href="javascript:;" class="move-signup a-tag tran blue-border">手机号登录<i class="iconfont tran">&#xe606;</i></a>
             </div>
             <div class="form-group">
                 <a href="javascript:;" class="move-reset a-tag tran">忘记密码？重置 <i class="iconfont tran">&#xe606;</i></a>
@@ -47,19 +46,20 @@
         </div>
         <!-- 手机号登录 -->
         <div class="signup f-l">
-            <div id="two" style="color: #d70101;font-size: 18px"></div>
-            <form>
+
+            <form method="post">
+                <h3 style="color: red;" th:text="${msg}"></h3>
             <div class="form-group">
                 <input type="text" placeholder="请输入手机号" name="tel" value="" id="tel">
             </div>
             <div >
-                <input type="button" style="background-color: #1E9FFF" id="fa"  value="获取验证码"/>
+                <button type="button" style="background-color: #1E9FFF" id="fa"  value="">获取验证码</button>
             </div>
             <div class="form-group">
-                <input type="text" placeholder="请输入验证码" name="code" id="textarea2" onblur="codeajax()">
+                <input type="text" placeholder="请输入验证码" name="code" id="code">
             </div>
-            <div class="">
-                <button id="MessageLogin">登录</button>
+            <div >
+                <button type="submit" style="background-color: #1E9FFF;" name="userLogin" id="userLogin"  value="">登录</button>
             </div>
             </form>
             <form action="" method="post">
@@ -89,7 +89,7 @@
             <div class="from-line"></div>
 
             <div class="form-group">
-                <a href="javascript:;" class="move-login a-tag tran blue-border">已有帐号？登录<i class="iconfont tran">&#xe606;</i></a>
+                <a href="javascript:;" class="move-login a-tag tran blue-border">手机号登录<i class="iconfont tran">&#xe606;</i></a>
             </div>
             <div class="form-group">
                 <a href="javascript:;" class="move-other a-tag tran">使用第三方帐号登录<i class="iconfont tran">&#xe606;</i></a>
@@ -338,115 +338,42 @@
                data:{tel:tels},
                dataType:"json",
                url:"/Message"
+
            })
        })
    })
 
     // 判断验证码
-    function codeajax(){
-        var code = $("#textarea2").val();
-        $.ajax({
-            type: "POST",
-            url: "${pageContext.request.contextPath}/userServlet",
-            data: "method=xiaregist&code="+code,
-            success: function(data){
-                if("no"==data){
-                    $("#two").html("验证码错误！");
-                    $("#xia").css("display","none");
-                }else {
-                    $("#two").html("");
-                    $("#xia").css("display","block");
+    $(function () {
+        $("#userLogin").click(function () {
+            var code=$("#code").val();
+            var tels=$("#tel").val();
+            console.log(tels);
+            $.ajax({
+                type:"post",
+                data:{tel:tels,
+                      code:code
+                },
+                dataType:"text",
+                url:"/MessageLogin",
+                success:function (data) {
+
+                   window.location.href=data;
                 }
-
-            }
-        });
-    }
-
-    // 手机号
-    function call(){
-        var shou=$("#textarea1").val();
-        var zh=/^1([38][0-9]|4[579]|5[0-3,5-9]|6[6]|7[0135678]|9[89])\d{8}$/;
-
-        $("#two").css({"color":"red","font-size":"13px","text-indent":"100px"});
-        if(zh.test(shou)){
-            $("#two").html("");
-            //$("#xia").css("display","block");
-            return true;
-        }else{
-            $("#two").html("手机号输入错误！");
-            $("#xia").css("display","none");
-            return false;
-        }
-    }
+            })
+        })
+    })
 
 
 
 
-    // 短信验证码
-    function duan(){
-        var shu=$("#textarea2").val();
-        alert(codeall);
-        $("#two").css({"color":"red","font-size":"13px","text-indent":"100px"});
-        var zh=/^\d{6}$/;
-        if(zh.test(shu)){
-            $("#two").html("");
-            $("#xia").css("display","block");
-            return true;
-        }else{
-            $("#two").html("验证码错误！");
-            $("#xia").css("display","none");
-            return false;
-        }
-    }
-
-    function two(){
-
-        $("#textarea1").blur(function(){
-            $("#textarea1").blur(call);
-            if(call()){$(".qu").css({"background-color":"#CCC"});}
-            else {
-                $("#two").html("手机号输入错误！");
-                $(".qu").css({"background-color":"#CCC"});
-            }
-        });
-
-    }
-
-    function two1(){
-
-        $("#textarea2").blur(function(){
-            $("#textarea2").blur(duan);
-            if(duan()){$(".qu").css({"background-color":"#CCC"});}
-            else {
-                $("#two").html("验证码错误！");
-                $(".qu").css({"background-color":"#CCC"});
-            }
-        });
-    }
 
 
-    $(function(){
-        two();
-        two1();
-        //表单添加事件实现验证
-        $("#form1").submit(function(){
-            $("#textarea1").blur(call);
-            if(call())
-                return true;
-            else
-                return false;
-        });
-        //表单添加事件实现验证
-        $("#form1").submit(function(){
-            var code = $("#textarea").val();
-            $("#textarea2").blur(duan);
-            if(duan())
-                return true;
-            else
-                return false;
-        });
 
-    });
+
+
+
+
 
 </script>
 </body>

@@ -41,12 +41,10 @@ public class ExcelUtil {
         HSSFRow row = hssfSheet.createRow(1);
         for (int i =0 ;i<fs.length;i++) {
             String name = fs[i].getName();
-            System.out.println(name);
 
             HSSFCell cell = row.createCell(i);
             cell.setCellValue(name);
         }
-
 
         //数据处理，通过out写出
         for (int i = 0; i < datas.size(); i++) {

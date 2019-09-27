@@ -67,9 +67,11 @@ public class UserAddOrderlmpl implements UserAddOrderService {
             userAddOrderDao.addSend(user);
         }else {
             //判断用户名是否更改
-             if(!Objects.equals(users.getName(),orderUser.getName())){
+             if(!orderUser.getName().equals(users.getName())){
                      //修改
+                 users.setName(orderUser.getName());
                      userAddOrderDao.upUsers(users);
+                 System.out.println("修改成功");
              }
         }
         return null;
@@ -110,11 +112,6 @@ public class UserAddOrderlmpl implements UserAddOrderService {
         return null;
     }
 
-    //修改
-    @Override
-    public void upUser(Users user) {
-     userAddOrderDao.upUsers(user);
-    }
 
     /**
  * @Method
@@ -146,7 +143,7 @@ public class UserAddOrderlmpl implements UserAddOrderService {
     添加订单
  */
     @Override
-    public void setOrder(OrderUser orderl, Employee employee) {
+    public void setOrder(OrderUser orderl,Employee employee) {
         //创建订单对象
         System.out.println("正在创建订单");
        Order order = new Order();
