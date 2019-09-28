@@ -1,5 +1,6 @@
 package com.xq.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.pagehelper.Page;
 import com.xq.bean.Employee;
 import com.xq.bean.EmployeePojo;
@@ -18,7 +19,7 @@ public interface EmployeeService {
     Employee login(Integer name);
 
     //分页查询
-    Page<Employee> getPageAll(Integer pageNum , Integer pageSize);
+    Page<Employee> getPageAll(Integer pageNum , Integer pageSize) throws Exception;
 
     //条件查询
     Page<Employee> getPageByName();

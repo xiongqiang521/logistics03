@@ -35,7 +35,7 @@ public class UsersLoginController {
              //查询到该用户信息
              if(usersByNameAndPassword!=null){
                  System.out.println("查到该用户");
-                 mv.setViewName("redirect:/index.html");
+                 mv.setViewName("redirect:/nose.html");
                  return mv;
              }
              System.out.println("用户名不存在");
@@ -87,7 +87,7 @@ public class UsersLoginController {
         ModelAndView mv=new ModelAndView();
         if(equals){
             System.out.println(11111);
-            return "index.html";
+            return "nose.html";
         }else {
             mv.addObject("codeError","验证码错误");
             System.out.println(123123);

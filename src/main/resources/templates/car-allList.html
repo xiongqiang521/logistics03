@@ -15,11 +15,7 @@
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="./lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="./js/xadmin.js"></script>
-    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
-    <!--[if lt IE 9]>
-      <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
-      <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+
   </head>
 
   <body>
@@ -96,11 +92,6 @@
 
     </div>
 
-    <script src="./js/bundle.js"></script>
-    <script src="./js/jquery.validate.min.js"></script>
-    <script src="./js/public.js"></script>
-    <script src="./js/expressCheck.js"></script>
-    <script src="./js/JsBarcode.js"></script>
 
     <script>
       layui.use('laydate', function(){
@@ -117,29 +108,7 @@
         });
       });
 
-       /*用户-停用*/
-      function member_stop(obj,id){
-          layer.confirm('确认要停用吗？',function(index){
 
-              if($(obj).attr('title')=='启用'){
-
-                //发异步把用户状态进行更改
-                $(obj).attr('title','停用')
-                $(obj).find('i').html('&#xe62f;');
-
-                $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
-                layer.msg('已停用!',{icon: 5,time:1000});
-
-              }else{
-                $(obj).attr('title','启用')
-                $(obj).find('i').html('&#xe601;');
-
-                $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
-                layer.msg('已启用!',{icon: 5,time:1000});
-              }
-
-          });
-      }
 
       /*用户-删除*/
       function member_del(obj,id){
@@ -170,8 +139,6 @@
           //   title: '最终的提交信息'
           // });
           vue0.getCarOne(data);
-          alert(data)
-          console.log(data)
           return false;
         })
 
@@ -180,15 +147,7 @@
       });
     </script>
 
-    <!--<script>-->
-      <!--var _hmt = _hmt || []; (function() {-->
-        <!--var hm = document.createElement("script");-->
-        <!--hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";-->
-        <!--var s = document.getElementsByTagName("script")[0];-->
-        <!--s.parentNode.insertBefore(hm, s);-->
-      <!--})();-->
 
-    <!--</script>-->
     <script type="text/javascript">
       //让vue忽略某个标签
       Vue.config.ignoredElements = ['xbloock'];
@@ -217,19 +176,32 @@
            },
           getCarOne: function (data) {
             var _this = this;
-            axios.post("/getOneCar",data).then(function (response) {
+            console.log(data.field);
+            var val = $("#car_num").val();
+            alert(val);
+            axios.get("/getOneCar?car_num="+val).then(function (response) {
 
               console.log(response.data);
               _this.list = response.data;
-          }).catch(function (err) {
+            }).catch(function (err) {
               console.log(err);
             })
+          }
 
         }
 
       });
 
 
+
+    </script>
+    <script>
+      var _hmt = _hmt || []; (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
 
     </script>
   </body>

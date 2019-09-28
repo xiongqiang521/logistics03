@@ -1,8 +1,11 @@
 package com.xq;
 
+import com.alibaba.fastjson.JSON;
+import com.github.pagehelper.Page;
+import com.xq.bean.Employee;
 import com.xq.bean.NoseOrder;
 import com.xq.bean.OrderTransferInfoName;
-import com.xq.dao.OrderDao;
+import com.xq.dao.PageDao;
 import com.xq.util.ExcelUtil;
 import com.xq.util.IntegerIDUtils;
 import com.xq.web.controller.NoseController;
@@ -11,7 +14,9 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import redis.clients.jedis.Jedis;
 
+import javax.annotation.Resource;
 import java.io.File;
 import java.util.*;
 
@@ -21,6 +26,26 @@ public class Logistics03ApplicationTests {
     @Autowired
     private NoseController controller;
 
+    @Resource
+    private PageDao pageDao;
+
+    @Test
+    public void sss(){
+        Jedis jedis=new Jedis();
+        Page<Employee> employees = pageDao.getPageAll();
+        String s = JSON.toJSONString(employees);
+        System.out.println(employees);
+        System.out.println(s);
+
+        jedis.set("ee", s);
+
+
+        String ee = jedis.get("ee");
+        Page parse = JSON.parseObject(ee, Page.class);
+        System.out.println(parse);
+
+        jedis.close();
+    }
 
 
     @Test

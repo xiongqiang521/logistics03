@@ -25,7 +25,7 @@
             <form class="layui-form">
                 <!--寄件人用户名-->
                 <div class="layui-form-item">
-                    <label for="username" class="layui-form-label">
+                    <label for="username1" class="layui-form-label">
                         <span class="x-red">*</span>用户名
                     </label>
                     <div class="layui-input-inline">
@@ -36,7 +36,7 @@
 
         <!--寄件人电话号码-->
             <div class="layui-form-item">
-                <label for="phone" class="layui-form-label">
+                <label for="telephone" class="layui-form-label">
                     <span class="x-red">*</span>发货人电话
                 </label>
                 <div class="layui-input-inline">
@@ -46,7 +46,7 @@
             </div>
            <!--寄件人地址-->
             <div class="layui-form-item">
-                <label for="username" class="layui-form-label">
+                <label for="receiveaddress" class="layui-form-label">
                     <span class="x-red">*</span>寄件人地址
                 </label>
                 <div class="layui-input-inline">
@@ -56,7 +56,7 @@
             </div>
             <!--收获人名字-->
           <div class="layui-form-item">
-              <label for="username" class="layui-form-label">
+              <label for="sname" class="layui-form-label">
                   <span class="x-red">*</span>收货人
               </label>
               <div class="layui-input-inline">
@@ -67,7 +67,7 @@
 
             <!--收件人电话号码-->
             <div class="layui-form-item">
-                <label for="phone" class="layui-form-label">
+                <label for="stelephone" class="layui-form-label">
                     <span class="x-red">*</span>寄件人电话
                 </label>
                 <div class="layui-input-inline">
@@ -78,7 +78,7 @@
 
             <!--收件人地址-->
           <div class="layui-form-item">
-              <label for="username" class="layui-form-label">
+              <label for="sendaddress" class="layui-form-label">
                   <span class="x-red">*</span>收货人地址
               </label>
               <div class="layui-input-inline">
@@ -89,7 +89,7 @@
 
             <!--货物重量-->
             <div class="layui-form-item">
-                <label for="username" class="layui-form-label">
+                <label for="weight" class="layui-form-label">
                     <span class="x-red">*</span>重量
                 </label>
                 <div class="layui-input-inline">
@@ -100,7 +100,7 @@
 
             <!--提交-->
           <div class="layui-form-item">
-              <label for="L_repass" class="layui-form-label">
+              <label for="tijiao" class="layui-form-label">
               </label>
               <button  id="tijiao" class="layui-btn" lay-filter="add" lay-submit="addorder">
                   提交
@@ -141,7 +141,7 @@
                   dataType:"json",
                   url:"/addorder",
                   type:"post"
-              })
+              });
             layer.alert("增加成功", {icon: 6},function () {
                 // 获得frame索引
                 var index = parent.layer.getFrameIndex(window.name);

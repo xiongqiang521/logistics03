@@ -4,7 +4,6 @@ import com.xq.bean.Employee;
 import com.xq.bean.Order;
 import com.xq.bean.OrderUser;
 import com.xq.bean.Users;
-import org.apache.catalina.User;
 
 /**
  * @ProjectName: logistics03

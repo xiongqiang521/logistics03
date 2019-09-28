@@ -25,6 +25,9 @@ public class CarServiceImpl implements CarService {
     @Override
     public Car getOneCar(String car_num) {
         Car oneCar = dao.getOneCar(car_num);
+        if (oneCar == null) {
+            return null;
+        }
         if (oneCar.getState().equals("0")) {
 //            oneCar.getState().replace("0", "未使用");
               oneCar.setState("未使用");

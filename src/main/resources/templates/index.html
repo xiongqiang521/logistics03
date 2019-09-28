@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:shiro="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:shiro="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
 	<meta charset="UTF-8">
 	<title>后台系统管理</title>
@@ -36,7 +36,7 @@
         </ul>
         <ul class="layui-nav right" lay-filter="">
           <li class="layui-nav-item">
-            <a href="javascript:;" th:text="${name}" ></a>
+            <a href="javascript:;" th:text="${session.name.name}" ></a>
 
             <dl class="layui-nav-child"> &lt;!&ndash; 二级菜单 &ndash;&gt;
 <!--              <dd><a onclick="x_admin_show('个人信息','http://www.baidu.com')">个人信息</a></dd>-->
@@ -236,56 +236,7 @@
                     <cite>分拣管理</cite>
                     <i class="iconfont nav_right">&#xe697;</i>
                 </a>
-                <ul class="sub-menu"><!--
-                    <li>
-                        <a _href="pages/transit/in_storage.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>入库</cite>
-                        </a>
-                    </li >
-                    <li>
-                        <a _href="pages/transit/out_storage.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>出库</cite>
-                        </a>
-                    </li>
-                    <li>
-                        <a _href="pages/transit/make_storage.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>盘库</cite>
-                        </a>
-                    </li>
-                    <li>
-                        <a _href="pages/transit/compose_package.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>合包</cite>
-                        </a>
-                    </li>
-                    <li>
-                        <a _href="pages/transit/arrive_time.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>到达时间录入</cite>
-                        </a>
-                    </li>
-                    <li>
-                        <a _href="pages/transit/in_out_search.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>出入库查询</cite>
-                        </a>
-                    </li>
-                    <li>
-                        <a _href="pages/transit/remain_search.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>库存查询</cite>
-                        </a>
-                    </li>
-                    <li>
-                        <a _href="pages/transit/package_search.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>合包查询</cite>
-                        </a>
-                    </li>
-                -->
+                <ul class="sub-menu">
                     <li>
                         <a _href="findByPage">
                             <i class="iconfont">&#xe6a7;</i>
@@ -294,20 +245,21 @@
                     </li>
                 </ul>
             </li>
-
             <li>
-                <a href="javascript:;">
-                    <i class="iconfont">&#xe6ce;</i>
-                    <cite>车辆管理</cite>
-                    <i class="iconfont nav_right">&#xe697;</i>
-                </a>
+                <shiro:hasRole name="admin">
+                    <a href="javascript:;">
+                        <i class="iconfont">&#xe723;</i>
+                        <cite>车辆管理</cite>
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                </shiro:hasRole>
                 <ul class="sub-menu">
                     <li>
                         <a _href="car-allList.html">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>车辆信息管理</cite>
                         </a>
-                    </li>
+                    </li >
                 </ul>
             </li>
         </ul>

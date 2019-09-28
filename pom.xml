@@ -13,7 +13,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>logistics03</name>
     <description>Demo project for Spring Boot</description>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
 
     <properties>
@@ -76,7 +76,9 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+
         </dependency>
+
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
@@ -128,7 +130,7 @@
             <artifactId>ehcache</artifactId>
         </dependency>
 
-        <!--短信-->
+        <!--json-->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
@@ -154,12 +156,14 @@
             <artifactId>jetty-util</artifactId>
             <version>9.3.7.v20160115</version>
         </dependency>
+
+
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.5</version>
-            <scope>test</scope>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>3.1.0</version>
         </dependency>
+
     </dependencies>
 
     <build>
@@ -167,10 +171,20 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+
                 <configuration>
                     <fork>true</fork>
                 </configuration>
             </plugin>
+
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-war-plugin</artifactId>-->
+<!--                <configuration>-->
+<!--                    <warSourceExcludes>src/main/resources/**</warSourceExcludes>-->
+<!--                    <warName>logistics</warName>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
         </plugins>
     </build>
 

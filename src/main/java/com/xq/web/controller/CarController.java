@@ -9,12 +9,14 @@ import com.xq.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -29,12 +31,15 @@ public class CarController {
      */
     @RequestMapping("/getOneCar")
     @ResponseBody
-    public Car getOneCar(ModelAndView mv ,@RequestParam String car_num){
+    public List<Car> getOneCar(@RequestParam String car_num){
+        System.out.println(car_num);
+
         Car car = service.getOneCar(car_num);
-        mv.addObject("Car",car);
+
         System.out.println("查询单个"+car);
-        mv.setViewName("car-oneList.html");
-        return car;
+        List<Car> list =new ArrayList<>();
+        list.add(car);
+        return list;
     }
 
     /*
@@ -43,11 +48,11 @@ public class CarController {
     @RequestMapping("/getAllCar")
     @ResponseBody
     public List<Car> getAllCar(ModelAndView mv){
-        List<Car> car = service.getAllCar();
-        mv.addObject("Car",car);
-        System.out.println(car);
+        List<Car> cars = service.getAllCar();
+        mv.addObject("Car",cars);
+        System.out.println(cars);
 //        mv.setViewName("car-allList.html");
-        return car;
+        return cars;
     }
 
     /*

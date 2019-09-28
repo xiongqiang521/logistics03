@@ -9,7 +9,6 @@ import com.xq.util.IntegerIDUtils;
 import com.xq.util.MoneyUtil;
 import com.xq.util.TimeUtils;
 import com.xq.util.UUIDUtils;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
