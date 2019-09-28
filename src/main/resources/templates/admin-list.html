@@ -84,7 +84,7 @@
               <a title="编辑"  onclick="x_admin_show('编辑','admin-edit.html')" href="javascript:;">
                 <i class="layui-icon">&#xe642;</i>
               </a>
-              <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
+              <a title="删除" th:data-name="${employees.employee_num}"onclick="member_del(this,this.getAttribute('data-name'))" href="javascript:;">
                 <i class="layui-icon">&#xe640;</i>
               </a>
             </td>
@@ -158,13 +158,41 @@
       }
 
       /*用户-删除*/
+      // function member_del(obj,id){
+      //     layer.confirm('确认要删除吗？',function(index){
+      //         //发异步删除数据
+      //         $(obj).parents("tr").remove();
+      //         layer.msg('已删除!',{icon:1,time:1000});
+      //     });
+      // }
       function member_del(obj,id){
-          layer.confirm('确认要删除吗？',function(index){
-              //发异步删除数据
-              $(obj).parents("tr").remove();
-              layer.msg('已删除!',{icon:1,time:1000});
+        alert(id);
+        layui.use('layer',function(){
+          var layer = layui.layer;
+          layer.msg('你确定删除么？', {
+            time: 2000 ,//2秒自动关闭
+            btn: ['确定', '取消'],
+            yes: function(index){
+              console.log(id);
+              $.ajax({
+                url:"DeleteoneEmplopee",
+                data:{'ids':id},
+                type:"Post",
+                dataType:"json",
+                success:function(){
+                  layer.msg('已删除!');
+                  location.reload(); //删除成功后再刷新
+                }/*,
+                error:function(data){
+                  $.messager.alert('错误',data.msg);
+                }*/
+              });
+              layer.close(index);
+            }
           });
-      }
+        });
+        $(obj).parents("tr").remove();
+      };
 
 
 
