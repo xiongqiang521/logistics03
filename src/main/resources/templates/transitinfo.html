@@ -30,8 +30,7 @@
             <div class="layui-input-inline">
                 <input type="text" id="order_id" name="order_id" required="" lay-verify="required"
                         autocomplete="off" class="layui-input">
-                <span class="x-red" id="msg"></span>
-            </div>
+            </div><span class="x-red" id="msg"></span>
         </div>
         <div class="layui-form-item">
             <label for="mode" class="layui-form-label">
@@ -41,7 +40,7 @@
                 <select id="mode" name="mode" class="valid">
                     <option value="入库">入库</option>
                     <option value="出库">出库</option>
-                    <option value="到达网点">到达网点</option>
+<!--                    <option value="到达网点">到达网点</option>-->
                 </select>
             </div>
         </div>
@@ -91,15 +90,26 @@
 
     $("#order_id").blur(function () {
 
-        $.post("/OutInto",{
-            order_id:$("#order_id").val()
-        },function (res) {
-            if(res){
-                $("#msg").text("可出库");
-            }else{
-                $("#msg").text("可入库");
+        $.ajax({
+            url:"/OutInto",
+            data:{
+                order_id:$("#order_id").val()
+            },
+            success:function (res) {
+                if (res) {
+                    $("#msg").text("可出库");
+                } else {
+                    $("#msg").text("可入库");
+                }
+            },
+            error:function () {
+                layer.alert($("#order_id").val(), {
+                    title: '订单号有误！'
+                })
             }
+
         });
+
     });
 
 
@@ -150,9 +160,6 @@
                 });
             });
 
-            /*
-                        location.replace(location.href);
-            */
             return false;
         });
 

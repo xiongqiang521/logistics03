@@ -15,11 +15,6 @@
     <script type="text/javascript" src="./js/xadmin.js"></script>
     <script type="text/javascript" src="./js/vuejs-2.5.16.js"></script>
     <script type="text/javascript" src="./js/axios-0.18.0.js"></script>
-    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
-    <!--[if lt IE 9]>
-      <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
-      <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
   </head>
   
   <body>
@@ -40,21 +35,6 @@
           <input class="layui-input" placeholder="开始日" name="startTime" id="start" th:value="${condition.getStartTime()}">
           <input class="layui-input" placeholder="截止日" name="lastTime" id="end" th:value="${condition.getLastTime()}">
           <input class="layui-input" placeholder="站点名称" name="stationName" id="stationName" th:value="${condition.getStationName()}">
-          <!--<div class="layui-input-inline" lay-filter="selectOrder" >
-            <select name="orderState" id="select1">
-              <option value="">订单状态</option>
-              &lt;!&ndash;<option v-for="(item,index) in orderStateList" v-bind:value="item.id">
-                {{item.state}}
-              </option>&ndash;&gt;
-              <option value="0">初始订单</option>
-              <option value="1">待发货</option>
-              <option value="2">已发货</option>
-              <option value="3">待签收</option>
-              <option value="4">已签收</option>
-              <option value="5">取消订单</option>
-            </select>
-
-          </div>-->
           <input type="text"   placeholder="请输入订单号" autocomplete="off" class="layui-input" name="orderId" th:value="${condition.getOrderId()}">
           <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
         </form>
