@@ -75,6 +75,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         // Page<Employee> pageAll=null;
         // if (getPageAll != null && !"".equals(getPageAll)) {
         //     pageAll = mapper.readValue(getPageAll, Page.class);
+        //     pageAll.setPageNum(pageNum);
+        //     pageAll.setPageSize(pageSize);
         // }else {
         //     PageHelper.startPage(pageNum, pageSize);
         //     pageAll = pageDao.getPageAll();
